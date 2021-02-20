@@ -22,4 +22,5 @@ This table contains the team members of this project, their roles and the hours 
 
 ## Project Report and Meeting Minutes
 
+The project report for sprint 1 can be found [here](https://github.com/McGill-ECSE321-Winter2021/project-group-15/wiki/Sprint-1-Project-Report).
 The meeting minutes for this project can be found [here](https://github.com/McGill-ECSE321-Winter2021/project-group-15/wiki/Meeting-Minutes).
