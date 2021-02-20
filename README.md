@@ -19,3 +19,7 @@ This table contains the team members of this project, their roles and the hours 
 | Elie Ruban | | | | | |
 | Rania Ouassif | | | | | |
 | Anandamoyi Saha | | | | | |
+
+## Project Report and Meeting Minutes
+
+The meeting minutes for this project can be found [here](https://github.com/McGill-ECSE321-Winter2021/project-group-15/wiki/Meeting-Minutes).
