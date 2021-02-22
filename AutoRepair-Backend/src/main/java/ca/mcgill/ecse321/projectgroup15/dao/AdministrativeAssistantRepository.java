@@ -2,10 +2,10 @@ package ca.mcgill.ecse321.projectgroup15.dao;
 
 import org.springframework.data.repository.CrudRepository;
 
-import ca.mcgill.ecse321.projectgroup15.model.AdminstrativeAssistant;
+import ca.mcgill.ecse321.projectgroup15.model.AdministrativeAssistant;
 
-public interface AdministrativeAssistantRepository extends CrudRepository<AdminstrativeAssistant, String>{
+public interface AdministrativeAssistantRepository extends CrudRepository<AdministrativeAssistant, String>{
 
-	AdminstrativeAssistant findAdministrativeAssistantByAdminID(String adminID);
+	AdministrativeAssistant findAdministrativeAssistantByAdminID(String adminID);
 
 }
