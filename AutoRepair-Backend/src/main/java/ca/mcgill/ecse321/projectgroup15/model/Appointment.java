@@ -1,14 +1,25 @@
 package ca.mcgill.ecse321.projectgroup15.model;
+
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
 import java.util.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import java.sql.Date;
 import java.sql.Time;
 
-// line 23 "model.ump"
-// line 109 "model.ump"
+// line 26 "model.ump"
+// line 104 "model.ump"
+@Entity
 public class Appointment
 {
 
@@ -20,15 +31,15 @@ public class Appointment
   private String appointmentID;
 
   //Appointment Associations
+
   private List<Service> services;
   private TimeSlot timeSlot;
-  private AutoRepairShop autoRepairShop;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Appointment(String aAppointmentID, TimeSlot aTimeSlot, AutoRepairShop aAutoRepairShop)
+  public Appointment(String aAppointmentID, TimeSlot aTimeSlot)
   {
     appointmentID = aAppointmentID;
     services = new ArrayList<Service>();
@@ -37,23 +48,13 @@ public class Appointment
       throw new RuntimeException("Unable to create Appointment due to aTimeSlot. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
     timeSlot = aTimeSlot;
-    boolean didAddAutoRepairShop = setAutoRepairShop(aAutoRepairShop);
-    if (!didAddAutoRepairShop)
-    {
-      throw new RuntimeException("Unable to create appointment due to autoRepairShop. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
   }
 
-  public Appointment(String aAppointmentID, Date aDateForTimeSlot, Time aStartTimeForTimeSlot, Time aEndTimeForTimeSlot, AutoRepairShop aAutoRepairShop)
+  public Appointment(String aAppointmentID, Date aDateForTimeSlot, Time aStartTimeForTimeSlot, Time aEndTimeForTimeSlot, String aTsIdForTimeSlot)
   {
     appointmentID = aAppointmentID;
     services = new ArrayList<Service>();
-    timeSlot = new TimeSlot(aDateForTimeSlot, aStartTimeForTimeSlot, aEndTimeForTimeSlot, this);
-    boolean didAddAutoRepairShop = setAutoRepairShop(aAutoRepairShop);
-    if (!didAddAutoRepairShop)
-    {
-      throw new RuntimeException("Unable to create appointment due to autoRepairShop. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
+    timeSlot = new TimeSlot(aDateForTimeSlot, aStartTimeForTimeSlot, aEndTimeForTimeSlot, aTsIdForTimeSlot, this);
   }
 
   //------------------------
@@ -67,7 +68,7 @@ public class Appointment
     wasSet = true;
     return wasSet;
   }
-
+@Id
   public String getAppointmentID()
   {
     return appointmentID;
@@ -78,7 +79,7 @@ public class Appointment
     Service aService = services.get(index);
     return aService;
   }
-
+  @OneToMany(cascade={CascadeType.ALL})
   public List<Service> getServices()
   {
     List<Service> newServices = Collections.unmodifiableList(services);
@@ -103,14 +104,10 @@ public class Appointment
     return index;
   }
   /* Code from template association_GetOne */
+  @OneToOne(cascade={CascadeType.ALL})
   public TimeSlot getTimeSlot()
   {
     return timeSlot;
-  }
-  /* Code from template association_GetOne */
-  public AutoRepairShop getAutoRepairShop()
-  {
-    return autoRepairShop;
   }
   /* Code from template association_IsNumberOfValidMethod */
   public boolean isNumberOfServicesValid()
@@ -256,25 +253,6 @@ public class Appointment
     }
     return wasAdded;
   }
-  /* Code from template association_SetOneToMany */
-  public boolean setAutoRepairShop(AutoRepairShop aAutoRepairShop)
-  {
-    boolean wasSet = false;
-    if (aAutoRepairShop == null)
-    {
-      return wasSet;
-    }
-
-    AutoRepairShop existingAutoRepairShop = autoRepairShop;
-    autoRepairShop = aAutoRepairShop;
-    if (existingAutoRepairShop != null && !existingAutoRepairShop.equals(aAutoRepairShop))
-    {
-      existingAutoRepairShop.removeAppointment(this);
-    }
-    autoRepairShop.addAppointment(this);
-    wasSet = true;
-    return wasSet;
-  }
 
   public void delete()
   {
@@ -297,12 +275,6 @@ public class Appointment
     {
       existingTimeSlot.delete();
     }
-    AutoRepairShop placeholderAutoRepairShop = autoRepairShop;
-    this.autoRepairShop = null;
-    if(placeholderAutoRepairShop != null)
-    {
-      placeholderAutoRepairShop.removeAppointment(this);
-    }
   }
 
 
@@ -310,7 +282,6 @@ public class Appointment
   {
     return super.toString() + "["+
             "appointmentID" + ":" + getAppointmentID()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "timeSlot = "+(getTimeSlot()!=null?Integer.toHexString(System.identityHashCode(getTimeSlot())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "autoRepairShop = "+(getAutoRepairShop()!=null?Integer.toHexString(System.identityHashCode(getAutoRepairShop())):"null");
+            "  " + "timeSlot = "+(getTimeSlot()!=null?Integer.toHexString(System.identityHashCode(getTimeSlot())):"null");
   }
 }

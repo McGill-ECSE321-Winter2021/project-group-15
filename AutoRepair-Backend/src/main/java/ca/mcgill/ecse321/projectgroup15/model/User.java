@@ -1,11 +1,16 @@
 package ca.mcgill.ecse321.projectgroup15.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
 
 // line 2 "model.ump"
-// line 89 "model.ump"
+// line 84 "model.ump"
+@Entity
 public abstract class User
 {
 
@@ -16,23 +21,19 @@ public abstract class User
   //User Attributes
   private String lastName;
   private String phoneNo;
-
-  //User Associations
-  private AutoRepairShop autoRepairShop;
+  private String firstName;
+  private String userId;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public User(String aLastName, String aPhoneNo, AutoRepairShop aAutoRepairShop)
+  public User(String aLastName, String aPhoneNo, String aFirstName, String aUserId)
   {
     lastName = aLastName;
     phoneNo = aPhoneNo;
-    boolean didAddAutoRepairShop = setAutoRepairShop(aAutoRepairShop);
-    if (!didAddAutoRepairShop)
-    {
-      throw new RuntimeException("Unable to create user due to autoRepairShop. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
+    firstName = aFirstName;
+    userId = aUserId;
   }
 
   //------------------------
@@ -55,6 +56,22 @@ public abstract class User
     return wasSet;
   }
 
+  public boolean setFirstName(String aFirstName)
+  {
+    boolean wasSet = false;
+    firstName = aFirstName;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public boolean setUserId(String aUserId)
+  {
+    boolean wasSet = false;
+    userId = aUserId;
+    wasSet = true;
+    return wasSet;
+  }
+
   public String getLastName()
   {
     return lastName;
@@ -64,47 +81,27 @@ public abstract class User
   {
     return phoneNo;
   }
-  /* Code from template association_GetOne */
-  public AutoRepairShop getAutoRepairShop()
-  {
-    return autoRepairShop;
-  }
-  /* Code from template association_SetOneToMany */
-  public boolean setAutoRepairShop(AutoRepairShop aAutoRepairShop)
-  {
-    boolean wasSet = false;
-    if (aAutoRepairShop == null)
-    {
-      return wasSet;
-    }
 
-    AutoRepairShop existingAutoRepairShop = autoRepairShop;
-    autoRepairShop = aAutoRepairShop;
-    if (existingAutoRepairShop != null && !existingAutoRepairShop.equals(aAutoRepairShop))
-    {
-      existingAutoRepairShop.removeUser(this);
-    }
-    autoRepairShop.addUser(this);
-    wasSet = true;
-    return wasSet;
+  public String getFirstName()
+  {
+    return firstName;
+  }
+@Id
+  public String getUserId()
+  {
+    return userId;
   }
 
   public void delete()
-  {
-    AutoRepairShop placeholderAutoRepairShop = autoRepairShop;
-    this.autoRepairShop = null;
-    if(placeholderAutoRepairShop != null)
-    {
-      placeholderAutoRepairShop.removeUser(this);
-    }
-  }
+  {}
 
 
   public String toString()
   {
     return super.toString() + "["+
             "lastName" + ":" + getLastName()+ "," +
-            "phoneNo" + ":" + getPhoneNo()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "autoRepairShop = "+(getAutoRepairShop()!=null?Integer.toHexString(System.identityHashCode(getAutoRepairShop())):"null");
+            "phoneNo" + ":" + getPhoneNo()+ "," +
+            "firstName" + ":" + getFirstName()+ "," +
+            "userId" + ":" + getUserId()+ "]";
   }
 }

@@ -1,21 +1,22 @@
 package ca.mcgill.ecse321.projectgroup15.model;
+
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
 import java.util.*;
 
-// line 43 "model.ump"
-// line 131 "model.ump"
+import javax.persistence.Entity;
+
+// line 45 "model.ump"
+// line 126 "model.ump"
+@Entity
 public class Customer extends User
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
-
-  //Customer Attributes
-  private String username;
 
   //Customer Associations
   private List<Service> desiredService;
@@ -25,10 +26,9 @@ public class Customer extends User
   // CONSTRUCTOR
   //------------------------
 
-  public Customer(String aLastName, String aPhoneNo, AutoRepairShop aAutoRepairShop, String aUsername, Appointment aAppointment, Service... allDesiredService)
+  public Customer(String aLastName, String aPhoneNo, String aFirstName, String aUserId, Appointment aAppointment, Service... allDesiredService)
   {
-    super(aLastName, aPhoneNo, aAutoRepairShop);
-    username = aUsername;
+    super(aLastName, aPhoneNo, aFirstName, aUserId);
     desiredService = new ArrayList<Service>();
     boolean didAddDesiredService = setDesiredService(allDesiredService);
     if (!didAddDesiredService)
@@ -44,19 +44,6 @@ public class Customer extends User
   //------------------------
   // INTERFACE
   //------------------------
-
-  public boolean setUsername(String aUsername)
-  {
-    boolean wasSet = false;
-    username = aUsername;
-    wasSet = true;
-    return wasSet;
-  }
-
-  public String getUsername()
-  {
-    return username;
-  }
   /* Code from template association_GetMany */
   public Service getDesiredService(int index)
   {
@@ -199,11 +186,4 @@ public class Customer extends User
     super.delete();
   }
 
-
-  public String toString()
-  {
-    return super.toString() + "["+
-            "username" + ":" + getUsername()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "appointment = "+(getAppointment()!=null?Integer.toHexString(System.identityHashCode(getAppointment())):"null");
-  }
 }

@@ -1,12 +1,20 @@
 package ca.mcgill.ecse321.projectgroup15.model;
+
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
 import java.util.*;
 
-// line 17 "model.ump"
-// line 102 "model.ump"
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+
+// line 20 "model.ump"
+// line 97 "model.ump"
+@Entity
 public class Service
 {
 
@@ -20,22 +28,16 @@ public class Service
   //Service Associations
   private List<Technician> technicians;
   private List<Appointment> appointments;
-  private AutoRepairShop autoRepairShop;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Service(String aServiceType, AutoRepairShop aAutoRepairShop)
+  public Service(String aServiceType)
   {
     serviceType = aServiceType;
     technicians = new ArrayList<Technician>();
     appointments = new ArrayList<Appointment>();
-    boolean didAddAutoRepairShop = setAutoRepairShop(aAutoRepairShop);
-    if (!didAddAutoRepairShop)
-    {
-      throw new RuntimeException("Unable to create service due to autoRepairShop. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
   }
 
   //------------------------
@@ -49,7 +51,7 @@ public class Service
     wasSet = true;
     return wasSet;
   }
-
+@Id
   public String getServiceType()
   {
     return serviceType;
@@ -60,7 +62,7 @@ public class Service
     Technician aTechnician = technicians.get(index);
     return aTechnician;
   }
-
+  @ManyToMany(cascade={CascadeType.ALL})
   public List<Technician> getTechnicians()
   {
     List<Technician> newTechnicians = Collections.unmodifiableList(technicians);
@@ -90,7 +92,7 @@ public class Service
     Appointment aAppointment = appointments.get(index);
     return aAppointment;
   }
-
+  @ManyToMany(cascade={CascadeType.ALL})
   public List<Appointment> getAppointments()
   {
     List<Appointment> newAppointments = Collections.unmodifiableList(appointments);
@@ -113,11 +115,6 @@ public class Service
   {
     int index = appointments.indexOf(aAppointment);
     return index;
-  }
-  /* Code from template association_GetOne */
-  public AutoRepairShop getAutoRepairShop()
-  {
-    return autoRepairShop;
   }
   /* Code from template association_IsNumberOfValidMethod */
   public boolean isNumberOfTechniciansValid()
@@ -387,25 +384,6 @@ public class Service
     }
     return wasAdded;
   }
-  /* Code from template association_SetOneToMany */
-  public boolean setAutoRepairShop(AutoRepairShop aAutoRepairShop)
-  {
-    boolean wasSet = false;
-    if (aAutoRepairShop == null)
-    {
-      return wasSet;
-    }
-
-    AutoRepairShop existingAutoRepairShop = autoRepairShop;
-    autoRepairShop = aAutoRepairShop;
-    if (existingAutoRepairShop != null && !existingAutoRepairShop.equals(aAutoRepairShop))
-    {
-      existingAutoRepairShop.removeService(this);
-    }
-    autoRepairShop.addService(this);
-    wasSet = true;
-    return wasSet;
-  }
 
   public void delete()
   {
@@ -435,19 +413,12 @@ public class Service
         aAppointment.removeService(this);
       }
     }
-    AutoRepairShop placeholderAutoRepairShop = autoRepairShop;
-    this.autoRepairShop = null;
-    if(placeholderAutoRepairShop != null)
-    {
-      placeholderAutoRepairShop.removeService(this);
-    }
   }
 
 
   public String toString()
   {
     return super.toString() + "["+
-            "serviceType" + ":" + getServiceType()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "autoRepairShop = "+(getAutoRepairShop()!=null?Integer.toHexString(System.identityHashCode(getAutoRepairShop())):"null");
+            "serviceType" + ":" + getServiceType()+ "]";
   }
 }

@@ -1,14 +1,19 @@
 package ca.mcgill.ecse321.projectgroup15.model;
+
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
 import java.util.*;
+
+import javax.persistence.Entity;
+
 import java.sql.Date;
 import java.sql.Time;
 
-// line 33 "model.ump"
-// line 124 "model.ump"
+// line 36 "model.ump"
+// line 119 "model.ump"
+@Entity
 public class Technician extends User
 {
 
@@ -17,7 +22,6 @@ public class Technician extends User
   //------------------------
 
   //Technician Attributes
-  private String technicianID;
   private int rating;
   private String role;
 
@@ -30,10 +34,9 @@ public class Technician extends User
   // CONSTRUCTOR
   //------------------------
 
-  public Technician(String aLastName, String aPhoneNo, AutoRepairShop aAutoRepairShop, String aTechnicianID, int aRating, String aRole)
+  public Technician(String aLastName, String aPhoneNo, String aFirstName, String aUserId, int aRating, String aRole)
   {
-    super(aLastName, aPhoneNo, aAutoRepairShop);
-    technicianID = aTechnicianID;
+    super(aLastName, aPhoneNo, aFirstName, aUserId);
     rating = aRating;
     role = aRole;
     availability = new ArrayList<TimeSlot>();
@@ -44,14 +47,6 @@ public class Technician extends User
   //------------------------
   // INTERFACE
   //------------------------
-
-  public boolean setTechnicianID(String aTechnicianID)
-  {
-    boolean wasSet = false;
-    technicianID = aTechnicianID;
-    wasSet = true;
-    return wasSet;
-  }
 
   public boolean setRating(int aRating)
   {
@@ -67,11 +62,6 @@ public class Technician extends User
     role = aRole;
     wasSet = true;
     return wasSet;
-  }
-
-  public String getTechnicianID()
-  {
-    return technicianID;
   }
 
   public int getRating()
@@ -446,7 +436,6 @@ public class Technician extends User
   public String toString()
   {
     return super.toString() + "["+
-            "technicianID" + ":" + getTechnicianID()+ "," +
             "rating" + ":" + getRating()+ "," +
             "role" + ":" + getRole()+ "]";
   }

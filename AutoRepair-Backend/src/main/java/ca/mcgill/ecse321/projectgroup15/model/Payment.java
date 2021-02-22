@@ -1,11 +1,16 @@
 package ca.mcgill.ecse321.projectgroup15.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
 
-// line 9 "model.ump"
-// line 97 "model.ump"
+// line 11 "model.ump"
+// line 92 "model.ump"
+@Entity
 public class Payment
 {
 
@@ -18,17 +23,19 @@ public class Payment
   private String cardNumber;
   private String expirationDate;
   private int cvc;
+  private String paymentId;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Payment(String aCardName, String aCardNumber, String aExpirationDate, int aCvc)
+  public Payment(String aCardName, String aCardNumber, String aExpirationDate, int aCvc, String aPaymentId)
   {
     cardName = aCardName;
     cardNumber = aCardNumber;
     expirationDate = aExpirationDate;
     cvc = aCvc;
+    paymentId = aPaymentId;
   }
 
   //------------------------
@@ -67,6 +74,14 @@ public class Payment
     return wasSet;
   }
 
+  public boolean setPaymentId(String aPaymentId)
+  {
+    boolean wasSet = false;
+    paymentId = aPaymentId;
+    wasSet = true;
+    return wasSet;
+  }
+
   public String getCardName()
   {
     return cardName;
@@ -86,6 +101,11 @@ public class Payment
   {
     return cvc;
   }
+@Id
+  public String getPaymentId()
+  {
+    return paymentId;
+  }
 
   public void delete()
   {}
@@ -97,6 +117,7 @@ public class Payment
             "cardName" + ":" + getCardName()+ "," +
             "cardNumber" + ":" + getCardNumber()+ "," +
             "expirationDate" + ":" + getExpirationDate()+ "," +
-            "cvc" + ":" + getCvc()+ "]";
+            "cvc" + ":" + getCvc()+ "," +
+            "paymentId" + ":" + getPaymentId()+ "]";
   }
 }

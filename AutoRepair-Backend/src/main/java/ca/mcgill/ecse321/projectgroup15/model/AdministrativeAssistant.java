@@ -1,54 +1,42 @@
 package ca.mcgill.ecse321.projectgroup15.model;
+
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
 import java.util.*;
+
+import javax.persistence.Entity;
+
 import java.sql.Date;
 import java.sql.Time;
 
-// line 50 "model.ump"
-// line 138 "model.ump"
-public class AdminstrativeAssistant extends User
+// line 51 "model.ump"
+// line 133 "model.ump"
+@Entity
+public class AdministrativeAssistant extends User
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //AdminstrativeAssistant Attributes
-  private String adminID;
-
-  //AdminstrativeAssistant Associations
+  //AdministrativeAssistant Associations
   private List<TimeSlot> availableTimeSlots;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public AdminstrativeAssistant(String aLastName, String aPhoneNo, AutoRepairShop aAutoRepairShop, String aAdminID)
+  public AdministrativeAssistant(String aLastName, String aPhoneNo, String aFirstName, String aUserId)
   {
-    super(aLastName, aPhoneNo, aAutoRepairShop);
-    adminID = aAdminID;
+    super(aLastName, aPhoneNo, aFirstName, aUserId);
     availableTimeSlots = new ArrayList<TimeSlot>();
   }
 
   //------------------------
   // INTERFACE
   //------------------------
-
-  public boolean setAdminID(String aAdminID)
-  {
-    boolean wasSet = false;
-    adminID = aAdminID;
-    wasSet = true;
-    return wasSet;
-  }
-
-  public String getAdminID()
-  {
-    return adminID;
-  }
   /* Code from template association_GetMany */
   public TimeSlot getAvailableTimeSlot(int index)
   {
@@ -143,10 +131,4 @@ public class AdminstrativeAssistant extends User
     super.delete();
   }
 
-
-  public String toString()
-  {
-    return super.toString() + "["+
-            "adminID" + ":" + getAdminID()+ "]";
-  }
 }
