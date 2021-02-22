@@ -9,7 +9,7 @@ import java.sql.Time;
 
 // line 50 "model.ump"
 // line 138 "model.ump"
-public class AdminstrativeAssistant extends User
+public class AdministrativeAssistant extends User
 {
 
   //------------------------
@@ -26,7 +26,7 @@ public class AdminstrativeAssistant extends User
   // CONSTRUCTOR
   //------------------------
 
-  public AdminstrativeAssistant(String aLastName, String aPhoneNo, AutoRepairShop aAutoRepairShop, String aAdminID)
+  public AdministrativeAssistant(String aLastName, String aPhoneNo, AutoRepairShop aAutoRepairShop, String aAdminID)
   {
     super(aLastName, aPhoneNo, aAutoRepairShop);
     adminID = aAdminID;
