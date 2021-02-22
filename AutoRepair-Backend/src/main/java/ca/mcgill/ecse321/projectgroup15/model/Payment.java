@@ -1,40 +1,19 @@
-/*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
+package ca.mcgill.ecse321.projectgroup15.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-
-// line 11 "model.ump"
-// line 126 "model.ump"
+@Entity
 public class Payment
 {
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
-
-  //Payment Attributes
   private String cardName;
   private String cardNumber;
   private String expirationDate;
   private int cvc;
   private String paymentId;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
-
-  public Payment(String aCardName, String aCardNumber, String aExpirationDate, int aCvc, String aPaymentId)
-  {
-    cardName = aCardName;
-    cardNumber = aCardNumber;
-    expirationDate = aExpirationDate;
-    cvc = aCvc;
-    paymentId = aPaymentId;
-  }
-
-  //------------------------
-  // INTERFACE
-  //------------------------
+  
 
   public boolean setCardName(String aCardName)
   {
@@ -95,7 +74,7 @@ public class Payment
   {
     return cvc;
   }
-
+@Id
   public String getPaymentId()
   {
     return paymentId;

@@ -7,10 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import ca.mcgill.ecse321.projectgroup15.model.Appointment;
 import ca.mcgill.ecse321.projectgroup15.model.Customer;
+import ca.mcgill.ecse321.projectgroup15.model.TimeSlot;
 @Repository
 public interface AppointmentRepository extends CrudRepository<Appointment, String>{
-	
-	List<Appointment> findByPerson(Customer lastName);
 
 	Appointment findApointmentByAppointmentID(String appointmentID);
 

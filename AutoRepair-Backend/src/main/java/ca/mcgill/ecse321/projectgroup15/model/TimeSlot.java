@@ -1,19 +1,18 @@
-/*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
+package ca.mcgill.ecse321.projectgroup15.model;
+
 
 
 import java.sql.Date;
 import java.sql.Time;
 
-// line 60 "model.ump"
-// line 149 "model.ump"
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+
 public class TimeSlot
 {
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
-
+  
   //TimeSlot Attributes
   private Date date;
   private Time startTime;
@@ -23,25 +22,7 @@ public class TimeSlot
   //TimeSlot Associations
   private Technician technician;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
 
-  public TimeSlot(Date aDate, Time aStartTime, Time aEndTime, String aTsId, Technician aTechnician)
-  {
-    date = aDate;
-    startTime = aStartTime;
-    endTime = aEndTime;
-    tsId = aTsId;
-    if (!setTechnician(aTechnician))
-    {
-      throw new RuntimeException("Unable to create TimeSlot due to aTechnician. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
-  }
-
-  //------------------------
-  // INTERFACE
-  //------------------------
 
   public boolean setDate(Date aDate)
   {
@@ -89,12 +70,13 @@ public class TimeSlot
   {
     return endTime;
   }
-
+@Id
   public String getTsId()
   {
     return tsId;
   }
   /* Code from template association_GetOne */
+@OneToMany()
   public Technician getTechnician()
   {
     return technician;
