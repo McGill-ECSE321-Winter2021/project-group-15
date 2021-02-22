@@ -1,5 +1,3 @@
-package ca.mcgill.ecse321.projectgroup15.model;
-
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
@@ -7,12 +5,8 @@ package ca.mcgill.ecse321.projectgroup15.model;
 import java.sql.Date;
 import java.sql.Time;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-// line 61 "model.ump"
-// line 141 "model.ump"
-@Entity
+// line 60 "model.ump"
+// line 149 "model.ump"
 public class TimeSlot
 {
 
@@ -27,32 +21,22 @@ public class TimeSlot
   private String tsId;
 
   //TimeSlot Associations
-  private Appointment appointment;
+  private Technician technician;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public TimeSlot(Date aDate, Time aStartTime, Time aEndTime, String aTsId, Appointment aAppointment)
+  public TimeSlot(Date aDate, Time aStartTime, Time aEndTime, String aTsId, Technician aTechnician)
   {
     date = aDate;
     startTime = aStartTime;
     endTime = aEndTime;
     tsId = aTsId;
-    if (aAppointment == null || aAppointment.getTimeSlot() != null)
+    if (!setTechnician(aTechnician))
     {
-      throw new RuntimeException("Unable to create TimeSlot due to aAppointment. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+      throw new RuntimeException("Unable to create TimeSlot due to aTechnician. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
-    appointment = aAppointment;
-  }
-
-  public TimeSlot(Date aDate, Time aStartTime, Time aEndTime, String aTsId, String aAppointmentIDForAppointment)
-  {
-    date = aDate;
-    startTime = aStartTime;
-    endTime = aEndTime;
-    tsId = aTsId;
-    appointment = new Appointment(aAppointmentIDForAppointment, this);
   }
 
   //------------------------
@@ -105,25 +89,31 @@ public class TimeSlot
   {
     return endTime;
   }
-@Id
+
   public String getTsId()
   {
     return tsId;
   }
   /* Code from template association_GetOne */
-  public Appointment getAppointment()
+  public Technician getTechnician()
   {
-    return appointment;
+    return technician;
+  }
+  /* Code from template association_SetUnidirectionalOne */
+  public boolean setTechnician(Technician aNewTechnician)
+  {
+    boolean wasSet = false;
+    if (aNewTechnician != null)
+    {
+      technician = aNewTechnician;
+      wasSet = true;
+    }
+    return wasSet;
   }
 
   public void delete()
   {
-    Appointment existingAppointment = appointment;
-    appointment = null;
-    if (existingAppointment != null)
-    {
-      existingAppointment.delete();
-    }
+    technician = null;
   }
 
 
@@ -134,6 +124,6 @@ public class TimeSlot
             "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "startTime" + "=" + (getStartTime() != null ? !getStartTime().equals(this)  ? getStartTime().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "endTime" + "=" + (getEndTime() != null ? !getEndTime().equals(this)  ? getEndTime().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "appointment = "+(getAppointment()!=null?Integer.toHexString(System.identityHashCode(getAppointment())):"null");
+            "  " + "technician = "+(getTechnician()!=null?Integer.toHexString(System.identityHashCode(getTechnician())):"null");
   }
 }

@@ -1,16 +1,10 @@
-package ca.mcgill.ecse321.projectgroup15.model;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
 
 // line 11 "model.ump"
-// line 92 "model.ump"
-@Entity
+// line 126 "model.ump"
 public class Payment
 {
 
@@ -101,7 +95,7 @@ public class Payment
   {
     return cvc;
   }
-@Id
+
   public String getPaymentId()
   {
     return paymentId;

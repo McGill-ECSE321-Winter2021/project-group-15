@@ -1,17 +1,11 @@
-package ca.mcgill.ecse321.projectgroup15.model;
-
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
 import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 // line 69 "model.ump"
-// line 146 "model.ump"
-@Entity
+// line 90 "model.ump"
 public class Account
 {
 
@@ -26,12 +20,13 @@ public class Account
   //Account Associations
   private User user;
   private List<Payment> payment;
+  private AutoRepairShop autoRepairShop;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Account(String aEmail, String aPassword, User aUser)
+  public Account(String aEmail, String aPassword, User aUser, AutoRepairShop aAutoRepairShop)
   {
     email = aEmail;
     password = aPassword;
@@ -40,6 +35,11 @@ public class Account
       throw new RuntimeException("Unable to create Account due to aUser. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
     payment = new ArrayList<Payment>();
+    boolean didAddAutoRepairShop = setAutoRepairShop(aAutoRepairShop);
+    if (!didAddAutoRepairShop)
+    {
+      throw new RuntimeException("Unable to create account due to autoRepairShop. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
   }
 
   //------------------------
@@ -61,7 +61,7 @@ public class Account
     wasSet = true;
     return wasSet;
   }
-@Id
+
   public String getEmail()
   {
     return email;
@@ -105,6 +105,11 @@ public class Account
   {
     int index = payment.indexOf(aPayment);
     return index;
+  }
+  /* Code from template association_GetOne */
+  public AutoRepairShop getAutoRepairShop()
+  {
+    return autoRepairShop;
   }
   /* Code from template association_SetUnidirectionalOne */
   public boolean setUser(User aNewUser)
@@ -174,11 +179,36 @@ public class Account
     }
     return wasAdded;
   }
+  /* Code from template association_SetOneToMany */
+  public boolean setAutoRepairShop(AutoRepairShop aAutoRepairShop)
+  {
+    boolean wasSet = false;
+    if (aAutoRepairShop == null)
+    {
+      return wasSet;
+    }
+
+    AutoRepairShop existingAutoRepairShop = autoRepairShop;
+    autoRepairShop = aAutoRepairShop;
+    if (existingAutoRepairShop != null && !existingAutoRepairShop.equals(aAutoRepairShop))
+    {
+      existingAutoRepairShop.removeAccount(this);
+    }
+    autoRepairShop.addAccount(this);
+    wasSet = true;
+    return wasSet;
+  }
 
   public void delete()
   {
     user = null;
     payment.clear();
+    AutoRepairShop placeholderAutoRepairShop = autoRepairShop;
+    this.autoRepairShop = null;
+    if(placeholderAutoRepairShop != null)
+    {
+      placeholderAutoRepairShop.removeAccount(this);
+    }
   }
 
 
@@ -187,6 +217,7 @@ public class Account
     return super.toString() + "["+
             "email" + ":" + getEmail()+ "," +
             "password" + ":" + getPassword()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "user = "+(getUser()!=null?Integer.toHexString(System.identityHashCode(getUser())):"null");
+            "  " + "user = "+(getUser()!=null?Integer.toHexString(System.identityHashCode(getUser())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "autoRepairShop = "+(getAutoRepairShop()!=null?Integer.toHexString(System.identityHashCode(getAutoRepairShop())):"null");
   }
 }

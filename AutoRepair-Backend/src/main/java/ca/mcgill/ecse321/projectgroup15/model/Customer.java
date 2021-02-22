@@ -1,16 +1,11 @@
-package ca.mcgill.ecse321.projectgroup15.model;
-
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
 import java.util.*;
 
-import javax.persistence.Entity;
-
-// line 45 "model.ump"
-// line 126 "model.ump"
-@Entity
+// line 44 "model.ump"
+// line 115 "model.ump"
 public class Customer extends User
 {
 
@@ -26,9 +21,9 @@ public class Customer extends User
   // CONSTRUCTOR
   //------------------------
 
-  public Customer(String aLastName, String aPhoneNo, String aFirstName, String aUserId, Appointment aAppointment, Service... allDesiredService)
+  public Customer(String aLastName, String aPhoneNo, String aFirstName, String aUserId, AutoRepairShop aAutoRepairShop, Appointment aAppointment, Service... allDesiredService)
   {
-    super(aLastName, aPhoneNo, aFirstName, aUserId);
+    super(aLastName, aPhoneNo, aFirstName, aUserId, aAutoRepairShop);
     desiredService = new ArrayList<Service>();
     boolean didAddDesiredService = setDesiredService(allDesiredService);
     if (!didAddDesiredService)

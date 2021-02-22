@@ -1,16 +1,10 @@
-package ca.mcgill.ecse321.projectgroup15.model;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
 
 // line 2 "model.ump"
-// line 84 "model.ump"
-@Entity
+// line 121 "model.ump"
 public abstract class User
 {
 
@@ -24,16 +18,24 @@ public abstract class User
   private String firstName;
   private String userId;
 
+  //User Associations
+  private AutoRepairShop autoRepairShop;
+
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public User(String aLastName, String aPhoneNo, String aFirstName, String aUserId)
+  public User(String aLastName, String aPhoneNo, String aFirstName, String aUserId, AutoRepairShop aAutoRepairShop)
   {
     lastName = aLastName;
     phoneNo = aPhoneNo;
     firstName = aFirstName;
     userId = aUserId;
+    boolean didAddAutoRepairShop = setAutoRepairShop(aAutoRepairShop);
+    if (!didAddAutoRepairShop)
+    {
+      throw new RuntimeException("Unable to create user due to autoRepairShop. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
   }
 
   //------------------------
@@ -86,14 +88,45 @@ public abstract class User
   {
     return firstName;
   }
-@Id
+
   public String getUserId()
   {
     return userId;
   }
+  /* Code from template association_GetOne */
+  public AutoRepairShop getAutoRepairShop()
+  {
+    return autoRepairShop;
+  }
+  /* Code from template association_SetOneToMany */
+  public boolean setAutoRepairShop(AutoRepairShop aAutoRepairShop)
+  {
+    boolean wasSet = false;
+    if (aAutoRepairShop == null)
+    {
+      return wasSet;
+    }
+
+    AutoRepairShop existingAutoRepairShop = autoRepairShop;
+    autoRepairShop = aAutoRepairShop;
+    if (existingAutoRepairShop != null && !existingAutoRepairShop.equals(aAutoRepairShop))
+    {
+      existingAutoRepairShop.removeUser(this);
+    }
+    autoRepairShop.addUser(this);
+    wasSet = true;
+    return wasSet;
+  }
 
   public void delete()
-  {}
+  {
+    AutoRepairShop placeholderAutoRepairShop = autoRepairShop;
+    this.autoRepairShop = null;
+    if(placeholderAutoRepairShop != null)
+    {
+      placeholderAutoRepairShop.removeUser(this);
+    }
+  }
 
 
   public String toString()
@@ -102,6 +135,7 @@ public abstract class User
             "lastName" + ":" + getLastName()+ "," +
             "phoneNo" + ":" + getPhoneNo()+ "," +
             "firstName" + ":" + getFirstName()+ "," +
-            "userId" + ":" + getUserId()+ "]";
+            "userId" + ":" + getUserId()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "autoRepairShop = "+(getAutoRepairShop()!=null?Integer.toHexString(System.identityHashCode(getAutoRepairShop())):"null");
   }
 }

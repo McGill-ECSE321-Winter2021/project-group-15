@@ -1,19 +1,11 @@
-package ca.mcgill.ecse321.projectgroup15.model;
-
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
 import java.util.*;
 
-import javax.persistence.Entity;
-
-import java.sql.Date;
-import java.sql.Time;
-
-// line 36 "model.ump"
-// line 119 "model.ump"
-@Entity
+// line 35 "model.ump"
+// line 143 "model.ump"
 public class Technician extends User
 {
 
@@ -26,7 +18,6 @@ public class Technician extends User
   private String role;
 
   //Technician Associations
-  private List<TimeSlot> availability;
   private List<Service> expertise;
   private List<Appointment> assignment;
 
@@ -34,12 +25,11 @@ public class Technician extends User
   // CONSTRUCTOR
   //------------------------
 
-  public Technician(String aLastName, String aPhoneNo, String aFirstName, String aUserId, int aRating, String aRole)
+  public Technician(String aLastName, String aPhoneNo, String aFirstName, String aUserId, AutoRepairShop aAutoRepairShop, int aRating, String aRole)
   {
-    super(aLastName, aPhoneNo, aFirstName, aUserId);
+    super(aLastName, aPhoneNo, aFirstName, aUserId, aAutoRepairShop);
     rating = aRating;
     role = aRole;
-    availability = new ArrayList<TimeSlot>();
     expertise = new ArrayList<Service>();
     assignment = new ArrayList<Appointment>();
   }
@@ -72,36 +62,6 @@ public class Technician extends User
   public String getRole()
   {
     return role;
-  }
-  /* Code from template association_GetMany */
-  public TimeSlot getAvailability(int index)
-  {
-    TimeSlot aAvailability = availability.get(index);
-    return aAvailability;
-  }
-
-  public List<TimeSlot> getAvailability()
-  {
-    List<TimeSlot> newAvailability = Collections.unmodifiableList(availability);
-    return newAvailability;
-  }
-
-  public int numberOfAvailability()
-  {
-    int number = availability.size();
-    return number;
-  }
-
-  public boolean hasAvailability()
-  {
-    boolean has = availability.size() > 0;
-    return has;
-  }
-
-  public int indexOfAvailability(TimeSlot aAvailability)
-  {
-    int index = availability.indexOf(aAvailability);
-    return index;
   }
   /* Code from template association_GetMany */
   public Service getExpertise(int index)
@@ -162,63 +122,6 @@ public class Technician extends User
   {
     int index = assignment.indexOf(aAssignment);
     return index;
-  }
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfAvailability()
-  {
-    return 0;
-  }
-  /* Code from template association_AddUnidirectionalMany */
-  public boolean addAvailability(TimeSlot aAvailability)
-  {
-    boolean wasAdded = false;
-    if (availability.contains(aAvailability)) { return false; }
-    availability.add(aAvailability);
-    wasAdded = true;
-    return wasAdded;
-  }
-
-  public boolean removeAvailability(TimeSlot aAvailability)
-  {
-    boolean wasRemoved = false;
-    if (availability.contains(aAvailability))
-    {
-      availability.remove(aAvailability);
-      wasRemoved = true;
-    }
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addAvailabilityAt(TimeSlot aAvailability, int index)
-  {  
-    boolean wasAdded = false;
-    if(addAvailability(aAvailability))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfAvailability()) { index = numberOfAvailability() - 1; }
-      availability.remove(aAvailability);
-      availability.add(index, aAvailability);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
-
-  public boolean addOrMoveAvailabilityAt(TimeSlot aAvailability, int index)
-  {
-    boolean wasAdded = false;
-    if(availability.contains(aAvailability))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfAvailability()) { index = numberOfAvailability() - 1; }
-      availability.remove(aAvailability);
-      availability.add(index, aAvailability);
-      wasAdded = true;
-    } 
-    else 
-    {
-      wasAdded = addAvailabilityAt(aAvailability, index);
-    }
-    return wasAdded;
   }
   /* Code from template association_IsNumberOfValidMethod */
   public boolean isNumberOfExpertiseValid()
@@ -414,7 +317,6 @@ public class Technician extends User
 
   public void delete()
   {
-    availability.clear();
     ArrayList<Service> copyOfExpertise = new ArrayList<Service>(expertise);
     expertise.clear();
     for(Service aExpertise : copyOfExpertise)

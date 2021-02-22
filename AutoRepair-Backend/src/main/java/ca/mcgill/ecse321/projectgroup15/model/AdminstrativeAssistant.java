@@ -7,22 +7,22 @@ import java.sql.Date;
 import java.sql.Time;
 
 // line 50 "model.ump"
-// line 131 "model.ump"
-public class AdministrativeAssistant extends User
+// line 130 "model.ump"
+public class AdminstrativeAssistant extends User
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //AdministrativeAssistant Associations
+  //AdminstrativeAssistant Associations
   private List<TimeSlot> availableTimeSlots;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public AdministrativeAssistant(String aLastName, String aPhoneNo, String aFirstName, String aUserId, AutoRepairShop aAutoRepairShop)
+  public AdminstrativeAssistant(String aLastName, String aPhoneNo, String aFirstName, String aUserId, AutoRepairShop aAutoRepairShop)
   {
     super(aLastName, aPhoneNo, aFirstName, aUserId, aAutoRepairShop);
     availableTimeSlots = new ArrayList<TimeSlot>();
