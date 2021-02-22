@@ -15,14 +15,25 @@ public class Service
   
   //Service Attributes
   private String serviceType;
+  private Double serviceCost;
 
   //Service Associations
   private List<Technician> technicians;
   private List<Appointment> appointments;
   
   
-
-
+  public boolean setServiceCost(Double aServiceCost)
+  {
+    boolean wasSet = false;
+    serviceCost = aServiceCost;
+    wasSet = true;
+    return wasSet;
+  }
+  public Double getServiceCost()
+  {
+    return serviceCost;
+  }
+  
   public boolean setServiceType(String aServiceType)
   {
     boolean wasSet = false;
