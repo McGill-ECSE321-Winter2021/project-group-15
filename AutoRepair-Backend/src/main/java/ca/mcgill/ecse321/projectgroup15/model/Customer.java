@@ -4,7 +4,10 @@ package ca.mcgill.ecse321.projectgroup15.model;
 
 import java.util.*;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,12 +24,15 @@ public class Customer extends User
 		// TODO Auto-generated constructor stub
 	}
 //Customer Associations
+  @ManyToMany()
   private List<Service> desiredService;
-  private Appointment appointment;
+  @OneToMany()
+  private List<Appointment> appointment;
 
   /* Code from template association_GetMany */
  
-
+  @Column
+  @ElementCollection(targetClass=Customer.class)
   public List<Service> getDesiredService()
   {
     List<Service> newDesiredService = Collections.unmodifiableList(desiredService);
@@ -38,12 +44,14 @@ public class Customer extends User
 
   
   /* Code from template association_GetOne */
- 
-  public Appointment getAppointment()
+  @Column
+  @ElementCollection(targetClass=Customer.class)
+  public List<Appointment> getAppointment()
   {
-    return appointment;
+	  List<Appointment> newAppointment = Collections.unmodifiableList(appointment);
+    return newAppointment;
   }
-  public void setAppointment(Appointment appointmentss) {
+  public void setAppointment(List<Appointment> appointmentss) {
 	   this.appointment = appointmentss;
  }
 }

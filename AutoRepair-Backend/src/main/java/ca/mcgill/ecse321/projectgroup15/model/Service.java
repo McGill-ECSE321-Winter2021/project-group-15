@@ -3,6 +3,8 @@ package ca.mcgill.ecse321.projectgroup15.model;
 
 import java.util.*;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -18,7 +20,9 @@ public class Service
   private Double serviceCost;
 
   //Service Associations
+  @ManyToMany()
   private List<Technician> technicians;
+  @ManyToMany()
   private List<Appointment> appointments;
   
   
@@ -47,7 +51,8 @@ public class Service
     return serviceType;
   }
  
-  @ManyToMany()
+@Column
+@ElementCollection(targetClass=Service.class)
   public List<Technician> getTechnicians()
   {
     List<Technician> newTechnicians = Collections.unmodifiableList(technicians);
@@ -60,7 +65,8 @@ public class Service
   
   /* Code from template association_GetMany */
  
-@ManyToMany()
+  @Column
+  @ElementCollection(targetClass=Service.class)
   public List<Appointment> getAppointments()
   {
     List<Appointment> newAppointments = Collections.unmodifiableList(appointments);

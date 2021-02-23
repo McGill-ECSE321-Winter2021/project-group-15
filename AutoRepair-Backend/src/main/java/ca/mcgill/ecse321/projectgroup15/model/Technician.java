@@ -2,6 +2,8 @@ package ca.mcgill.ecse321.projectgroup15.model;
 
 import java.util.*;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
@@ -14,7 +16,9 @@ public class Technician extends User
   private String role;
 
   //Technician Associations
+  @ManyToMany()
   private List<Service> expertise;
+  @ManyToMany()
   private List<Appointment> assignment;
 
  
@@ -54,7 +58,8 @@ public class Technician extends User
   }
   /* Code from template association_GetMany */
  
-@ManyToMany()
+  @Column
+  @ElementCollection(targetClass=Technician.class)
   public List<Service> getExpertise()
   {
     List<Service> newExpertise = Collections.unmodifiableList(expertise);
@@ -67,7 +72,8 @@ public void setService(List<Service> expertisess) {
   
   /* Code from template association_GetMany */
   
-@ManyToMany()
+@Column
+@ElementCollection(targetClass=Technician.class)
   public List<Appointment> getAssignment()
   {
     List<Appointment> newAssignment = Collections.unmodifiableList(assignment);

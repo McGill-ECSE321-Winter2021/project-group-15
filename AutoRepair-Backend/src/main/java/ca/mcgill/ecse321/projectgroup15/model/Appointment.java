@@ -3,9 +3,12 @@ package ca.mcgill.ecse321.projectgroup15.model;
 
 import java.util.*;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import java.sql.Date;
@@ -24,9 +27,10 @@ public class Appointment
   private Double totalCost;
 
   //Appointment Associations
+  @ManyToMany()
   private List<Service> services;
- 
-  private TimeSlot timeSlot;
+  @OneToMany()
+  private List<TimeSlot> timeSlots;
 
   //------------------------
   // CONSTRUCTOR
@@ -61,7 +65,8 @@ public class Appointment
   }
   /* Code from template association_GetMany */
  
-@ManyToMany()
+@Column
+@ElementCollection(targetClass=Appointment.class)
   public List<Service> getServices()
   {
     List<Service> newServices = Collections.unmodifiableList(services);
@@ -76,12 +81,16 @@ public class Appointment
   
   
   /* Code from template association_GetOne */
-  //@OneToOne()
-  public TimeSlot getTimeSlot()
+  //@OneToMany()
+  @Column
+  @ElementCollection(targetClass=Appointment.class)
+
+  public List<TimeSlot> getTimeSlot()
   {
-    return timeSlot;
+	  List<TimeSlot> newTimeSlots = Collections.unmodifiableList(timeSlots);
+    return newTimeSlots;
   }
-  public void setTimeSlot(TimeSlot timeslotss) {
-	   this.timeSlot = timeslotss;
+  public void setTimeSlot(List<TimeSlot> timeslotss) {
+	   this.timeSlots = timeslotss;
 	}
 }

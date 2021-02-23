@@ -3,6 +3,8 @@ package ca.mcgill.ecse321.projectgroup15.model;
 
 import java.util.*;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
@@ -16,6 +18,7 @@ public class AdministrativeAssistant extends User
   
 
   //AdministrativeAssistant Associations
+	@ManyToMany()
   private List<TimeSlot> availableTimeSlots;
 
   
@@ -31,6 +34,8 @@ public class AdministrativeAssistant extends User
   /* Code from template association_GetMany */
   
 //@ManyToMany()
+  @Column
+  @ElementCollection(targetClass=AdministrativeAssistant.class)
   public List<TimeSlot> getAvailableTimeSlots()
   {
     List<TimeSlot> newAvailableTimeSlots = Collections.unmodifiableList(availableTimeSlots);
