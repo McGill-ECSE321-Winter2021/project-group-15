@@ -18,7 +18,7 @@ This table contains the team members of this project, their roles and the hours 
 | Ege Karadibak | Software developer |     |      |      |    |
 | Elie Ruban | Testing and Software developer| | | | |
 | Rania Ouassif | Project Manager and Software developer | 25| | | |
-| Anandamoyi Saha | Testing lead and Software developer | | | | |
+| Anandamoyi Saha | Testing lead and Software developer |24 | | | |
 
 ## Project Report and Meeting Minutes
 
