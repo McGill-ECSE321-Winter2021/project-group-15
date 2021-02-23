@@ -31,12 +31,33 @@ public class TestAutoRepairPersistence {
 	@Autowired
 	private TechnicianRepository technicianRepository;
 	
+	@Autowired
+	private AccountRepository accountRepository;
+	
+	@Autowired
+	private AppointmentRepository appointmentRepository;
+	
+	@Autowired
+	private PaymentRepository paymentRepository;
+	
+	@Autowired
+	private ServiceRepository serviceRepository;
+	
+	@Autowired
+	private TimeSlotRepository timeSlotRepository;
+	
 	@AfterEach
 	public void clearDatabase() {
 		
 		assistantRepository.deleteAll();
 		customerRepository.deleteAll();
 		technicianRepository.deleteAll();
+		accountRepository.deleteAll();
+		appointmentRepository.deleteAll();
+		paymentRepository.deleteAll();
+		serviceRepository.deleteAll();
+		timeSlotRepository.deleteAll();
+		
 		
 	}
 	
@@ -44,12 +65,14 @@ public class TestAutoRepairPersistence {
 	public void PersistAndLoadAccount() {
 		
 		AutoRepairShop auto = new AutoRepairShop();
-		Technician tech = new Technician("xsd","213",auto,"123",5,"maintenance");
-		tech.setLastName("sdd");
 		
+		Technician tech = new Technician("xsd","213","cccwed","xdewdw",auto,5,"maintenance");
+		tech.setFirstName("d");
+		tech.setLastName("sdd");
 		tech.setRole("oil change");
 		tech.setPhoneNo("514");
-		tech.setTechnicianID("csd");
+		tech.setUserId("helo");
+		tech.setRating(8);
 		tech.setAutoRepairShop(auto);
 		String email = "123@mail.mcgill.ca";
 		String password = "123";
@@ -58,12 +81,17 @@ public class TestAutoRepairPersistence {
 		account.setPassword(password);
 		account.setAutoRepairShop(auto);
 		account.setUser(tech);
+		accountRepository.save(account);
 		
 		account = null;
+		
+		account = accountRepository.findAccountByEmail(email);
 		
 		assertNotNull(account);
 		assertEquals(email,account.getEmail());
 		assertEquals(password,account.getPassword());
+		assertEquals(tech.getFirstName(),account.getUser().getFirstName());
+		assertEquals(tech.getUserId(),account.getUser().getUserId());
 		assertEquals(tech.getLastName(),account.getUser().getLastName());
 		assertEquals(tech.getAutoRepairShop(),account.getUser().getAutoRepairShop());
 		assertEquals(tech.getPhoneNo(),account.getUser().getPhoneNo());
@@ -74,25 +102,29 @@ public class TestAutoRepairPersistence {
 	public void PersistAndLoadTechnician() {
 		AutoRepairShop auto = new AutoRepairShop();
 		AutoRepairShop auto2 = new AutoRepairShop();
-		Technician tech = new Technician("xsd","213",auto,"123",5,"maintenance");
+		Technician tech = new Technician("xsd","213","cccwed","xdewdw",auto,5,"maintenance");
 		
 		String techId = "789";
 		String role = "oil change";
 		String lastName = "sdd";
+		String firstName = "x";
 		String phoneNumber = "388";
 		int rating = 4;
+		tech.setFirstName(firstName);
 		tech.setLastName(lastName);
 		tech.setRole(role);
 		tech.setPhoneNo(phoneNumber);
-		tech.setTechnicianID(techId);
+		tech.setUserId(techId);
+		tech.setRating(rating);
 		tech.setAutoRepairShop(auto2);
 		technicianRepository.save(tech);
 		
 		tech = null;
 		tech = technicianRepository.findTechnicianByTechnicianID(techId);
 		assertNotNull(tech);
-		assertEquals(techId,tech.getTechnicianID());
+		assertEquals(techId,tech.getUserId());
 		assertEquals(role,tech.getRole());
+		assertEquals(firstName,tech.getFirstName());
 		assertEquals(lastName,tech.getLastName());
 		assertEquals(phoneNumber,tech.getPhoneNo());
 		assertEquals(rating,tech.getRating());
@@ -108,8 +140,8 @@ public class TestAutoRepairPersistence {
 		String adminId = "123";
 		String lastName = "dsf";
 		String phoneNumber = "514";
-		AdministrativeAssistant assistant = new AdministrativeAssistant("dss","456",auto,"32");
-		assistant.setAdminID(adminId);
+		AdministrativeAssistant assistant = new AdministrativeAssistant("xsd","213","cccwed","xdewdw",auto);
+		assistant.setUserId(adminId);
 		assistant.setAutoRepairShop(auto2);
 		assistant.setLastName(lastName);
 		assistant.setPhoneNo(phoneNumber);
@@ -120,7 +152,7 @@ public class TestAutoRepairPersistence {
 		assistant = assistantRepository.findAdministrativeAssistantByAdminID(adminId);
 		
 		assertNotNull(assistant);
-		assertEquals(adminId,assistant.getAdminID());
+		assertEquals(adminId,assistant.getUserId());
 		assertEquals(lastName,assistant.getLastName());
 		assertEquals(phoneNumber,assistant.getPhoneNo());
 		assertEquals(auto2,assistant.getAutoRepairShop());
@@ -132,20 +164,36 @@ public class TestAutoRepairPersistence {
 	public void PersistAndLoadAppointment() {
 		AutoRepairShop auto = new AutoRepairShop();
 		AutoRepairShop auto2 = new AutoRepairShop();
+		
+		Technician tech = new Technician("xsd","213","cccwed","xdewdw",auto,5,"maintenance");
+		tech.setFirstName("vrf");
+		tech.setLastName("sdd");
+		tech.setRole("oil change");
+		tech.setPhoneNo("514");
+		tech.setUserId("helo");
+		tech.setRating(0);
+		tech.setAutoRepairShop(auto);
+		
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
 		Time startTime = java.sql.Time.valueOf(LocalTime.of(11, 35));
 		Time endTime = java.sql.Time.valueOf(LocalTime.of(13, 25));
-		TimeSlot timeSlot = new TimeSlot(date,startTime,endTime,"id",auto);
+		TimeSlot timeSlot = new TimeSlot(date,startTime,endTime,"id",tech);
 		timeSlot.setDate(date);
 		timeSlot.setEndTime(endTime);
 		timeSlot.setStartTime(startTime);
 		String appointmentID = "45";
+		Double totalCost = 34.55;
 		
-		Appointment appointment = new Appointment("67",timeSlot,auto2);
+		Appointment appointment = new Appointment("67",auto,timeSlot);
 		appointment.setAppointmentID(appointmentID);
 		appointment.setAutoRepairShop(auto2);
+		//appointment.setTotalCost(totalCost);
+		
+		appointmentRepository.save(appointment);
 		
 		appointment = null;
+		
+		appointment = appointmentRepository.findApointmentByAppointmentID(appointmentID);
 		
 		assertNotNull(appointment);
 		assertEquals(appointmentID,appointment.getAppointmentID());
@@ -153,6 +201,7 @@ public class TestAutoRepairPersistence {
 		assertEquals(timeSlot.getDate(),appointment.getTimeSlot().getDate());
 		assertEquals(timeSlot.getEndTime(),appointment.getTimeSlot().getEndTime());
 		assertEquals(timeSlot.getStartTime(), appointment.getTimeSlot().getStartTime());
+		//assertEquals(totalCost,appointment.getTotalCost());
 		
 	}
 	
@@ -161,51 +210,94 @@ public class TestAutoRepairPersistence {
 		
 		AutoRepairShop auto = new AutoRepairShop();
 		AutoRepairShop auto2 = new AutoRepairShop();
-        String appointmentID = "45";
+       
+        
+        Technician tech = new Technician("xsd","213","cccwed","xdewdw",auto,5,"maintenance");
+        tech.setFirstName("de");
+		tech.setLastName("sdd");
+		tech.setRole("oil change");
+		tech.setPhoneNo("514");
+		tech.setUserId("helo");
+		tech.setRating(0);
+		tech.setAutoRepairShop(auto);
 		
 		
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
 		Time startTime = java.sql.Time.valueOf(LocalTime.of(11, 35));
 		Time endTime = java.sql.Time.valueOf(LocalTime.of(13, 25));
-		Appointment appointment = new Appointment("67",date,startTime,endTime,auto);
-		appointment.setAppointmentID(appointmentID);
-		appointment.setAutoRepairShop(auto2);
-		TimeSlot timeSlot = new TimeSlot(java.sql.Date.valueOf(LocalDate.of(2020, Month.FEBRUARY, 31)),java.sql.Time.valueOf(LocalTime.of(21, 45)),java.sql.Time.valueOf(LocalTime.of(22, 65)),appointment);
+		String id = "cdde";
+	
+		TimeSlot timeSlot = new TimeSlot(java.sql.Date.valueOf(LocalDate.of(2020, Month.FEBRUARY, 31)),java.sql.Time.valueOf(LocalTime.of(21, 45)),java.sql.Time.valueOf(LocalTime.of(22, 65)),"id",tech);
 		timeSlot.setDate(date);
 		timeSlot.setEndTime(endTime);
 		timeSlot.setStartTime(startTime);
+		timeSlot.setTsId(id);
+		timeSlot.setTechnician(tech);
+		timeSlotRepository.save(timeSlot);
+		
+        
 		
 		timeSlot = null;
+		
+		timeSlot = timeSlotRepository.findTimeSlotByTsId(id);
 		
 		assertNotNull(timeSlot);
 		assertEquals(date, timeSlot.getDate());
 		assertEquals(startTime,timeSlot.getStartTime());
 		assertEquals(endTime,timeSlot.getEndTime());
-		assertEquals(appointment.getAppointmentID(),timeSlot.getAppointment().getAppointmentID());
-		assertEquals(appointment.getAutoRepairShop(),timeSlot.getAppointment().getAutoRepairShop());
+		assertEquals(tech.getFirstName(),timeSlot.getTechnician().getFirstName());
+		assertEquals(tech.getLastName(),timeSlot.getTechnician().getLastName());
+		assertEquals(tech.getRole(),timeSlot.getTechnician().getRole());
+		assertEquals(tech.getPhoneNo(),timeSlot.getTechnician().getPhoneNo());
+		assertEquals(tech.getUserId(),timeSlot.getTechnician().getUserId());
+		assertEquals(tech.getRating(),timeSlot.getTechnician());
+		assertEquals(auto,timeSlot.getTechnician().getAutoRepairShop());
 		
 	}
 	
 	@Test
 	public void PersistAndLoadCustomer() {
-		
-		String username = "saa";
-		String phoneNumber = "344";
 		AutoRepairShop auto = new AutoRepairShop();
 		AutoRepairShop auto2 = new AutoRepairShop();
+		
+		 Technician tech = new Technician("xsd","213","cccwed","xdewdw",auto,5,"maintenance");
+	        tech.setFirstName("de");
+			tech.setLastName("sdd");
+			tech.setRole("oil change");
+			tech.setPhoneNo("514");
+			tech.setUserId("helo");
+			tech.setRating(0);
+			tech.setAutoRepairShop(auto);
+		
+		String username = "saa";
+		String lastName = "xsdw";
+		String phoneNumber = "344";
+		String userId = "dededw";
+		
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
 		Time startTime = java.sql.Time.valueOf(LocalTime.of(11, 35));
 		Time endTime = java.sql.Time.valueOf(LocalTime.of(13, 25));
-		Appointment appointment = new Appointment("67",date,startTime,endTime,auto);
-		appointment.setAppointmentID("45");
+		
+		TimeSlot timeSlot = new TimeSlot(java.sql.Date.valueOf(LocalDate.of(2020, Month.FEBRUARY, 31)),java.sql.Time.valueOf(LocalTime.of(21, 45)),java.sql.Time.valueOf(LocalTime.of(22, 65)),"id",tech);
+		timeSlot.setDate(date);
+		timeSlot.setEndTime(endTime);
+		timeSlot.setStartTime(startTime);
+		
+         String appointmentID = "45";
+		
+		Appointment appointment = new Appointment("67",auto,timeSlot);
+		appointment.setAppointmentID(appointmentID);
 		appointment.setAutoRepairShop(auto2);
+		
 		Service service = new Service("maintenance",auto);
 		String serviceType = "oil change";
 		service.setServiceType(serviceType);
 		service.setAutoRepairShop(auto2);
-		Customer customer = new Customer("xsdw","900",auto,"opp",appointment,service);
+		Customer customer = new Customer("xsdw","900","defe","dttgtg",auto,appointment,service);
 		
-		customer.setUsername(username);
+		customer.setFirstName(username);
+		customer.setLastName(lastName);
+		customer.setUserId(userId);
 		customer.setPhoneNo(phoneNumber);
 		customer.setAppointment(appointment);
 		customer.setAutoRepairShop(auto2);
@@ -217,8 +309,10 @@ public class TestAutoRepairPersistence {
 		customer = customerRepository.findByCustomerAndAppointment(username,"45");
 		
 		assertNotNull(customer);
-		assertEquals(username,customer.getUsername());
+		assertEquals(username,customer.getFirstName());
+		assertEquals(lastName,customer.getLastName());
 		assertEquals(phoneNumber,customer.getPhoneNo());
+		assertEquals(userId,customer.getUserId());
 		assertEquals(auto2,customer.getAutoRepairShop());
 		assertEquals(appointment.getAppointmentID(),customer.getAppointment().getAppointmentID());	
 		
@@ -232,14 +326,20 @@ public class TestAutoRepairPersistence {
 		
 		Service service = new Service("maintenance",auto);
 		String serviceType = "oil change";
+		Double totalCost = 34.55;
 		service.setServiceType(serviceType);
 		service.setAutoRepairShop(auto2);
+		//service.setServiceCost(totalCost);
+		serviceRepository.save(service);
 		
 		service = null;
+		
+		service = serviceRepository.findSerivceByServiceType(serviceType);
 		
 		assertNotNull(service);
 		assertEquals(serviceType,service.getServiceType());
 		assertEquals(auto2,service.getAutoRepairShop());
+		//assertEquals(totalCost,service.getServiceCost());
 		
 	}
 	
@@ -250,20 +350,26 @@ public class TestAutoRepairPersistence {
 		String cardNumber = "1234";
 		String expirationDate = "234343";
 		int cvc = 8;
+		String paymentId = "kfrj";
 		
-		Payment payment = new Payment("gh","098","09",0);
+		Payment payment = new Payment("gh","098","09",0,"dw");
 		payment.setCardName(cardName);
 		payment.setCardNumber(cardNumber);
 		payment.setExpirationDate(expirationDate);
 		payment.setCvc(cvc);
+		payment.setPaymentId(paymentId);
+		paymentRepository.save(payment);
 		
 		payment = null;
+		
+		payment = paymentRepository.findPaymentByPaymentId(paymentId);
 		
 		assertNotNull(payment);
 		assertEquals(cardName,payment.getCardName());
 		assertEquals(cardNumber,payment.getCardNumber());
 		assertEquals(expirationDate, payment.getExpirationDate());
 		assertEquals(cvc, payment.getCvc());
+		assertEquals(paymentId,payment.getPaymentId());
 	}
 
 }
