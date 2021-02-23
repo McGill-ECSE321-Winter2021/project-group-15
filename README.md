@@ -17,7 +17,7 @@ This table contains the team members of this project, their roles and the hours 
 | Venkata Satyanarayana | Software developer     |     |     |     |     |
 | Ege Karadibak | Software developer |     |      |      |    |
 | Elie Ruban | Testing and Software developer| | | | |
-| Rania Ouassif | Project Manager and Software developer | | | | |
+| Rania Ouassif | Project Manager and Software developer | 25| | | |
 | Anandamoyi Saha | Testing lead and Software developer | | | | |
 
 ## Project Report and Meeting Minutes
