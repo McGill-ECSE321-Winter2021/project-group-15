@@ -1,57 +1,114 @@
+/*PLEASE DO NOT EDIT THIS CODE*/
+/*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 package ca.mcgill.ecse321.projectgroup15.model;
 
-
-
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.sql.Date;
 import java.util.*;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
 @Entity
-public class Customer extends User
+public class Customer extends Person
 {
+  //Customer Attributes
+  private String cardNumber;
+  private String cvv;
+  private Date expiry;
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
+  //Customer Associations
+  private List<Bill> bills;
+  private List<Appointment> appointments;
 
-  public Customer(String aLastName, String aPhoneNo, String aFirstName, String aUserId,
-			AutoRepairShop aAutoRepairShop) {
-		super(aLastName, aPhoneNo, aFirstName, aUserId, aAutoRepairShop);
-		// TODO Auto-generated constructor stub
-	}
-//Customer Associations
-  @ManyToMany()
-  private List<Service> desiredService;
-  @OneToMany()
-  private List<Appointment> appointment;
-
-  /* Code from template association_GetMany */
- 
-  @Column
-  @ElementCollection(targetClass=Customer.class)
-  public List<Service> getDesiredService()
-  {
-    List<Service> newDesiredService = Collections.unmodifiableList(desiredService);
-    return newDesiredService;
+  public String getCardNumber() {
+    return cardNumber;
   }
-  public void setService(List<Service> desiredservicess) {
-	   this.desiredService = desiredservicess;
- }
 
-  
-  /* Code from template association_GetOne */
-  @Column
-  @ElementCollection(targetClass=Customer.class)
-  public List<Appointment> getAppointment()
+  public Bill getBill(int index)
   {
-	  List<Appointment> newAppointment = Collections.unmodifiableList(appointment);
-    return newAppointment;
+    Bill aBill = bills.get(index);
+    return aBill;
   }
-  public void setAppointment(List<Appointment> appointmentss) {
-	   this.appointment = appointmentss;
- }
+
+
+  public int numberOfBills()
+  {
+    int number = bills.size();
+    return number;
+  }
+
+  public boolean hasBills()
+  {
+    boolean has = bills.size() > 0;
+    return has;
+  }
+
+  public int indexOfBill(Bill aBill)
+  {
+    int index = bills.indexOf(aBill);
+    return index;
+  }
+
+  public Appointment getAppointment(int index)
+  {
+    Appointment aAppointment = appointments.get(index);
+    return aAppointment;
+  }
+
+  public int numberOfAppointments()
+  {
+    int number = appointments.size();
+    return number;
+  }
+
+  public boolean hasAppointments()
+  {
+    boolean has = appointments.size() > 0;
+    return has;
+  }
+
+  public int indexOfAppointment(Appointment aAppointment)
+  {
+    int index = appointments.indexOf(aAppointment);
+    return index;
+  }
+
+  public void setCardNumber(String cardNumber) {
+    this.cardNumber = cardNumber;
+  }
+
+  public String getCvv() {
+    return cvv;
+  }
+
+  public void setCvv(String cvv) {
+    this.cvv = cvv;
+  }
+
+  public Date getExpiry() {
+    return expiry;
+  }
+
+  public void setExpiry(Date expiry) {
+    this.expiry = expiry;
+  }
+
+  @OneToMany(mappedBy = "customer",cascade = {CascadeType.ALL})
+  public List<Bill> getBills() {
+    return bills;
+  }
+
+  public void setBills(List<Bill> bills) {
+    this.bills = bills;
+  }
+
+  @OneToMany(mappedBy = "customer",cascade = {CascadeType.ALL})
+  public List<Appointment> getAppointments() {
+    return appointments;
+  }
+
+  public void setAppointments(List<Appointment> appointments) {
+    this.appointments = appointments;
+  }
 }
