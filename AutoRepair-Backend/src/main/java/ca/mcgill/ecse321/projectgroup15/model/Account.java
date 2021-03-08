@@ -4,6 +4,9 @@ package ca.mcgill.ecse321.projectgroup15.model;
 
 import java.util.*;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -19,7 +22,9 @@ public class Account
   private String password;
 
   //Account Associations
-  private User user;
+  @OneToMany()
+  private List<User> user;
+  @ManyToMany()
   private List<Payment> payment;
  
 
@@ -51,25 +56,23 @@ public class Account
     return password;
   }
   /* Code from template association_GetOne */
+  @Column
+  @ElementCollection(targetClass=Account.class)
+  public List<User> getUser()
+  {
+	  List<User> newUser = Collections.unmodifiableList(user);
+    return newUser;
+  }
+  public void setUser(List<User> userss) {
+	   this.user = userss;
+ }
   
-  public User getUser()
-  {
-    return user;
-  }
-  public boolean setUser(User aNewUser)
-  {
-    boolean wasSet = false;
-    if (aNewUser != null)
-    {
-      user = aNewUser;
-      wasSet = true;
-    }
-    return wasSet;
-  }
+ 
   
   /* Code from template association_GetMany */
   
-@ManyToMany()
+  @Column
+  @ElementCollection(targetClass=Account.class)
   public List<Payment> getPayment()
   {
     List<Payment> newPayment = Collections.unmodifiableList(payment);

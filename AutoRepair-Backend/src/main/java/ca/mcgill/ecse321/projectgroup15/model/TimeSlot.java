@@ -20,6 +20,7 @@ public class TimeSlot
   private String tsId;
 
   //TimeSlot Associations
+  @OneToMany()
   private Technician technician;
 
 
@@ -76,7 +77,7 @@ public class TimeSlot
     return tsId;
   }
   /* Code from template association_GetOne */
-@OneToMany()
+
   public Technician getTechnician()
   {
     return technician;
