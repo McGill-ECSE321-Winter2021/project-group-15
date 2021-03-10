@@ -8,7 +8,7 @@ public class Appointment
   private Service service;
   private Customer customer;
   private TimeSlot timeslot;
-  private Bill bill;
+  private Payment payment;
   private RepairShop repairShop;
   private Long id;
 
@@ -40,12 +40,12 @@ public class Appointment
   }
 
   @ManyToOne
-  public Bill getBill() {
-    return bill;
+  public Payment getPayment() {
+    return payment;
   }
 
-  public void setBill(Bill bill) {
-    this.bill = bill;
+  public void setPayment(Payment payment) {
+    this.payment = payment;
   }
 
   @ManyToOne(cascade = {CascadeType.ALL})

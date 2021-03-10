@@ -5,12 +5,12 @@ import java.util.*;
 import javax.persistence.*;
 
 @Entity
-public class Bill
+public class Payment
 {
   private Date date;
   private float totalCost;
 
-  //Bill Associations
+  //Payment Associations
   private RepairShop repairShop;
   private Customer customer;
   private List<Appointment> appointments;
@@ -50,7 +50,7 @@ public class Bill
     this.customer = customer;
   }
 
-  @OneToMany(mappedBy = "bill",cascade = {CascadeType.ALL})
+  @OneToMany(mappedBy = "payment",cascade = {CascadeType.ALL})
   public List<Appointment> getAppointments() {
     return appointments;
   }

@@ -14,7 +14,7 @@ public class RepairShop
   private List<TimeSlot> timeSlots;
   private Business business;
   private List<Person> persons;
-  private List<Bill> bills;
+  private List<Payment> payments;
   private List<Service> services;
   private List<Appointment> appointments;
 
@@ -46,12 +46,12 @@ public class RepairShop
     this.persons = persons;
   }
   @OneToMany(mappedBy = "repairShop",cascade = {CascadeType.ALL})
-  public List<Bill> getBills() {
-    return bills;
+  public List<Payment> getPayments() {
+    return payments;
   }
 
-  public void setBills(List<Bill> bills) {
-    this.bills = bills;
+  public void setPayments(List<Payment> Payments) {
+    this.payments = Payments;
   }
   @OneToMany(mappedBy = "repairShop",cascade = {CascadeType.ALL})
   public List<Service> getServices() {

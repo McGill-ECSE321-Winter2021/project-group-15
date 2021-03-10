@@ -18,35 +18,35 @@ public class Customer extends Person
   private Date expiry;
 
   //Customer Associations
-  private List<Bill> bills;
+  private List<Payment> payments;
   private List<Appointment> appointments;
 
   public String getCardNumber() {
     return cardNumber;
   }
 
-  public Bill getBill(int index)
+  public Payment getPayment(int index)
   {
-    Bill aBill = bills.get(index);
-    return aBill;
+    Payment aPayment = payments.get(index);
+    return aPayment;
   }
 
 
-  public int numberOfBills()
+  public int numberOfPayments()
   {
-    int number = bills.size();
+    int number = payments.size();
     return number;
   }
 
-  public boolean hasBills()
+  public boolean hasPayments()
   {
-    boolean has = bills.size() > 0;
+    boolean has = payments.size() > 0;
     return has;
   }
 
-  public int indexOfBill(Bill aBill)
+  public int indexOfPayment(Payment aPayment)
   {
-    int index = bills.indexOf(aBill);
+    int index = payments.indexOf(aPayment);
     return index;
   }
 
@@ -95,12 +95,12 @@ public class Customer extends Person
   }
 
   @OneToMany(mappedBy = "customer",cascade = {CascadeType.ALL})
-  public List<Bill> getBills() {
-    return bills;
+  public List<Payment> getPayments() {
+    return payments;
   }
 
-  public void setBills(List<Bill> bills) {
-    this.bills = bills;
+  public void setPayments(List<Payment> Payments) {
+    this.payments = Payments;
   }
 
   @OneToMany(mappedBy = "customer",cascade = {CascadeType.ALL})
