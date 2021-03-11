@@ -12,7 +12,7 @@ public class RepairShop
 
   //RepairShop Associations
   private List<TimeSlot> timeSlots;
-  private Business business;
+  
   private List<Person> persons;
   private List<Payment> payments;
   private List<Service> services;
@@ -26,15 +26,6 @@ public class RepairShop
 
   public void setTimeSlots(List<TimeSlot> timeSlots) {
     this.timeSlots = timeSlots;
-  }
-
-  @OneToOne(mappedBy = "repairShop",cascade = {CascadeType.ALL})
-  public Business getBusiness() {
-    return business;
-  }
-
-  public void setBusiness(Business business) {
-    this.business = business;
   }
 
   @OneToMany(mappedBy = "repairShop",cascade = {CascadeType.ALL})
