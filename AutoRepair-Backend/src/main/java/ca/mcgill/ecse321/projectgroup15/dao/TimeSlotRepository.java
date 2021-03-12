@@ -10,12 +10,12 @@ import ca.mcgill.ecse321.projectgroup15.model.Technician;
 import ca.mcgill.ecse321.projectgroup15.model.TimeSlot;
 
 @Repository
-public interface TimeSlotRepository  extends CrudRepository<TimeSlot, String> {
+public interface TimeSlotRepository  extends CrudRepository<TimeSlot, Long> {
 	    //List all the time slots available for a service by specifying Type
-		List<TimeSlot> findByService(Service serviceType);
+		List<TimeSlot> findTimeSlotByService(Service serviceType);
 		
 		//List all the time slots of a technician using its userId
-		List<TimeSlot> findByTechnician(Technician id);
+		List<TimeSlot> findTimeSlotByTechnician(Technician id);
 		
-		TimeSlot findTimeSlotByTsId(String tsId);
+		TimeSlot findTimeSlotById(Long tsId);
 }

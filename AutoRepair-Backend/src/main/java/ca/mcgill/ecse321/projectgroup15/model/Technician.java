@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
 import java.util.*;
 
 @Entity
@@ -18,8 +20,29 @@ public class Technician extends Person
 
 //Technician Associations
   private List<TimeSlot> timeSlots;
-  
-  @ManyToMany
+  private List<Appointment> appointments;
+ private List<Service> services;
+ 
+ 
+ @OneToMany(mappedBy = "technician",cascade = {CascadeType.ALL})
+  public List<Service> getServices() {
+	return services;
+}
+
+public void setServices(List<Service> services) {
+	this.services = services;
+}
+
+@OneToMany(mappedBy = "technician",cascade = {CascadeType.ALL})
+  public List<Appointment> getAppointments() {
+	return appointments;
+}
+
+public void setAppointments(List<Appointment> appointments) {
+	this.appointments = appointments;
+}
+
+@ManyToMany
   public List<TimeSlot> getTimeSlots() {
     return timeSlots;
   }

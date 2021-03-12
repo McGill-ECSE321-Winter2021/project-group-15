@@ -7,12 +7,23 @@ public class Appointment
 {
   private Service service;
   private Customer customer;
+  private Technician technician;
   private TimeSlot timeslot;
   private Payment payment;
   private RepairShop repairShop;
   private Long id;
 
+  
   @ManyToOne
+  public Technician getTechnician() {
+	return technician;
+}
+
+public void setTechnician(Technician technician) {
+	this.technician = technician;
+}
+
+@ManyToOne
   public Service getService() {
     return service;
   }

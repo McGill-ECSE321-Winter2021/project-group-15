@@ -16,9 +16,30 @@ public class TimeSlot
 
   //TimeSlot Associations
   private RepairShop repairShop;
+  private Technician technician;
+  private Service service;
+  
+  
+  
+  @ManyToOne
+public Service getService() {
+	return service;
+}
 
+public void setService(Service service) {
+	this.service = service;
+}
 
-  public Date getDate() {
+@ManyToOne
+  public Technician getTechnician() {
+	return technician;
+}
+
+public void setTechnician(Technician technician) {
+	this.technician = technician;
+}
+
+public Date getDate() {
     return date;
   }
 

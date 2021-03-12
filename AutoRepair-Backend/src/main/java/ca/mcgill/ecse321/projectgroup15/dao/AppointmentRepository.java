@@ -12,17 +12,17 @@ import ca.mcgill.ecse321.projectgroup15.model.Technician;
 import ca.mcgill.ecse321.projectgroup15.model.TimeSlot;
 
 @Repository
-public interface AppointmentRepository extends CrudRepository<Appointment, String>{
+public interface AppointmentRepository extends CrudRepository<Appointment, Long>{
 
 	//List all the appointments booked by a customer using its Id
-		List<Appointment> findByCustomer(Customer id);
+		List<Appointment> findAppointmentByCustomer(Customer id);
 		
 		//List all the appointments for a technician using its Id
-		List<Appointment> findByTechnician(Technician id) ;
+		List<Appointment> findAppointmentByTechnician(Technician id) ;
 
 		// Check if a specified time slot and service exists
 		boolean existsByTimeslotAndService(TimeSlot tsId, Service service);
 		
-		Appointment findApointmentByAppointmentID(String appointmentID);
+		Appointment findApointmentById(Long appointmentID);
 
 }

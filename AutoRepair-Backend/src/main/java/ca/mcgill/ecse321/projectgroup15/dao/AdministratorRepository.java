@@ -5,6 +5,6 @@ import ca.mcgill.ecse321.projectgroup15.model.Administrator;
 
 public interface AdministratorRepository extends CrudRepository<Administrator, Long>{
 
-	Administrator findAdministratorById(String id);	
+	Administrator findAdministratorById(Long id);	
 
 }

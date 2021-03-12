@@ -10,7 +10,7 @@ import ca.mcgill.ecse321.projectgroup15.model.Technician;
 @Repository
 public interface ServiceRepository extends CrudRepository<Service, String> {
 	//List all the services offered by a technician using its Id
-		List<Service> findByTechnician (Technician userId);
+		List<Service> findServiceByTechnician (Technician userId);
 		
 		Service findSerivceByServiceType(String serviceType);
 }

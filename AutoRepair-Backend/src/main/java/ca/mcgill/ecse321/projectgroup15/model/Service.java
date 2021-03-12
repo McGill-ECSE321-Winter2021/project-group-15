@@ -15,8 +15,31 @@ public class Service
   //Service Associations
   private RepairShop repairShop;
   private List<Appointment> appointments;
+  private List<TimeSlot> timeSlots;
+ 
+  
+  private Technician technician;
+  
+  
+  @ManyToOne
+  public Technician getTechnician() {
+	return technician;
+}
 
-  public String getName() {
+public void setTechnician(Technician technician) {
+	this.technician = technician;
+}
+
+@ManyToMany
+  public List<TimeSlot> getTimeSlots() {
+	return timeSlots;
+}
+
+public void setTimeSlots(List<TimeSlot> timeSlots) {
+	this.timeSlots = timeSlots;
+}
+
+public String getName() {
     return name;
   }
 
@@ -61,6 +84,9 @@ public class Service
   public void setAppointments(List<Appointment> appointments) {
     this.appointments = appointments;
   }
+  public void setId(Long id) {
+	    this.id = id;
+	  }
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

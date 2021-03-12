@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import ca.mcgill.ecse321.projectgroup15.model.Customer;
 import ca.mcgill.ecse321.projectgroup15.model.Payment;
 @Repository
-public interface PaymentRepository extends CrudRepository<Payment, String>{
+public interface PaymentRepository extends CrudRepository<Payment, Long>{
 
 	//List all the payments made by a customer using its ID
-	List<Payment> findByCustomer(Customer id);
+	List<Payment> findPaymentByCustomer(Customer id);
 		
-	Payment findPaymentByPaymentId(String paymentId);
+	Payment findPaymentById(Long paymentId);
 
 }
