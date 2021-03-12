@@ -14,7 +14,7 @@ public class Payment
   private RepairShop repairShop;
   private Customer customer;
   private List<Appointment> appointments;
-  private Long id;
+  private String id;
 
   public Date getDate() {
     return date;
@@ -59,13 +59,13 @@ public class Payment
     this.appointments = appointments;
   }
 
-  public void setId(Long id) {
+  public void setId(String id) {
     this.id = id;
   }
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  public Long getId() {
+  public String getId() {
     return id;
   }
 }

@@ -10,7 +10,7 @@ public class Service
   private String name;
   private float cost;
   private int duration;
-  private Long id;
+  private String id;
 
   //Service Associations
   private RepairShop repairShop;
@@ -63,7 +63,7 @@ public String getName() {
     this.duration = duration;
   }
 
-  public void setId(long id) {
+  public void setId(String id) {
     this.id = id;
   }
 
@@ -84,13 +84,11 @@ public String getName() {
   public void setAppointments(List<Appointment> appointments) {
     this.appointments = appointments;
   }
-  public void setId(Long id) {
-	    this.id = id;
-	  }
+ 
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  public Long getId() {
+  public String getId() {
     return id;
   }
   

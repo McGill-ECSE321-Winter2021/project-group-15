@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import ca.mcgill.ecse321.projectgroup15.model.Technician;
 @Repository
-public interface TechnicianRepository extends CrudRepository<Technician, Long>{
+public interface TechnicianRepository extends CrudRepository<Technician, String>{
 
-	Technician findTechnicianById(Long id);
+	Technician findTechnicianById(String id);
 }

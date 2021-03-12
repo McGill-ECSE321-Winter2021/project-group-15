@@ -11,7 +11,7 @@ public class Appointment
   private TimeSlot timeslot;
   private Payment payment;
   private RepairShop repairShop;
-  private Long id;
+  private String id;
 
   
   @ManyToOne
@@ -68,13 +68,13 @@ public void setTechnician(Technician technician) {
     this.repairShop = repairShop;
   }
 
-  public void setId(Long id) {
+  public void setId(String id) {
     this.id = id;
   }
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  public Long getId() {
+  public String getId() {
     return id;
   }
 }
