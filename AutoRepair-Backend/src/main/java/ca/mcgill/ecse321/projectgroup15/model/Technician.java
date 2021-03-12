@@ -1,72 +1,90 @@
-/*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 package ca.mcgill.ecse321.projectgroup15.model;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 import java.util.*;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+
 @Entity
-public class Technician extends Person
+public class Technician extends User
 {
-	
 
+  //Technician Attributes
+  private int rating;
+  private String role;
 
-//Technician Associations
-  private List<TimeSlot> timeSlots;
-  private List<Appointment> appointments;
- private List<Service> services;
+  //Technician Associations
+  @ManyToMany()
+  private List<Service> expertise;
+  @ManyToMany()
+  private List<Appointment> assignment;
+
  
- 
- @OneToMany(mappedBy = "technician",cascade = {CascadeType.ALL})
-  public List<Service> getServices() {
-	return services;
-}
-
-public void setServices(List<Service> services) {
-	this.services = services;
-}
-
-@OneToMany(mappedBy = "technician",cascade = {CascadeType.ALL})
-  public List<Appointment> getAppointments() {
-	return appointments;
-}
-
-public void setAppointments(List<Appointment> appointments) {
-	this.appointments = appointments;
-}
-
-@ManyToMany
-  public List<TimeSlot> getTimeSlots() {
-    return timeSlots;
+  public Technician(String aLastName, String aPhoneNo, String aFirstName, String aUserId, AutoRepairShop aAutoRepairShop, int aRating, String aRole)
+  {
+    super(aLastName, aPhoneNo, aFirstName, aUserId, aAutoRepairShop);
+    rating = aRating;
+    role = aRole;
+    expertise = new ArrayList<Service>();
+    assignment = new ArrayList<Appointment>();
   }
 
-  public void setTimeSlots(List<TimeSlot> timeSlots) {
-    this.timeSlots = timeSlots;
+  public boolean setRating(int aRating)
+  {
+    boolean wasSet = false;
+    rating = aRating;
+    wasSet = true;
+    return wasSet;
   }
+
+  public boolean setRole(String aRole)
+  {
+    boolean wasSet = false;
+    role = aRole;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public int getRating()
+  {
+    return rating;
+  }
+
+  public String getRole()
+  {
+    return role;
+  }
+  /* Code from template association_GetMany */
  
-  //adds a single timeslot for a technician
-  public void setTimeSlot(TimeSlot timeSlot) {
-	 if(this.timeSlots == null) {
-		 this.timeSlots = new ArrayList<TimeSlot>();
-	 }
-	 this.timeSlots.add(timeSlot);
+  @Column
+  @ElementCollection(targetClass=Technician.class)
+  public List<Service> getExpertise()
+  {
+    List<Service> newExpertise = Collections.unmodifiableList(expertise);
+    return newExpertise;
   }
-private TechnicianRole TechnicianRole;
+public void setService(List<Service> expertisess) {
+	   this.expertise = expertisess;
+}
+
   
-  public void setTechnicianRole(TechnicianRole TechnicianRole) {
-	    this.TechnicianRole = TechnicianRole;
-	  }
-
-	  public TechnicianRole getTechnicianRole() {
-	    return this.TechnicianRole;
-	  }
+  /* Code from template association_GetMany */
+  
+@Column
+@ElementCollection(targetClass=Technician.class)
+  public List<Appointment> getAssignment()
+  {
+    List<Appointment> newAssignment = Collections.unmodifiableList(assignment);
+    return newAssignment;
+  }
+public void setAppointment(List<Appointment> assignmentss) {
+	   this.assignment = assignmentss;
+}
+ 
+  
+   
   
  
 }

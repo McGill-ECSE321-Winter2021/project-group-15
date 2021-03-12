@@ -1,106 +1,78 @@
 package ca.mcgill.ecse321.projectgroup15.model;
 
+
 import java.util.*;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 
 @Entity
 public class Service
 {
+
+  
   //Service Attributes
-  private String name;
-  private float cost;
-  private int duration;
-  private Long id;
+  private String serviceType;
+  private Double serviceCost;
 
   //Service Associations
-  private RepairShop repairShop;
+  @ManyToMany()
+  private List<Technician> technicians;
+  @ManyToMany()
   private List<Appointment> appointments;
-  private List<TimeSlot> timeSlots;
+  
+  
+  public boolean setServiceCost(Double aServiceCost)
+  {
+    boolean wasSet = false;
+    serviceCost = aServiceCost;
+    wasSet = true;
+    return wasSet;
+  }
+  public Double getServiceCost()
+  {
+    return serviceCost;
+  }
+  
+  public boolean setServiceType(String aServiceType)
+  {
+    boolean wasSet = false;
+    serviceType = aServiceType;
+    wasSet = true;
+    return wasSet;
+  }
+@Id
+  public String getServiceType()
+  {
+    return serviceType;
+  }
  
+@Column
+@ElementCollection(targetClass=Service.class)
+  public List<Technician> getTechnicians()
+  {
+    List<Technician> newTechnicians = Collections.unmodifiableList(technicians);
+    return newTechnicians;
+  }
+  public void setTechnician(List<Technician> technicianss) {
+	   this.technicians = technicianss;
+	}
+
   
-  private Technician technician;
-  
-  
-  @ManyToOne
-  public Technician getTechnician() {
-	return technician;
-}
-
-public void setTechnician(Technician technician) {
-	this.technician = technician;
-}
-
-@ManyToMany
-  public List<TimeSlot> getTimeSlots() {
-	return timeSlots;
-}
-
-public void setTimeSlots(List<TimeSlot> timeSlots) {
-	this.timeSlots = timeSlots;
-}
-
-public String getName() {
-    return name;
+  /* Code from template association_GetMany */
+ 
+  @Column
+  @ElementCollection(targetClass=Service.class)
+  public List<Appointment> getAppointments()
+  {
+    List<Appointment> newAppointments = Collections.unmodifiableList(appointments);
+    return newAppointments;
   }
-
-  public void setName(String name) {
-    this.name = name;
+  public void setAppointment(List<Appointment> appointmentss) {
+	   this.appointments = appointmentss;
+	}
   }
-
-  public float getCost() {
-    return cost;
-  }
-
-  public void setCost(float cost) {
-    this.cost = cost;
-  }
-
-  public int getDuration() {
-    return duration;
-  }
-
-  public void setDuration(int duration) {
-    this.duration = duration;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
-
-  @ManyToOne(cascade = {CascadeType.ALL})
-  public RepairShop getRepairShop() {
-    return repairShop;
-  }
-
-  public void setRepairShop(RepairShop repairShop) {
-    this.repairShop = repairShop;
-  }
-
-  @OneToMany(mappedBy = "service",cascade = {CascadeType.ALL})
-  public List<Appointment> getAppointments() {
-    return appointments;
-  }
-
-  public void setAppointments(List<Appointment> appointments) {
-    this.appointments = appointments;
-  }
-  public void setId(Long id) {
-	    this.id = id;
-	  }
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  public Long getId() {
-    return id;
-  }
-  
- private ServiceType ServiceType;
-  
-  public void setServiceType(ServiceType ServiceType) {
-	    this.ServiceType = ServiceType;
-	  }
-
-	  public ServiceType getServiceType() {
-	    return this.ServiceType;
-	  }
-}
