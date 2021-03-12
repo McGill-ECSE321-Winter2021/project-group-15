@@ -1,5 +1,10 @@
 package ca.mcgill.ecse321.projectgroup15.dao;
 
-public class AdministratorRepository {
+import org.springframework.data.repository.CrudRepository;
+import ca.mcgill.ecse321.projectgroup15.model.Administrator;
+
+public interface AdministratorRepository extends CrudRepository<Administrator, Long>{
+
+	Administrator findAdministratorById(String id);	
 
 }
