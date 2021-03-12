@@ -14,7 +14,8 @@ public class Appointment
   private String id;
 
   
-  @ManyToOne
+  @ManyToOne()
+  @JoinColumn(name = "id", referencedColumnName = "id", insertable=false, updatable=false) 
   public Technician getTechnician() {
 	return technician;
 }
