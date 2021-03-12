@@ -1,112 +1,85 @@
 package ca.mcgill.ecse321.projectgroup15.model;
 
-
-
 import java.sql.Date;
 import java.sql.Time;
 
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
-
+@Entity
 public class TimeSlot
 {
-
-  
   //TimeSlot Attributes
   private Date date;
   private Time startTime;
   private Time endTime;
-  private String tsId;
+  private Long id;
 
   //TimeSlot Associations
-  @OneToMany()
+  private RepairShop repairShop;
   private Technician technician;
+  private Service service;
+  
+  
+  
+  @ManyToOne
+public Service getService() {
+	return service;
+}
 
+public void setService(Service service) {
+	this.service = service;
+}
 
+@ManyToOne
+  public Technician getTechnician() {
+	return technician;
+}
 
-  public boolean setDate(Date aDate)
-  {
-    boolean wasSet = false;
-    date = aDate;
-    wasSet = true;
-    return wasSet;
-  }
+public void setTechnician(Technician technician) {
+	this.technician = technician;
+}
 
-  public boolean setStartTime(Time aStartTime)
-  {
-    boolean wasSet = false;
-    startTime = aStartTime;
-    wasSet = true;
-    return wasSet;
-  }
-
-  public boolean setEndTime(Time aEndTime)
-  {
-    boolean wasSet = false;
-    endTime = aEndTime;
-    wasSet = true;
-    return wasSet;
-  }
-
-  public boolean setTsId(String aTsId)
-  {
-    boolean wasSet = false;
-    tsId = aTsId;
-    wasSet = true;
-    return wasSet;
-  }
-
-  public Date getDate()
-  {
+public Date getDate() {
     return date;
   }
 
-  public Time getStartTime()
-  {
+  public void setDate(Date date) {
+    this.date = date;
+  }
+
+  public Time getStartTime() {
     return startTime;
   }
 
-  public Time getEndTime()
-  {
+  public void setStartTime(Time startTime) {
+    this.startTime = startTime;
+  }
+
+  public Time getEndTime() {
     return endTime;
   }
-@Id
-  public String getTsId()
-  {
-    return tsId;
-  }
-  /* Code from template association_GetOne */
 
-  public Technician getTechnician()
-  {
-    return technician;
-  }
-  /* Code from template association_SetUnidirectionalOne */
-  public boolean setTechnician(Technician aNewTechnician)
-  {
-    boolean wasSet = false;
-    if (aNewTechnician != null)
-    {
-      technician = aNewTechnician;
-      wasSet = true;
-    }
-    return wasSet;
+  public void setEndTime(Time endTime) {
+    this.endTime = endTime;
   }
 
-  public void delete()
-  {
-    technician = null;
+  @ManyToOne(cascade = {CascadeType.ALL})
+  public RepairShop getRepairShop() {
+    return repairShop;
+  }
+
+  public void setRepairShop(RepairShop repairShop) {
+    this.repairShop = repairShop;
   }
 
 
-  public String toString()
-  {
-    return super.toString() + "["+
-            "tsId" + ":" + getTsId()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "startTime" + "=" + (getStartTime() != null ? !getStartTime().equals(this)  ? getStartTime().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "endTime" + "=" + (getEndTime() != null ? !getEndTime().equals(this)  ? getEndTime().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "technician = "+(getTechnician()!=null?Integer.toHexString(System.identityHashCode(getTechnician())):"null");
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public Long getId() {
+    return id;
   }
 }
