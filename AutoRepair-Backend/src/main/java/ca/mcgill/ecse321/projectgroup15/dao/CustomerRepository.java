@@ -8,6 +8,9 @@ import ca.mcgill.ecse321.projectgroup15.model.Customer;
 import ca.mcgill.ecse321.projectgroup15.model.Appointment;
 
 public interface CustomerRepository extends CrudRepository<Customer, String>{
+
+	List<Customer> findCustomerByUsername(String username);
 	
-	Customer findCustomerById(String id);
+	Customer findByCustomerAndAppointment(String username, String appointmentID);
+	
 }

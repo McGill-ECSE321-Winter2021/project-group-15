@@ -1,71 +1,96 @@
 package ca.mcgill.ecse321.projectgroup15.model;
 
-import java.sql.Date;
-import java.util.*;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Payment
 {
-  private Date date;
-  private float totalCost;
 
-  //Payment Associations
-  private RepairShop repairShop;
-  private Customer customer;
-  private List<Appointment> appointments;
-  private String id;
+  private String cardName;
+  private String cardNumber;
+  private String expirationDate;
+  private int cvc;
+  private String paymentId;
 
-  public Date getDate() {
-    return date;
+  
+
+  public boolean setCardName(String aCardName)
+  {
+    boolean wasSet = false;
+    cardName = aCardName;
+    wasSet = true;
+    return wasSet;
   }
 
-  public void setDate(Date date) {
-    this.date = date;
+  public boolean setCardNumber(String aCardNumber)
+  {
+    boolean wasSet = false;
+    cardNumber = aCardNumber;
+    wasSet = true;
+    return wasSet;
   }
 
-  public float getTotalCost() {
-    return totalCost;
+  public boolean setExpirationDate(String aExpirationDate)
+  {
+    boolean wasSet = false;
+    expirationDate = aExpirationDate;
+    wasSet = true;
+    return wasSet;
   }
 
-  public void setTotalCost(float totalCost) {
-    this.totalCost = totalCost;
+  public boolean setCvc(int aCvc)
+  {
+    boolean wasSet = false;
+    cvc = aCvc;
+    wasSet = true;
+    return wasSet;
   }
 
-  @ManyToOne
-  public RepairShop getRepairShop() {
-    return repairShop;
+  public boolean setPaymentId(String aPaymentId)
+  {
+    boolean wasSet = false;
+    paymentId = aPaymentId;
+    wasSet = true;
+    return wasSet;
   }
 
-  public void setRepairShop(RepairShop repairShop) {
-    this.repairShop = repairShop;
+  public String getCardName()
+  {
+    return cardName;
   }
 
-  @ManyToOne
-  public Customer getCustomer() {
-    return customer;
+  public String getCardNumber()
+  {
+    return cardNumber;
   }
 
-  public void setCustomer(Customer customer) {
-    this.customer = customer;
+  public String getExpirationDate()
+  {
+    return expirationDate;
   }
 
-  @OneToMany(mappedBy = "payment",cascade = {CascadeType.ALL})
-  public List<Appointment> getAppointments() {
-    return appointments;
+  public int getCvc()
+  {
+    return cvc;
+  }
+@Id
+  public String getPaymentId()
+  {
+    return paymentId;
   }
 
-  public void setAppointments(List<Appointment> appointments) {
-    this.appointments = appointments;
-  }
+  public void delete()
+  {}
 
-  public void setId(String id) {
-    this.id = id;
-  }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  public String getId() {
-    return id;
+  public String toString()
+  {
+    return super.toString() + "["+
+            "cardName" + ":" + getCardName()+ "," +
+            "cardNumber" + ":" + getCardNumber()+ "," +
+            "expirationDate" + ":" + getExpirationDate()+ "," +
+            "cvc" + ":" + getCvc()+ "," +
+            "paymentId" + ":" + getPaymentId()+ "]";
   }
 }

@@ -11,8 +11,8 @@ import ca.mcgill.ecse321.projectgroup15.model.Payment;
 public interface PaymentRepository extends CrudRepository<Payment, String>{
 
 	//List all the payments made by a customer using its ID
-	List<Payment> findPaymentByCustomer(Customer id);
+	List<Payment> findByCustomer(Customer userID);
 		
-	Payment findPaymentById(String paymentId);
+	Payment findPaymentByPaymentId(String paymentId);
 
 }
