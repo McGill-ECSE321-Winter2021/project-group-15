@@ -12,7 +12,7 @@ public class TimeSlot
   private Date date;
   private Time startTime;
   private Time endTime;
-  private String id;
+  private int id;
 
   //TimeSlot Associations
   private RepairShop repairShop;
@@ -73,13 +73,13 @@ public Date getDate() {
   }
 
 
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  public String getId() {
+  public int getId() {
     return id;
   }
 }
