@@ -1,96 +1,81 @@
 package ca.mcgill.ecse321.projectgroup15.model;
 
-
-import java.util.*;
-
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import java.sql.Date;
-import java.sql.Time;
+import javax.persistence.*;
 
 @Entity
 public class Appointment
 {
-
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
-
-  //Appointment Attributes
-  private String appointmentID;
-  private Double totalCost;
-
-  //Appointment Associations
-  @ManyToMany()
-  private List<Service> services;
-  @OneToMany()
-  private List<TimeSlot> timeSlots;
-
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
-
- 
-  //------------------------
-  // INTERFACE
-  //------------------------
-
-  public boolean setTotalCost(Double aTotalCost) {
-	  Boolean wasSet = false;
-	  totalCost = aTotalCost;
-	  wasSet = true;
-	  return wasSet;
-  }
-  
-  public Double getTotalCost() {
-	  return totalCost;
-  }
-  public boolean setAppointmentID(String aAppointmentID)
-  {
-    boolean wasSet = false;
-    appointmentID = aAppointmentID;
-    wasSet = true;
-    return wasSet;
-  }
-@Id
-  public String getAppointmentID()
-  {
-    return appointmentID;
-  }
-  /* Code from template association_GetMany */
- 
-@Column
-@ElementCollection(targetClass=Appointment.class)
-  public List<Service> getServices()
-  {
-    List<Service> newServices = Collections.unmodifiableList(services);
-    return newServices;
-  }
-  
-  public void setService(List<Service> servicess) {
-	   this.services = servicess;
-	}
+  private Service service;
+  private Customer customer;
+  private Technician technician;
+  private TimeSlot timeslot;
+  private Payment payment;
+  private RepairShop repairShop;
+  private int id;
 
   
-  
-  
-  /* Code from template association_GetOne */
-  //@OneToMany()
-  @Column
-  @ElementCollection(targetClass=Appointment.class)
+  @ManyToOne()
+  @JoinColumn(name = "id", referencedColumnName = "id", insertable=false, updatable=false) 
+  public Technician getTechnician() {
+	return technician;
+}
 
-  public List<TimeSlot> getTimeSlot()
-  {
-	  List<TimeSlot> newTimeSlots = Collections.unmodifiableList(timeSlots);
-    return newTimeSlots;
+public void setTechnician(Technician technician) {
+	this.technician = technician;
+}
+
+@ManyToOne
+  public Service getService() {
+    return service;
   }
-  public void setTimeSlot(List<TimeSlot> timeslotss) {
-	   this.timeSlots = timeslotss;
-	}
+
+  public void setService(Service service) {
+    this.service = service;
+  }
+
+  @ManyToOne
+  public Customer getCustomer() {
+    return customer;
+  }
+
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
+  }
+
+  @OneToOne
+  public TimeSlot getTimeslot() {
+    return timeslot;
+  }
+
+  public void setTimeslot(TimeSlot timeslot) {
+    this.timeslot = timeslot;
+  }
+
+  @ManyToOne
+  public Payment getPayment() {
+    return payment;
+  }
+
+  public void setPayment(Payment payment) {
+    this.payment = payment;
+  }
+
+  @ManyToOne(cascade = {CascadeType.ALL})
+  public RepairShop getRepairShop() {
+    return repairShop;
+  }
+
+  public void setRepairShop(RepairShop repairShop) {
+    this.repairShop = repairShop;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public int getId() {
+    return id;
+  }
 }
