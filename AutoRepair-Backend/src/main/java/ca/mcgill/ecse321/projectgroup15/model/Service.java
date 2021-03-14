@@ -21,6 +21,9 @@ public class Service
   private Technician technician;
   
   
+	
+  
+  
   @ManyToOne
   public Technician getTechnician() {
 	return technician;
@@ -91,14 +94,14 @@ public String getName() {
   public String getId() {
     return id;
   }
+  @Enumerated(EnumType.ORDINAL)  
+ private ServiceType serviceType;
   
- private ServiceType ServiceType;
-  
-  public void setServiceType(ServiceType ServiceType) {
-	    this.ServiceType = ServiceType;
+  public void setServiceType(ServiceType serviceType) {
+	    this.serviceType = serviceType;
 	  }
 
 	  public ServiceType getServiceType() {
-	    return this.ServiceType;
+	    return this.serviceType;
 	  }
 }

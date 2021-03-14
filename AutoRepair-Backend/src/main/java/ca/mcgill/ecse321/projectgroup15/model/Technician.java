@@ -5,6 +5,8 @@ package ca.mcgill.ecse321.projectgroup15.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -58,14 +60,15 @@ public void setAppointments(List<Appointment> appointments) {
 	 }
 	 this.timeSlots.add(timeSlot);
   }
-private TechnicianRole TechnicianRole;
+  @Enumerated(EnumType.ORDINAL)
+private TechnicianRole technicianRole;
   
-  public void setTechnicianRole(TechnicianRole TechnicianRole) {
-	    this.TechnicianRole = TechnicianRole;
+  public void setTechnicianRole(TechnicianRole technicianRole) {
+	    this.technicianRole = technicianRole;
 	  }
 
 	  public TechnicianRole getTechnicianRole() {
-	    return this.TechnicianRole;
+	    return this.technicianRole;
 	  }
   
  
