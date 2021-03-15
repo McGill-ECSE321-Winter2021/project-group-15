@@ -124,30 +124,44 @@ public class AutoRepairService {
 	}
 
 	
-	// to change since Person is abstract class (cannot be instanciated)
-	/*@Transactional
-	public Person createPerson(String email, String username, String password ) {
-		Person person = new Person();
-		person.setEmail(email);
-		person.setPassword(password);
-		person.setUsername(username);
-		//person.setId(id);
-		personRepository.save(person);
-		return person;
+	//Register as Technician
+	@Transactional
+	public Technician createTechnician (String email, String username, String password, TechnicianRole technicianRole) {
+		if ((username == null || username.trim().length() == 0)
+				&& (password == null || password.trim().length() == 0)) {
+			throw new IllegalArgumentException("Username and password cannot be empty!");
+		}
+		if (username == null || username.trim().length() == 0) {
+			throw new IllegalArgumentException("Username cannot be empty!");
+		}
+		if (password == null || password.trim().length() == 0) {
+			throw new IllegalArgumentException("Password cannot be empty!");
+		}
+		if (email == null || email.trim().length() == 0) {
+			throw new IllegalArgumentException("Email is required!");
+		}
+		Technician technician = new Technician();
+		technician.setEmail(email);
+		technician.setPassword(password);
+		technician.setTechnicianRole(technicianRole);
+		technicianRepository.save(technician);
+		return technician;
 	}
 	
 	@Transactional
-	public Person getPerson(String id) {
-		Person person = personRepository.findPersonById(id);
-		return person;
+	public Technician getTechnician(String username) {
+		Technician technician = technicianRepository.findTechnicianByUsername(username);
+		if (technician == null) {
+			throw new IllegalArgumentException("No technician found with this username!");
+		}
+		return technician;
 	}
-	
-	@Transactional
-	public List<Person> getAllPersons(){
-		return toList(personRepository.findAll());
-	}
-	*/
 
+	@Transactional
+	public List<Technician> getAllTechinicans(){
+		return toList(technicianRepository.findAll());
+	}
+	
 	@Transactional
 	public TimeSlot createTimeSlot(int id,Date date, Time startTime, Time endTime, Technician technician ) {
 		TimeSlot ts = new TimeSlot();
@@ -160,12 +174,6 @@ public class AutoRepairService {
 		timeSlotRepository.save(ts);
 		return ts;
 	}
-	
-//	@Transactional
-//	public TimeSlot getTimeSlot(Service service) {
-//		TimeSlot ts = timeSlotRepository.findTimeSlotByService(service);
-//		return ts;
-//	}
 	
 	@Transactional
 	public List<TimeSlot> getAllTimeSlots(){
@@ -183,7 +191,6 @@ public class AutoRepairService {
 		appointmentRepository.save(apt);
 		return apt;
 	}
-
 	
 	private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();
