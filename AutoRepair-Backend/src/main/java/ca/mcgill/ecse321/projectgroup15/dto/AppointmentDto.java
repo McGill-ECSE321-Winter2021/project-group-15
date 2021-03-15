@@ -5,18 +5,17 @@ import java.util.List;
 
 public class AppointmentDto {
 
-	private Integer id;
+	private int id;
 	private List<ServiceDto> services;
 	
 	//First Controller
 	public AppointmentDto() {
 	}
-	
 	@SuppressWarnings("unchecked") // because the Collection the Services list needs to be empty at the start.
 
 	//Second Controller
 	public AppointmentDto(int id) {
-		this.id = id;
+		this(id, Collections.EMPTY_LIST);
 	}
 	
 	//Third Controller
