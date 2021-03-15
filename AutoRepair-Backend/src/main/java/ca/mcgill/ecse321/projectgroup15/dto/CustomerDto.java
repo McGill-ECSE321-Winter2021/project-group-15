@@ -39,12 +39,12 @@ public class CustomerDto {
 	}
 	
 	// get all the appointments a customer have
-		public List<PaymentDto> getPayments() {
-			return payments;
-		}
-		
-		public void setPayments(List<PaymentDto> payments) {
-			this.payments = payments;
-		}
-	
+	public List<PaymentDto> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<PaymentDto> payments) {
+		this.payments = payments;
+	}
+
 }

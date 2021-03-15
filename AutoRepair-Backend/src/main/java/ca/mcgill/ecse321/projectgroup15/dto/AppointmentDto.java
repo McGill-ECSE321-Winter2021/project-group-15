@@ -1,41 +1,36 @@
 package ca.mcgill.ecse321.projectgroup15.dto;
 
+import java.util.Collections;
+import java.util.List;
+
 public class AppointmentDto {
 
-	private CustomerDto customer;
-	private TechnicianDto technician;
-	private TimeSlotDto ts;
+	private Integer id;
+	private List<ServiceDto> services;
 	
+	//First Controller
 	public AppointmentDto() {
 	}
 	
-	public AppointmentDto(CustomerDto customer, TechnicianDto technician, TimeSlotDto ts) {
-		this.customer = customer;
-		this.technician = technician;
-		this.ts = ts;
+	@SuppressWarnings("unchecked") // because the Collection the Services list needs to be empty at the start.
+
+	//Second Controller
+	public AppointmentDto(int id) {
+		this.id = id;
 	}
 	
-	public CustomerDto getCustomer() {
-		return customer;
+	//Third Controller
+	public AppointmentDto(int id, List<ServiceDto> arrayList){
+		this.id = id;
+		this.services = arrayList;
 	}
 	
-	public void setCustomer(CustomerDto customer) {
-		this.customer=customer;
+	//Get all the services required for an appointment
+	public List<ServiceDto> getServices(){
+		return services;
 	}
 	
-	public TechnicianDto getTechnician() {
-		return technician;
-	}
-	
-	public void setTechnician(TechnicianDto technician) {
-		this.technician=technician;
-	}
-	
-	public TimeSlotDto getTimeSlot() {
-		return ts;
-	}
-	
-	public void setTimeSlot(TimeSlotDto ts) {
-		this.ts = ts;
+	public void setServices(List<ServiceDto> services) {
+		this.services = services;
 	}
 }
