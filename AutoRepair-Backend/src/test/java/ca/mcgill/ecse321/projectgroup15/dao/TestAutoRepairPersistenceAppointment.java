@@ -51,12 +51,13 @@ public class TestAutoRepairPersistenceAppointment {
 		Time startTime = java.sql.Time.valueOf(LocalTime.of(11, 35));
 		Time endTime = java.sql.Time.valueOf(LocalTime.of(13, 25));
 		String id = "cdde";
+		int timeId = 0;
 	
 		TimeSlot timeSlot = new TimeSlot();
 		timeSlot.setDate(date);
 		timeSlot.setEndTime(endTime);
 		timeSlot.setStartTime(startTime);
-		timeSlot.setId(id);
+		timeSlot.setId(timeId);
 		timeSlot.setRepairShop(auto2);
 		timeSlot.setTechnician(tech);
 		auto2.setId(id);
@@ -75,7 +76,7 @@ public class TestAutoRepairPersistenceAppointment {
 		
 		
 		
-		String appointmentID = "45";
+		int appointmentID = 9;
 		
 		
 		Appointment appointment = new Appointment();

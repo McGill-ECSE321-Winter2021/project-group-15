@@ -23,6 +23,6 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Strin
 		// Check if a specified time slot and service exists
 		boolean existsByTimeslotAndService(TimeSlot tsId, Service service);
 		
-		Appointment findApointmentById(String appointmentID);
+		Appointment findApointmentById(int appointmentID);
 
 }

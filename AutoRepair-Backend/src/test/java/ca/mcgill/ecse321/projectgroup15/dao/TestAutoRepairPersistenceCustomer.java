@@ -75,7 +75,7 @@ public class TestAutoRepairPersistenceCustomer {
 		
 		customer = null;
 		
-		customer = customerRepository.findCustomerById(userId);
+		customer = customerRepository.findCustomerByUsername(username);
 		
 		assertNotNull(customer);
 		assertEquals(username,customer.getUsername());
