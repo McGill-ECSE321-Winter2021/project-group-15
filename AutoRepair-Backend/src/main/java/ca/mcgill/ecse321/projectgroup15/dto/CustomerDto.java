@@ -16,13 +16,14 @@ public class CustomerDto {
 
 	//Second Constructor 
 	public CustomerDto(String username) {
-		this(username, Collections.EMPTY_LIST);
+		this(username, Collections.EMPTY_LIST, Collections.EMPTY_LIST);
 	}
 	
 	//Third Constructor
-	public CustomerDto(String username, List<AppointmentDto> arrayList) {
+	public CustomerDto(String username, List<AppointmentDto> arrayList, List<PaymentDto> arrayList1) {
 		this.username = username;
 		this.appointments = arrayList;
+		this.payments = arrayList1; 
 	}
 	
 	public String getUsername() {

@@ -7,6 +7,7 @@ public class ServiceDto {
 
 	private String id;
 	private List<TimeSlotDto> timeSlots;
+	private List<TechnicianDto> technicians;
 	
 	//First Constructor
 	public ServiceDto() {	
@@ -23,6 +24,11 @@ public class ServiceDto {
 		this.id = id;
 		this.timeSlots = arrayList;
 	}
+//	
+//	public ServiceDto(String id, List<TechnicianDto> arrayList1) {
+//		this.id = id;
+//		this.technicians = arrayList1;
+//	}
 	
 	public String getId() {
 		return id;
@@ -35,5 +41,14 @@ public class ServiceDto {
 	
 	public void setTimeSlots(List<TimeSlotDto> timeSlots) {
 		this.timeSlots = timeSlots;
+	}
+	
+	//Get all the technicians that are specified in a service
+	public List<TechnicianDto> getTechnicians(){
+		return technicians;
+	}
+	
+	public void setTechnicians(List<TechnicianDto> technicians) {
+		this.technicians = technicians;
 	}
 }

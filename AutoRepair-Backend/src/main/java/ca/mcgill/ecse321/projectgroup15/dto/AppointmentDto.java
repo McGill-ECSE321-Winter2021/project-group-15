@@ -23,6 +23,9 @@ public class AppointmentDto {
 		this.id = id;
 		this.services = arrayList;
 	}
+	public int getId() {
+		return id;
+	}
 	
 	//Get all the services required for an appointment
 	public List<ServiceDto> getServices(){
@@ -32,4 +35,5 @@ public class AppointmentDto {
 	public void setServices(List<ServiceDto> services) {
 		this.services = services;
 	}
+	
 }
