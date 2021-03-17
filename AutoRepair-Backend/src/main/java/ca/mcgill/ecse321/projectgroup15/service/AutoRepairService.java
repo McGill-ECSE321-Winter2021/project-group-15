@@ -48,11 +48,13 @@ public class AutoRepairService {
 	@Autowired
 	TimeSlotRepository timeSlotRepository;
 	
+	private static Person loggedInUser = null;
+	
 	
 	//Register as Customer
 	
 	@Transactional
-	public Customer createCustomer(String email, String username, String password, String cardNumber, String cvv, Date expiry) {
+	public Customer createCustomer(String email, String username, String password, String lastName, String firstname) {
 		if (this.getAllCustomers().size() == 1) {
 			throw new IllegalArgumentException("Can only have one Admin!");
 		}
@@ -70,11 +72,16 @@ public class AutoRepairService {
 		customer.setEmail(email);
 		customer.setUsername(username);
 		customer.setPassword(password);
-		customer.setCardNumber(cardNumber);
-		customer.setCvv(cvv);
-		customer.setExpiry(expiry);
+		customer.setLastName(lastName);
+		customer.setFirstName(firstname);;
 		customerRepository.save(customer);
 		return customer;
+	}
+	
+	
+	@Transactional
+	public void saveCustomer(Customer c) {
+		customerRepository.save(c);	
 	}
 
 	@Transactional
@@ -199,5 +206,37 @@ public class AutoRepairService {
 		}
 		return resultList;
 	}
+	
+	//login 
+	
+		@Transactional
+		public Customer loginAsCustomer(String username, String password) {
+
+			if (username == null || username.trim().length() == 0) {
+				throw new IllegalArgumentException("Username cannot be empty.");
+			}
+			if (password == null || password.trim().length() == 0) {
+				throw new IllegalArgumentException("Password cannot be empty.");
+			}
+
+			List<Customer> Customers = getAllCustomers();
+
+			Customer foundCustomer = null;
+			for (Customer Customer : Customers) {
+				if (Customer.getUsername().equals(username) && Customer.getPassword().equals(password)) {
+					loggedInUser = Customer;
+					foundCustomer = Customer;
+					break;
+				}
+			}
+
+			if (foundCustomer == null) {
+				throw new IllegalArgumentException("This user account could not be found.");
+			}
+
+			return foundCustomer;
+
+		}
+		
 	
 }

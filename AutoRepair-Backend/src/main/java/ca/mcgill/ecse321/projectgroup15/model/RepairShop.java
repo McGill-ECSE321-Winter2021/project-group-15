@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class RepairShop
 {
-  private String id;
+  private int id;
 
   //RepairShop Associations
   private List<TimeSlot> timeSlots;
@@ -62,13 +62,13 @@ public class RepairShop
     this.appointments = appointments;
   }
 
-  public void setId(String ID) {
+  public void setId(int ID) {
     this.id = ID;
   }
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  public String getId() {
+  public int getId() {
     return id;
   }
 }

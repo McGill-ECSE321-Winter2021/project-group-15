@@ -11,5 +11,5 @@ import ca.mcgill.ecse321.projectgroup15.model.Person;
 
 @Repository
 public interface PersonRepository extends CrudRepository<Person, String> {
-	Person findPersonById(String UserId);
+	Person findPersonById(int UserId);
 }

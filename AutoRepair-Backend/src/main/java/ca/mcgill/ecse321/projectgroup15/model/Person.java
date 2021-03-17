@@ -15,7 +15,7 @@ public abstract class Person
 
   //Person Associations
   private RepairShop repairShop;
-  private String id;
+  private int id;
 
   public String getEmail() {
     return email;
@@ -66,13 +66,13 @@ public abstract class Person
     this.repairShop = repairShop;
   }
 
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  public String getId() {
+  public int getId() {
     return id;
   }
 }
