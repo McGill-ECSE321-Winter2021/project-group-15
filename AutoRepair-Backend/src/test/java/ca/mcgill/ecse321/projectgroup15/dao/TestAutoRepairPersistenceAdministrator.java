@@ -59,7 +59,7 @@ public class TestAutoRepairPersistenceAdministrator {
 		  
 		  List<Person> persons = new ArrayList<Person>();
 		  List<Payment> payments = new ArrayList<Payment>();
-		  List<Service> services = new ArrayList<Service>();
+		  List<Services> services = new ArrayList<Services>();
 		 List<Appointment> appointments = new ArrayList<Appointment>();
 		 auto2.setAppointments(appointments);
 		 auto2.setPayments(payments);
@@ -95,3 +95,6 @@ public class TestAutoRepairPersistenceAdministrator {
 		
 	}
 }
+
+		
+		
