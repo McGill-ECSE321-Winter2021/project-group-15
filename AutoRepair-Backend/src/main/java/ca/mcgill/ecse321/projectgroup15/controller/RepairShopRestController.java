@@ -4,6 +4,7 @@ package ca.mcgill.ecse321.projectgroup15.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,17 +45,17 @@ public class RepairShopRestController {
 	}
 	
 	
-	// APP USER //
+	// Customer //
 
+	
+	//get all the customers in the database
 		@GetMapping(value = { "/customer", "/customer/" })
 		public List<CustomerDto> getAllCustomer() {
 			return service.getAllCustomers().stream().map(a -> convertToDto(a)).collect(Collectors.toList());
 		}
 		
 		
-		//@PathVariable("username")  String username, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("lastName") String lastName, @RequestParam("firstName") String firstName
-		
-		//@RequestMapping(value = { "/Customerregister/{username}", "/Customerregister/{username}/"}, method = RequestMethod.POST)
+		//register as a customer
 		@PostMapping(value = { "/Customerregister", "/Customerregister/" })
 		
 		public CustomerDto createCustomerDto(@RequestBody Customer c) throws IllegalArgumentException {
@@ -74,9 +75,8 @@ public class RepairShopRestController {
 		}
 
 	
-		//@RequestParam String personUsername, @RequestParam String password
-	
-	
+		
+	//login as a customer
 	
 	@PostMapping(value = { "/loginuser" })
 	@ResponseBody
@@ -90,7 +90,7 @@ public class RepairShopRestController {
 
 	}
 	
-	
+	//Register as a technician
 	@PostMapping(value = { "/technicianregister", "/technicianregister/" })
 	
 	public TechnicianDto createTechnicianDto(@RequestBody Technician t) throws IllegalArgumentException {
@@ -109,7 +109,7 @@ public class RepairShopRestController {
 		return technicianDto;
 	}
 	
-	
+	// create a Payment
 	@PostMapping(value = {"/payment", "/payment/"})
 	public PaymentDto createPayment(@RequestBody Payment p) throws IllegalArgumentException {
 		
@@ -123,6 +123,8 @@ public class RepairShopRestController {
 		return paymentDto;
 	}
 	 
+	
+	// get all the appointments in the database
 	@GetMapping(value = {"/appointments", "/appointments/" })
  	public List<AppointmentDto> getAllAppointments(){
 	 	List<AppointmentDto> aDtos = new ArrayList<>();
@@ -132,7 +134,8 @@ public class RepairShopRestController {
 	 	return aDtos;
 	 
  }
-
+	
+	//get the appointment correspondig
 	@GetMapping(value = {"/appointments/{id}", "/appointments/{id}/" })
 	 public AppointmentDto getAppointmentById(@PathVariable("id")int id) throws IllegalArgumentException{
 	 	return convertToDto(service.getAppointment(id));
@@ -154,11 +157,11 @@ public class RepairShopRestController {
 		return aDto;
 		}
 	
-	private ServiceDto convertToDto(Service s) {
+	private ServiceDto convertToDto(Services s) {
 		if(s == null) {
 			throw new IllegalArgumentException("There is no such service !");
 		}
-		ServiceDto sDto = new ServiceDto(s.getId());
+		ServiceDto sDto = new ServiceDto(s.getId(), null, 0, 0, null);
 		return sDto;
 	}
 }

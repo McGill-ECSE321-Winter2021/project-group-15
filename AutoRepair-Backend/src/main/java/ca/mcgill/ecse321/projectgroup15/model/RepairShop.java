@@ -15,7 +15,7 @@ public class RepairShop
   
   private List<Person> persons;
   private List<Payment> payments;
-  private List<Service> services;
+  private List<Services> services;
   private List<Appointment> appointments;
 
 
@@ -45,11 +45,11 @@ public class RepairShop
     this.payments = Payments;
   }
   @OneToMany(mappedBy = "repairShop",cascade = {CascadeType.ALL})
-  public List<Service> getServices() {
+  public List<Services> getServices() {
     return services;
   }
 
-  public void setServices(List<Service> services) {
+  public void setServices(List<Services> services) {
     this.services = services;
   }
 

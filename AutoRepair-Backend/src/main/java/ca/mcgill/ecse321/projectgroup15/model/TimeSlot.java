@@ -17,16 +17,16 @@ public class TimeSlot
   //TimeSlot Associations
   private RepairShop repairShop;
   private Technician technician;
-  private Service service;
+  private Services service;
   
   
   
   @ManyToOne
-public Service getService() {
+public Services getService() {
 	return service;
 }
 
-public void setService(Service service) {
+public void setService(Services service) {
 	this.service = service;
 }
 

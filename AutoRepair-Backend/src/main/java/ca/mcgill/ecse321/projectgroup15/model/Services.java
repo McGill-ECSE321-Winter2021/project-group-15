@@ -4,7 +4,7 @@ import java.util.*;
 import javax.persistence.*;
 
 @Entity
-public class Service
+public class Services
 {
   //Service Attributes
   private String name;
@@ -21,7 +21,6 @@ public class Service
   private Technician technician;
   
   
-	
   
   
   @ManyToOne

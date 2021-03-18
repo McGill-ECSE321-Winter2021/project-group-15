@@ -16,14 +16,8 @@ import ca.mcgill.ecse321.projectgroup15.dao.PersonRepository;
 import ca.mcgill.ecse321.projectgroup15.dao.AppointmentRepository;
 import ca.mcgill.ecse321.projectgroup15.dao.TimeSlotRepository;
 import ca.mcgill.ecse321.projectgroup15.dao.ServiceRepository;
-
-import ca.mcgill.ecse321.projectgroup15.model.*;
-import ca.mcgill.ecse321.projectgroup15.model.Person;
-import ca.mcgill.ecse321.projectgroup15.model.Appointment;
-import ca.mcgill.ecse321.projectgroup15.model.TimeSlot;
-import ca.mcgill.ecse321.projectgroup15.model.ServiceType;
 //import ca.mcgill.ecse321.projectgroup15.model.Service;
-
+import ca.mcgill.ecse321.projectgroup15.model.*;
 import ca.mcgill.ecse321.projectgroup15.model.*;
 
 @Service
@@ -161,6 +155,11 @@ public class AutoRepairService {
 	}
 	
 	@Transactional
+	public List<Technician> getAllTechnicians() {
+		return toList(technicianRepository.findAll());
+	}
+	
+	@Transactional
 	public Technician getTechnician(String username) {
 		Technician technician = technicianRepository.findTechnicianByUsername(username);
 		if (technician == null) {
@@ -170,9 +169,39 @@ public class AutoRepairService {
 	}
 
 	@Transactional
-	public List<Technician> getAllTechinicans(){
-		return toList(technicianRepository.findAll());
+	public boolean deleteTechnician(String username) {
+		if (username == null || username.trim().length() == 0) {
+			throw new IllegalArgumentException("Username invalid!");
+		}
+
+		boolean deleted = false; // not deleted yet
+		Technician technician = technicianRepository.findTechnicianByUsername(username);
+		if (technician != null) {
+			technicianRepository.delete(technician);
+			deleted = true;
+		} else {
+			throw new IllegalArgumentException("No technician found with username!");
+		}
+		return deleted;
 	}
+	
+	@Transactional
+	public Technician changeTechnicianPassword(String username, String password) {
+		if (username == null) {
+			throw new IllegalArgumentException("Username cannot be empty!");
+		}
+		if (password == null) {
+			throw new IllegalArgumentException("New password cannot be empty!");
+		}
+		Technician technician = getTechnician(username);
+		technician.setPassword(password);
+		technicianRepository.save(technician);
+
+		return technician;
+	}
+
+	
+	//TimeSlot
 	
 	@Transactional
 	public TimeSlot createTimeSlot(int id,Date date, Time startTime, Time endTime, Technician technician ) {
@@ -193,6 +222,87 @@ public class AutoRepairService {
 	}
 	
 	@Transactional
+	public TimeSlot getTimeSlot(int id) {
+		TimeSlot timeSlot = timeSlotRepository.findTimeSlotById(id);
+		if (timeSlot == null) {
+			throw new IllegalArgumentException("No timeSlot found with this Id!");
+		}
+		return timeSlot;
+	}
+	
+	@Transactional
+	public boolean deleteTimeSlot(int id) {
+	
+		boolean deleted = false; // not deleted yet
+		TimeSlot timeSlot = timeSlotRepository.findTimeSlotById(id);
+		if (timeSlot != null) {
+			timeSlotRepository.delete(timeSlot);
+			deleted = true;
+		} else {
+			throw new IllegalArgumentException("No timeslot found with this Id!");
+		}
+		return deleted;
+	}
+	
+	@Transactional
+	public TimeSlot updateTimeSlot(Time startTime, Time EndTime, Date date, int id) {
+		
+		TimeSlot timeSlot = getTimeSlot(id);
+		timeSlot.setDate(date);
+		timeSlot.setEndTime(EndTime);
+		timeSlot.setStartTime(startTime);
+		timeSlotRepository.save(timeSlot);
+
+		return timeSlot;
+	}
+	//services
+	
+	@Transactional
+	public Services createService(String name, float cost, int duration, String id, ServiceType serviceType) {
+		Services serv = new Services();
+		serv.setName(name);
+		serv.setCost(cost);
+		serv.setDuration(duration);
+		serv.setId(id);
+		serv.setServiceType(serviceType);
+		serviceRepository.save(serv);
+		return serv;
+	}
+	
+	@Transactional
+	public List<Services> getAllServices(){
+		return toList(serviceRepository.findAll());
+	}
+	
+	@Transactional
+	public Services getServices(String id) {
+		Services service = serviceRepository.findServiceById(id);
+		if (service == null) {
+			throw new IllegalArgumentException("No service found with this Id!");
+		}
+		return service;
+	}
+	
+	@Transactional
+	public boolean deleteService(String id) {
+	
+		boolean deleted = false; // not deleted yet
+		Services serv = serviceRepository.findServiceById(id);
+		if (serv != null) {
+			serviceRepository.delete(serv);
+			deleted = true;
+		} else {
+			throw new IllegalArgumentException("No service found with this Id!");
+		}
+		return deleted;
+	}
+	
+	
+	
+	
+	//appointment
+	
+	@Transactional
 	public Appointment createAppointment(Customer customer, Technician technician, Service service, TimeSlot ts, Payment payment) {
 		Appointment apt = new Appointment();
 		apt.setCustomer(customer);
@@ -203,6 +313,39 @@ public class AutoRepairService {
 		appointmentRepository.save(apt);
 		return apt;
 	}
+	
+	
+	@Transactional
+	public List<Appointment> getAllAppointments(){
+		return toList(appointmentRepository.findAll());
+	}
+	
+	@Transactional
+	public Appointment getAppointment(int id) {
+		Appointment a = appointmentRepository.findApointmentById(id);
+		if (a == null) {
+			throw new IllegalArgumentException("No Appointment found with this Id!");
+		}
+		return a;
+	}
+	
+	
+	@Transactional
+	public boolean deleteAppointment(int id) {
+	
+		boolean deleted = false; // not deleted yet
+		Appointment apt = appointmentRepository.findApointmentById(id);
+		if (apt != null) {
+			appointmentRepository.delete(apt);
+			deleted = true;
+		} else {
+			throw new IllegalArgumentException("No appointment found with this Id!");
+		}
+		return deleted;
+	}
+	
+	
+	
 	
 	private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();
@@ -242,6 +385,40 @@ public class AutoRepairService {
 			return foundCustomer;
 
 		}
+		
+		
+		@Transactional
+		public Technician loginAsTechnician(String username, String password) {
+
+			if (username == null || username.trim().length() == 0) {
+				throw new IllegalArgumentException("Username cannot be empty.");
+			}
+			if (password == null || password.trim().length() == 0) {
+				throw new IllegalArgumentException("Password cannot be empty.");
+			}
+			List<Technician> technicians = getAllTechnicians();
+
+			Technician foundTechnician = null;
+			for (Technician technician : technicians) {
+				if (technician.getUsername().equals(username) && technician.getPassword().equals(password)) {
+					loggedInUser = technician;
+					foundTechnician = technician;
+					break;
+				
+			
+				}
+			}
+
+			if (foundTechnician == null) {
+				throw new IllegalArgumentException("This user account could not be found.");
+			}
+
+			return foundTechnician;
+
+		}
+		
+		
+		
 		
 		
 	//Payment
@@ -295,19 +472,9 @@ public class AutoRepairService {
 			return deleted;
 		}
 	
-		@Transactional
-		public List<Appointment> getAllAppointments(){
-			return toList(appointmentRepository.findAll());
-		}
 		
-		@Transactional
-		public Appointment getAppointment(int id) {
-			Appointment a = appointmentRepository.findAppointmentById(id);
-			if (a == null) {
-				throw new IllegalArgumentException("No Appointment found with this Id!");
-			}
-			return a;
-		}
+		
+		
 		
 
 

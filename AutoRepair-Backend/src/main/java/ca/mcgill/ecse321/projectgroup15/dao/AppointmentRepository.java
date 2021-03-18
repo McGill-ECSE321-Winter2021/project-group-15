@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import ca.mcgill.ecse321.projectgroup15.model.Appointment;
 import ca.mcgill.ecse321.projectgroup15.model.Customer;
-import ca.mcgill.ecse321.projectgroup15.model.Service;
+import ca.mcgill.ecse321.projectgroup15.model.Services;
 import ca.mcgill.ecse321.projectgroup15.model.Technician;
 import ca.mcgill.ecse321.projectgroup15.model.TimeSlot;
 
@@ -21,7 +21,7 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Strin
 		List<Appointment> findAppointmentByTechnician(Technician id) ;
 
 		// Check if a specified time slot and service exists
-		boolean existsByTimeslotAndService(TimeSlot tsId, Service service);
+		boolean existsByTimeslotAndService(TimeSlot tsId, Services service);
 		
 		Appointment findApointmentById(int appointmentID);
 

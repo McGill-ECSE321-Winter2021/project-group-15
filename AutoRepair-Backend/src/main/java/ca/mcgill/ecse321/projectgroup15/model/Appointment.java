@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Appointment
 {
-  private Service service;
+  private Services service;
   private Customer customer;
   private Technician technician;
   private TimeSlot timeslot;
@@ -24,16 +24,18 @@ public void setTechnician(Technician technician) {
 	this.technician = technician;
 }
 
-@ManyToOne
-  public Service getService() {
+@ManyToOne()
+@JoinColumn(name = "id", referencedColumnName = "id", insertable=false, updatable=false) 
+  public Services getService() {
     return service;
   }
 
-  public void setService(Service service) {
+  public void setService(Services service) {
     this.service = service;
   }
 
-  @ManyToOne
+  @ManyToOne()
+  @JoinColumn(name = "id", referencedColumnName = "id", insertable=false, updatable=false) 
   public Customer getCustomer() {
     return customer;
   }
@@ -42,7 +44,8 @@ public void setTechnician(Technician technician) {
     this.customer = customer;
   }
 
-  @OneToOne
+  @ManyToOne()
+  @JoinColumn(name = "id", referencedColumnName = "id", insertable=false, updatable=false) 
   public TimeSlot getTimeslot() {
     return timeslot;
   }
@@ -51,7 +54,8 @@ public void setTechnician(Technician technician) {
     this.timeslot = timeslot;
   }
 
-  @ManyToOne
+  @ManyToOne()
+  @JoinColumn(name = "id", referencedColumnName = "id", insertable=false, updatable=false) 
   public Payment getPayment() {
     return payment;
   }

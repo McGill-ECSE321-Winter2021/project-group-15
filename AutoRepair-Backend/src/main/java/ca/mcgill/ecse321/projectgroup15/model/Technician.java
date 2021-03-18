@@ -23,15 +23,15 @@ public class Technician extends Person
 //Technician Associations
   private List<TimeSlot> timeSlots;
   private List<Appointment> appointments;
- private List<Service> services;
+ private List<Services> services;
  
  
  @OneToMany(mappedBy = "technician",cascade = {CascadeType.ALL})
-  public List<Service> getServices() {
+  public List<Services> getServices() {
 	return services;
 }
 
-public void setServices(List<Service> services) {
+public void setServices(List<Services> services) {
 	this.services = services;
 }
 
