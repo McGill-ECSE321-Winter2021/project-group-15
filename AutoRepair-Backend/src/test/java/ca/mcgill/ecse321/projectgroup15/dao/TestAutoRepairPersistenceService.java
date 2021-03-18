@@ -8,6 +8,8 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -59,6 +61,9 @@ public class TestAutoRepairPersistenceService {
 		String firstName = "x";
 		String password = "388";
 		
+		List<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		
 		Technician tech = new Technician();
 		
 		tech.setUsername(firstName);
@@ -75,6 +80,8 @@ public class TestAutoRepairPersistenceService {
 		service.setRepairShop(auto2);
 		service.setServiceType(ServiceType.Checkup);
 		service.setTechnician(tech);
+		service.setTimeSlots(timeSlots);
+		service.setAppointments(appointments);
 		
 		
 		//service.setServiceCost(totalCost);
