@@ -8,6 +8,8 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -64,14 +66,24 @@ public class TestAutoRepairPersistenceTechnician {
 		
 		int techId = 4;
 		String email = "sdd";
-		String firstName = "x";
+		String userName = "x";
 		String password = "388";
+		String firstname = "whqbxq";
+		String lastname = "xucbxasx";
+		String name = "jbwdvwq";
+		List<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		List<Service> services = new ArrayList<Service>();
 		
-		tech.setUsername(firstName);
+		
+		tech.setUsername(userName);
+		tech.setFirstName(firstname);
+		tech.setLastName(lastname);
 		tech.setEmail(email);
 		tech.setId(techId);
 		tech.setPassword(password);
 		tech.setRepairShop(auto2);
+		tech.setTimeSlot(timeSlot);
 		tech.setTechnicianRole(TechnicianRole.Inspector);
 		
 		
@@ -81,10 +93,10 @@ public class TestAutoRepairPersistenceTechnician {
 		technicianRepository.save(tech);
 		
 		tech = null;
-		tech = technicianRepository.findTechnicianByUsername(firstName);
+		tech = technicianRepository.findTechnicianByUsername(userName);
 		assertNotNull(tech);
 		assertEquals(techId,tech.getId());
-		assertEquals(firstName,tech.getUsername());
+		assertEquals(userName,tech.getUsername());
 		assertEquals(email,tech.getEmail());
 		assertEquals(password,tech.getPassword());
 		assertEquals(auto2,tech.getRepairShop());
