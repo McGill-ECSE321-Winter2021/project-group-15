@@ -68,15 +68,16 @@ public class TestAutoRepairServiceTechnician {
 	public void testCreateTechnician() {
 		assertEquals(0, service.getAllTechinicans().size());
 		
-		//createCustomer(String email, String username, String password, String lastName, String firstname)
-		
+		//createTechnician (String email, String username, String password, String lastName, String firstName, TechnicianRole technicianRole)
 		String email = "wedsdw";
 		String username = "vgbjrfe";
 		String password = "crgerf";
+		String lastName = "xdnqw";
+		String firstName = "ncjdqw";
 		
 		Technician technician = null;
 		try {
-			technician = service.createTechnician(email, username, password, TechnicianRole.BodyRepair);
+			technician = service.createTechnician(email, username, password,lastName,firstName, TechnicianRole.BodyRepair);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
@@ -94,12 +95,14 @@ public class TestAutoRepairServiceTechnician {
 		String email = "wedsdw";
 		String username = null;
 		String password = "crgerf";
+		String lastName = "xdnqw";
+		String firstName = "ncjdqw";
 		
 		String error = null;
 		Technician technician = null;
 		
 		try {
-			technician = service.createTechnician(email, username, password, TechnicianRole.BodyRepair);
+			technician = service.createTechnician(email, username, password,lastName,firstName, TechnicianRole.BodyRepair);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -115,12 +118,14 @@ public class TestAutoRepairServiceTechnician {
 		String email = "wedsdw";
 		String username = "";
 		String password = "crgerf";
+		String lastName = "xdnqw";
+		String firstName = "ncjdqw";
 		
 		String error = null;
 		Technician technician = null;
 		
 		try {
-			technician = service.createTechnician(email, username, password, TechnicianRole.BodyRepair);
+			technician = service.createTechnician(email, username, password,lastName,firstName, TechnicianRole.BodyRepair);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -136,12 +141,14 @@ public class TestAutoRepairServiceTechnician {
 		String email = "wedsdw";
 		String username = "xewcweckw";
 		String password = null;
+		String lastName = "xdnqw";
+		String firstName = "ncjdqw";
 		
 		String error = null;
 		Technician technician = null;
 		
 		try {
-			technician = service.createTechnician(email, username, password, TechnicianRole.BodyRepair);
+			technician = service.createTechnician(email, username, password,lastName,firstName, TechnicianRole.BodyRepair);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -157,12 +164,14 @@ public class TestAutoRepairServiceTechnician {
 		String email = "wedsdw";
 		String username = "xewcweckw";
 		String password = "";
+		String lastName = "xdnqw";
+		String firstName = "ncjdqw";
 		
 		String error = null;
 		Technician technician = null;
 		
 		try {
-			technician = service.createTechnician(email, username, password, TechnicianRole.BodyRepair);
+			technician = service.createTechnician(email, username, password,lastName,firstName, TechnicianRole.BodyRepair);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -177,12 +186,14 @@ public class TestAutoRepairServiceTechnician {
 		String email = "wedsdw";
 		String username = null;
 		String password = null;
+		String lastName = "xdnqw";
+		String firstName = "ncjdqw";
 		
 		String error = null;
 		Technician technician = null;
 		
 		try {
-			technician = service.createTechnician(email, username, password, TechnicianRole.BodyRepair);
+			technician = service.createTechnician(email, username, password,lastName,firstName, TechnicianRole.BodyRepair);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -197,12 +208,14 @@ public class TestAutoRepairServiceTechnician {
 		String email = "wedsdw";
 		String username = "";
 		String password = "";
+		String lastName = "xdnqw";
+		String firstName = "ncjdqw";
 		
 		String error = null;
 		Technician technician = null;
 		
 		try {
-			technician = service.createTechnician(email, username, password, TechnicianRole.BodyRepair);
+			technician = service.createTechnician(email, username, password,lastName,firstName, TechnicianRole.BodyRepair);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -218,12 +231,14 @@ public class TestAutoRepairServiceTechnician {
 		String email = "";
 		String username = "xewcweckw";
 		String password = "cxjced";
+		String lastName = "xdnqw";
+		String firstName = "ncjdqw";
 		
 		String error = null;
 		Technician technician = null;
 		
 		try {
-			technician = service.createTechnician(email, username, password, TechnicianRole.BodyRepair);
+			technician = service.createTechnician(email, username, password,lastName,firstName, TechnicianRole.BodyRepair);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -239,12 +254,13 @@ public class TestAutoRepairServiceTechnician {
 		String email = null;
 		String username = "xewcweckw";
 		String password = "cxjced";
-		
+		String lastName = "xdnqw";
+		String firstName = "ncjdqw";
 		String error = null;
 		Technician technician = null;
 		
 		try {
-			technician = service.createTechnician(email, username, password, TechnicianRole.BodyRepair);
+			technician = service.createTechnician(email, username, password,lastName,firstName, TechnicianRole.BodyRepair);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
