@@ -49,11 +49,11 @@ public class TestAutoRepairPersistenceCustomer {
 		String username = "saa";
 		String cardNumber = "xsdw";
 		String password = "344";
-		String userId = "dededw";
+		int userId = 4;
 		String cvv = "xwdqwdq";
 		String email = "wesfr";
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
-		String id = "dejiejd";
+		int id = 8;
 		auto2.setId(id);
 		
 		

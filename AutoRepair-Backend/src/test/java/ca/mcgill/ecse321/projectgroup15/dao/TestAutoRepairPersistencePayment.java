@@ -22,44 +22,19 @@ import ca.mcgill.ecse321.projectgroup15.model.*;
 @SpringBootTest
 public class TestAutoRepairPersistencePayment {
 	
-	@Autowired
-	private CustomerRepository customerRepository;
 	
-	@Autowired
-	private TechnicianRepository technicianRepository;
-	
-	@Autowired
-	private PersonRepository personRepository;
-	
-	@Autowired
-	private AdministratorRepository administratorRepository;
-	
-	@Autowired
-	private AppointmentRepository appointmentRepository;
 	
 	@Autowired
 	private PaymentRepository paymentRepository;
 	
-	@Autowired
-	private ServiceRepository serviceRepository;
 	
-	@Autowired
-	private TimeSlotRepository timeSlotRepository;
-	
-	@Autowired
-	private RepairShopRepository repairShopRepository;
 	
 	@AfterEach
 	public void clearDatabase() {
 		
-		personRepository.deleteAll();
-		customerRepository.deleteAll();
-		technicianRepository.deleteAll();
-		administratorRepository.deleteAll();
-		appointmentRepository.deleteAll();
+		
 		paymentRepository.deleteAll();
-		serviceRepository.deleteAll();
-		timeSlotRepository.deleteAll();
+	
 		
 		
 		
@@ -73,11 +48,11 @@ public class TestAutoRepairPersistencePayment {
 		String username = "saa";
 		String cardNumber = "xsdw";
 		String password = "344";
-		String userId = "dededw";
+		int userId = 5;
 		String cvv = "xwdqwdq";
 		String email = "wesfr";
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
-		String id = "dejiejd";
+		int id = 4;
 		auto2.setId(id);
 		
 		

@@ -44,11 +44,11 @@ public class TestAutoRepairPersistenceAdministrator {
 		
 		RepairShop auto2 = new RepairShop();
 		
-		String adminId = "123";
+		int adminId = 6;
 		String lastName = "dsf";
 		String password = "514";
 		String email = "sdd";
-		String id = "cdde";
+		int id = 9;
 		auto2.setId(id);
 		Administrator assistant = new Administrator();
 		

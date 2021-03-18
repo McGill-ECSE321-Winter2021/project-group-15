@@ -54,7 +54,7 @@ public class TestAutoRepairPersistenceService {
 		String name = "fcwcd";
 		String serviceType = "Checkup";
 		
-		String techId = "789";
+		int techId = 9;
 		String email = "sdd";
 		String firstName = "x";
 		String password = "388";

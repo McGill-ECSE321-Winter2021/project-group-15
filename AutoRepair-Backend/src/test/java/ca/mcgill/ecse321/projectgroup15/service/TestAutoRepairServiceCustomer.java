@@ -309,6 +309,8 @@ public class TestAutoRepairServiceCustomer {
 	
 	@Test
 	public void testLoginAsCustomer() {
+		
+		
 		Customer customer = null;
 		
 		try {

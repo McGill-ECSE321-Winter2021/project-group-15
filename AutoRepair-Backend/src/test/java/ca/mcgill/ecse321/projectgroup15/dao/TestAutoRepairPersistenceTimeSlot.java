@@ -51,7 +51,7 @@ public class TestAutoRepairPersistenceTimeSlot {
 			Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
 			Time startTime = java.sql.Time.valueOf(LocalTime.of(11, 35));
 			Time endTime = java.sql.Time.valueOf(LocalTime.of(13, 25));
-			String id = "cdde";
+			int id = 7;
 			int timeId = 9;
 		
 			TimeSlot timeSlot = new TimeSlot();
@@ -63,7 +63,7 @@ public class TestAutoRepairPersistenceTimeSlot {
 			timeSlot.setTechnician(tech);
 			auto2.setId(id);
 			
-			String techId = "789";
+			int techId = 3;
 			String email = "sdd";
 			String firstName = "x";
 			String password = "388";
