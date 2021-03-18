@@ -17,6 +17,7 @@ import java.sql.Time;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,8 @@ public class TestAutoRepairServiceTechnician {
 	
 	private static final String TECHNICIAN_KEY = "TestCustomer";
 	
+	private static final String TECHNICIAN_PASSWORD = "csxa";
+	
 	@BeforeEach
 	public void setMockOutput() {
 		
@@ -51,6 +54,7 @@ public class TestAutoRepairServiceTechnician {
 					                            if (invocation.getArgument(0).equals(TECHNICIAN_KEY)) {
 					                            	Technician technician = new Technician();
 					                            	technician.setUsername(TECHNICIAN_KEY);
+					                            	technician.setPassword(TECHNICIAN_PASSWORD);
 					                            	return technician;
 					                            } else {
 					                            	return null;
@@ -66,7 +70,7 @@ public class TestAutoRepairServiceTechnician {
 	
 	@Test
 	public void testCreateTechnician() {
-		assertEquals(0, service.getAllTechinicans().size());
+		assertEquals(0, service.getAllTechnicians().size());
 		
 		//createTechnician (String email, String username, String password, String lastName, String firstName, TechnicianRole technicianRole)
 		String email = "wedsdw";
@@ -159,7 +163,7 @@ public class TestAutoRepairServiceTechnician {
 	}
 	
 	@Test
-	public void testCreateCustomerPasswordEmpty() {
+	public void testCreateTechnicianPasswordEmpty() {
 		
 		String email = "wedsdw";
 		String username = "xewcweckw";
@@ -182,7 +186,7 @@ public class TestAutoRepairServiceTechnician {
 	}
 	
 	@Test
-	public void testCreateCustomerUsernameAndPasswordNull() {
+	public void testCreateTechnicianUsernameAndPasswordNull() {
 		String email = "wedsdw";
 		String username = null;
 		String password = null;
@@ -204,7 +208,7 @@ public class TestAutoRepairServiceTechnician {
 	}
 	
 	@Test
-	public void testCreateCustomerUsernameAndPasswordEmpty() {
+	public void testCreateTechnicianUsernameAndPasswordEmpty() {
 		String email = "wedsdw";
 		String username = "";
 		String password = "";
@@ -298,5 +302,137 @@ public class TestAutoRepairServiceTechnician {
 		assertNull(technician);
 		assertEquals("No technician found with this username!",error);
 	}
+	
+
+	
+	@Test
+	public void testChangeTechnicianPassword() {
+		String password = "dewdwdx";
+		Technician technician = null;
+		try {
+			technician = service.changeTechnicianPassword(TECHNICIAN_KEY, password);
+		} catch (IllegalArgumentException e) {
+			
+			fail();
+			
+		}
+		assertNotNull(technician);
+		assertEquals(TECHNICIAN_KEY,technician.getUsername());
+		assertEquals(password,technician.getPassword());
+	}
+	
+	@Test
+	public void testChangeTechnicianPasswordUsernameNull() {
+		String password = "dewdwdx";
+		Technician technician = null;
+		String error = null;
+		try {
+			technician = service.changeTechnicianPassword(null, password);
+		} catch (IllegalArgumentException e) {
+			
+			error = e.getMessage();
+			
+		}
+		assertNull(technician);
+		assertEquals("Username cannot be empty!",error);
+		
+		
+	}
+	
+	@Test
+	public void testChangeTechnicianPasswordNull() {
+		String password = null;
+		Technician technician = null;
+		String error = null;
+		try {
+			technician = service.changeTechnicianPassword(null, password);
+		} catch (IllegalArgumentException e) {
+			
+			error = e.getMessage();
+			
+		}
+		assertNull(technician);
+		assertEquals("New password cannot be empty!",error);
+		
+		
+	}
+	
+	
+	
+	@Test
+	public void testLoginAsTechnician() {
+		
+		
+		Technician technician = null;
+		
+		try {
+			technician = service.loginAsTechnician(TECHNICIAN_KEY, TECHNICIAN_PASSWORD);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		
+		assertNotNull(technician);
+		assertEquals(TECHNICIAN_KEY,technician.getUsername());
+		assertEquals(TECHNICIAN_PASSWORD,technician.getPassword());
+		
+	}
+	
+	@Test
+	public void testLoginAsTechnicianUsernameNull() {
+		Technician technician = null;
+		String error = null;
+		
+		try {
+			technician = service.loginAsTechnician(null, TECHNICIAN_PASSWORD);
+		} catch(IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNull(technician);
+		assertEquals("Username cannot be empty.",error);
+	}
+	
+	@Test
+	public void testLoginAsTechnicianUsernameEmpty() {
+		Technician technician = null;
+		String error = null;
+		
+		try {
+			technician = service.loginAsTechnician("", TECHNICIAN_PASSWORD);
+		} catch(IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNull(technician);
+		assertEquals("Username cannot be empty.",error);
+	}
+	
+	@Test
+	public void testLoginAsTechnicianPasswordEmpty() {
+		Technician technician = null;
+		String error = null;
+		
+		try {
+			technician = service.loginAsTechnician(TECHNICIAN_KEY, "");
+		} catch(IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNull(technician);
+		assertEquals("Password cannot be empty.",error);
+	}
+	
+	@Test
+	public void testLoginAsCustomerPasswordNull() {
+		Technician technician = null;
+		String error = null;
+		
+		try {
+			technician = service.loginAsTechnician(TECHNICIAN_KEY, null);
+		} catch(IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNull(technician);
+		assertEquals("Password cannot be empty.",error);
+	}
+	
+	
 
 }
