@@ -8,6 +8,8 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -45,27 +47,45 @@ public class TestAutoRepairPersistenceAdministrator {
 		RepairShop auto2 = new RepairShop();
 		
 		int adminId = 6;
-		String lastName = "dsf";
+		String username = "dsf";
+		String firstname = "ewdwe";
+		String lastname = "dhewjfwva";
 		String password = "514";
 		String email = "sdd";
+		String name = "xsch";
 		int id = 9;
-		auto2.setId(id);
+		
+		 List<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
+		  
+		  List<Person> persons = new ArrayList<Person>();
+		  List<Payment> payments = new ArrayList<Payment>();
+		  List<Service> services = new ArrayList<Service>();
+		 List<Appointment> appointments = new ArrayList<Appointment>();
+		 auto2.setAppointments(appointments);
+		 auto2.setPayments(payments);
+		 auto2.setPersons(persons);
+		 auto2.setServices(services);
+		 auto2.setTimeSlots(timeSlots);
+		 auto2.setId(id);
 		Administrator assistant = new Administrator();
 		
 		assistant.setId(adminId);
-		assistant.setUsername(lastName);
+		assistant.setUsername(username);
 		assistant.setPassword(password);
+		assistant.setFirstName(firstname);
+		assistant.setLastName(lastname);
+		
 		assistant.setEmail(email);
 		assistant.setRepairShop(auto2);
 		administratorRepository.save(assistant);
 		
-		assistant = null;
+	//	assistant = null;
 		
 		assistant = administratorRepository.findAdministratorById(adminId);
 		
 		assertNotNull(assistant);
 		assertEquals(adminId,assistant.getId());
-		assertEquals(lastName,assistant.getUsername());
+		assertEquals(username,assistant.getUsername());
 		assertEquals(password,assistant.getPassword());
 		assertEquals(email,assistant.getEmail());
 		assertEquals(auto2,assistant.getRepairShop());
