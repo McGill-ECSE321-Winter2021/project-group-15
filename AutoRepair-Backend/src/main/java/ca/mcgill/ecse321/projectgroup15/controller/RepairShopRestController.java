@@ -61,7 +61,7 @@ public class RepairShopRestController {
 			//service.saveCustomer(c);
 			
 			
-			//Customer cus = service.createCustomer(c.getEmail(), c.getUsername(), c.getPassword(), c.getLastName(), c.getFirstName());
+			Customer cus = service.createCustomer(c.getEmail(), c.getUsername(), c.getPassword(), c.getLastName(), c.getFirstName(), c.getCardNumber(), c.getCvv(), c.getExpiry());
 			return convertToDto(cus);
 		}
 
@@ -69,7 +69,7 @@ public class RepairShopRestController {
 			if (a == null) {
 				throw new IllegalArgumentException("There is no such app user!");
 			}
-			CustomerDto CustomerDto = new CustomerDto(a.getEmail(), a.getUsername(), a.getPassword(), a.getLastName(), a.getFirstName());
+			CustomerDto CustomerDto = new CustomerDto(a.getEmail(), a.getUsername(), a.getPassword(), a.getLastName(), a.getFirstName(), a.getCardNumber(), a.getCvv(), a.getExpiry());
 			return CustomerDto;
 		}
 
@@ -88,6 +88,39 @@ public class RepairShopRestController {
 			return e.getMessage();
 		}
 
+	}
+	
+	
+	@PostMapping(value = { "/technicianregister", "/technicianregister/" })
+	
+	public TechnicianDto createTechnicianDto(@RequestBody Technician t) throws IllegalArgumentException {
+		//service.saveCustomer(c);
+		
+		
+		Technician tech = service.createTechnician(t.getEmail(), t.getUsername(), t.getPassword(), t.getLastName(), t.getFirstName(), t.getTechnicianRole());
+		return convertTechDto(tech);
+	}
+
+	private TechnicianDto convertTechDto(Technician t) {
+		if (t == null) {
+			throw new IllegalArgumentException("There is no such app user!");
+		}
+		TechnicianDto technicianDto = new TechnicianDto(t.getTechnicianRole(), t.getEmail(), t.getUsername(), t.getPassword(), t.getLastName(), t.getFirstName());
+		return technicianDto;
+	}
+	
+	
+	@PostMapping(value = {"/payment", "/payment/"})
+	public PaymentDto createPayment(@RequestBody Payment p) throws IllegalArgumentException {
+		
+		Payment payment = service.createPayment(p.getId(), p.getTotalCost(), p.getDate());
+		
+		return convertpToDto(payment);
+	}
+	
+	private PaymentDto convertpToDto(Payment p) {
+		PaymentDto paymentDto = new PaymentDto(p.getDate(), p.getTotalCost(), p.getId());
+		return paymentDto;
 	}
 	
 }

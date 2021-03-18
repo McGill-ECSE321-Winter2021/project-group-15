@@ -15,6 +15,8 @@ public class PaymentDto {
 	  
 
 	  @SuppressWarnings("unchecked") // because the Collection the Appointment list needs to be empty at the start.
+	  
+	  
 
 		//Second Constructor 
 		public PaymentDto(String id) {
@@ -22,6 +24,38 @@ public class PaymentDto {
 		}
 	  
 	  
+		/**
+	 * @param date
+	 * @param totalCost
+	 * @param id
+	 * @param appointments
+	 */
+	public PaymentDto(Date date, float totalCost, String id, List<AppointmentDto> appointments) {
+		super();
+		this.date = date;
+		this.totalCost = totalCost;
+		this.id = id;
+		this.appointments = appointments;
+	}
+	
+	
+	
+	 @SuppressWarnings("unchecked") // because the Collection the Appointment list needs to be empty at the start.
+
+		/**
+		 * @param date
+		 * @param totalCost
+		 * @param id
+		 */
+		public PaymentDto(Date date, float totalCost, String id) {
+			super();
+			this.date = date;
+			this.totalCost = totalCost;
+			this.id = id;
+			this.appointments = Collections.EMPTY_LIST;
+		}
+
+
 		public PaymentDto(String id, List<AppointmentDto> arrayList) {
 			this.id = id;
 			this.appointments = arrayList;

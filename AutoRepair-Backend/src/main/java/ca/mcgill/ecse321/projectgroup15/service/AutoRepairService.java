@@ -54,7 +54,7 @@ public class AutoRepairService {
 	//Register as Customer
 	
 	@Transactional
-	public Customer createCustomer(String email, String username, String password, String lastName, String firstname) {
+	public Customer createCustomer(String email, String username, String password, String lastName, String firstname, String cardNumber, String cvv, Date Expiry) {
 		if (this.getAllCustomers().size() == 1) {
 			throw new IllegalArgumentException("Can only have one Admin!");
 		}
@@ -73,7 +73,10 @@ public class AutoRepairService {
 		customer.setUsername(username);
 		customer.setPassword(password);
 		customer.setLastName(lastName);
-		customer.setFirstName(firstname);;
+		customer.setFirstName(firstname);
+		customer.setCardNumber(cardNumber);
+		customer.setCvv(cvv);
+		customer.setExpiry(Expiry);
 		customerRepository.save(customer);
 		return customer;
 	}
@@ -133,7 +136,7 @@ public class AutoRepairService {
 	
 	//Register as Technician
 	@Transactional
-	public Technician createTechnician (String email, String username, String password, TechnicianRole technicianRole) {
+	public Technician createTechnician (String email, String username, String password, String lastName, String firstName, TechnicianRole technicianRole) {
 		if ((username == null || username.trim().length() == 0)
 				&& (password == null || password.trim().length() == 0)) {
 			throw new IllegalArgumentException("Username and password cannot be empty!");
@@ -150,6 +153,8 @@ public class AutoRepairService {
 		Technician technician = new Technician();
 		technician.setEmail(email);
 		technician.setPassword(password);
+		technician.setLastName(lastName);
+		technician.setFirstName(firstName);
 		technician.setTechnicianRole(technicianRole);
 		technicianRepository.save(technician);
 		return technician;
@@ -238,5 +243,59 @@ public class AutoRepairService {
 
 		}
 		
-	
+		
+	//Payment
+		
+		public Payment createPayment(String id, float totalCost, Date date) {
+			if (id == null) {
+				throw new IllegalArgumentException("There is no payment with this id");
+			}
+			if (date == null) {
+				throw new IllegalArgumentException("please mention the date");
+			}
+			Payment payment =  new Payment();
+			payment.setId(id);
+			payment.setDate(date);
+			payment.setTotalCost(totalCost);
+			paymentRepository.save(payment);
+			return payment;
+			
+		}
+		
+		
+
+		@Transactional
+		public Payment getPayment(String id) {
+			Payment payment = paymentRepository.findPaymentById(id);
+			if (payment == null) {
+				throw new IllegalArgumentException("No Payment found with this Id!");
+			}
+			return payment;
+		}
+
+		@Transactional
+		public List<Payment> getAllPayments() {
+			return toList(paymentRepository.findAll());
+		}
+
+		@Transactional
+		public boolean deletePayment(String paymentId) {
+			if (paymentId == null) {
+				throw new IllegalArgumentException("PaymentId invalid!");
+			}
+
+			boolean deleted = false; // not deleted yet
+			Payment payment = paymentRepository.findPaymentById(paymentId);
+			if (payment != null) {
+				paymentRepository.delete(payment);
+				deleted = true;
+			} else {
+				throw new IllegalArgumentException("Payment must be valid!");
+			}
+			return deleted;
+		}
+
+		
+
+
 }
