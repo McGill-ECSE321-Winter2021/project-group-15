@@ -8,6 +8,8 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -69,6 +71,8 @@ public class TestAutoRepairPersistencePayment {
 		customer.setExpiry(date);
 		customer.setRepairShop(auto2);
 		
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		
 		
 		String paymentId = "kfrj";
 		
@@ -79,6 +83,8 @@ public class TestAutoRepairPersistencePayment {
 		payment.setId(paymentId);
 		payment.setRepairShop(auto2);
 		payment.setTotalCost(cost);
+		payment.setCustomer(customer);
+		payment.setAppointments(appointments);
 		
 		paymentRepository.save(payment);
 		
