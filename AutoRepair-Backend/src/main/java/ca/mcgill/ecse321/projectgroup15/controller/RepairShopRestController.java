@@ -122,5 +122,43 @@ public class RepairShopRestController {
 		PaymentDto paymentDto = new PaymentDto(p.getDate(), p.getTotalCost(), p.getId());
 		return paymentDto;
 	}
+	 
+	@GetMapping(value = {"/appointments", "/appointments/" })
+ 	public List<AppointmentDto> getAllAppointments(){
+	 	List<AppointmentDto> aDtos = new ArrayList<>();
+	 	for(Appointment a : service.getAllAppointments()) {
+		 	aDtos.add(convertToDto(a));
+	 	}
+	 	return aDtos;
+	 
+ }
+
+	@GetMapping(value = {"/appointments/{id}", "/appointments/{id}/" })
+	 public AppointmentDto getAppointmentById(@PathVariable("id")int id) throws IllegalArgumentException{
+	 	return convertToDto(service.getAppointment(id));
+ }
 	
+		private TimeSlotDto convertToDto(TimeSlot ts) {
+		if(ts == null) {
+			throw new IllegalArgumentException("There is no such Time Slot");
+		}
+		TimeSlotDto tsDto = new TimeSlotDto(ts.getId(), ts.getDate(), ts.getStartTime(), ts.getEndTime());
+		return tsDto;
+	}
+	
+	private AppointmentDto convertToDto(Appointment a){
+		if(a == null) {
+			throw new IllegalArgumentException("There is no such Appointment ");
+		}
+		AppointmentDto aDto = new AppointmentDto(a.getId());
+		return aDto;
+		}
+	
+	private ServiceDto convertToDto(Service s) {
+		if(s == null) {
+			throw new IllegalArgumentException("There is no such service !");
+		}
+		ServiceDto sDto = new ServiceDto(s.getId());
+		return sDto;
+	}
 }
