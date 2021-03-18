@@ -48,7 +48,7 @@ public class TestAutoRepairPersistenceService {
 		
 		RepairShop auto2 = new RepairShop();
 		
-		Service service = new Service();
+		Services service = new Services();
 		
 		float cost = 34;
 		int duration = 9;
