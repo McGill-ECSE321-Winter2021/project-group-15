@@ -294,7 +294,20 @@ public class AutoRepairService {
 			}
 			return deleted;
 		}
-
+	
+		@Transactional
+		public List<Appointment> getAllAppointments(){
+			return toList(appointmentRepository.findAll());
+		}
+		
+		@Transactional
+		public Appointment getAppointment(int id) {
+			Appointment a = appointmentRepository.findAppointmentById(id);
+			if (a == null) {
+				throw new IllegalArgumentException("No Appointment found with this Id!");
+			}
+			return a;
+		}
 		
 
 
