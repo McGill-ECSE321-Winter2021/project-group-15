@@ -121,5 +121,33 @@ public class TestAutoRepairServicePayment {
 		assertEquals("please mention the date",error);
 		
 	}
+	
+	@Test
+	public void testGetPayment() {
+		
+		Payment payment = null;
+		try {
+			payment = service.getPayment(PAYMENT_KEY);
+		} catch(IllegalArgumentException e) {
+			fail();
+		}
+		
+		assertNotNull(payment);
+		assertEquals(PAYMENT_KEY,payment.getId());
+	}
+	
+	@Test 
+	public void testGetPaymentInvalid() {
+		Payment payment = null;
+		String error = null;
+		try {
+			payment = service.getPayment("nxsbjcb");
+		}catch(IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		
+		assertNull(payment);
+		assertEquals("No Payment found with this Id!",error);
+	}
 
 }
