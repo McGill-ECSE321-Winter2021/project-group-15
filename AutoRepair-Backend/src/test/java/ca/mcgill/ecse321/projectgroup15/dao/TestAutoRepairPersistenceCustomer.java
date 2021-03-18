@@ -8,6 +8,8 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -49,6 +51,9 @@ public class TestAutoRepairPersistenceCustomer {
 		String username = "saa";
 		String cardNumber = "xsdw";
 		String password = "344";
+		String firstname = "hwbdv";
+		String lastname = "xcdqwcd";
+		String name = "csjbcqw";
 		int userId = 4;
 		String cvv = "xwdqwdq";
 		String email = "wesfr";
@@ -61,7 +66,10 @@ public class TestAutoRepairPersistenceCustomer {
 		
 		Customer customer = new Customer();
 		
+		
 		customer.setUsername(username);
+		customer.setFirstName(firstname);
+		customer.setLastName(lastname);
 		customer.setCardNumber(cardNumber);
 		customer.setId(userId);
 		customer.setPassword(password);
@@ -69,6 +77,10 @@ public class TestAutoRepairPersistenceCustomer {
 		customer.setEmail(email);
 		customer.setExpiry(date);
 		customer.setRepairShop(auto2);
+		List<Payment> payments = new ArrayList<Payment>();
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		customer.setAppointments(appointments);
+		customer.setPayments(payments);
 		
 		
 		customerRepository.save(customer);
