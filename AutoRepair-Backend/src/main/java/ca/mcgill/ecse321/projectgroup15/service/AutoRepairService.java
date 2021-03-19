@@ -149,6 +149,7 @@ public class AutoRepairService {
 		technician.setPassword(password);
 		technician.setLastName(lastName);
 		technician.setFirstName(firstName);
+		technician.setUsername(username);
 		technician.setTechnicianRole(technicianRole);
 		technicianRepository.save(technician);
 		return technician;
