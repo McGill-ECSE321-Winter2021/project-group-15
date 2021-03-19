@@ -304,7 +304,7 @@ public class AutoRepairService {
 	//appointment
 	
 	@Transactional
-	public Appointment createAppointment(Customer customer, Technician technician, Service service, TimeSlot ts, Payment payment) {
+	public Appointment createAppointment(Customer customer, Technician technician, Services service, TimeSlot ts, Payment payment) {
 		Appointment apt = new Appointment();
 		apt.setCustomer(customer);
 		apt.setTechnician(technician);

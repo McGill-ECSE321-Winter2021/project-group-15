@@ -4,6 +4,8 @@ package ca.mcgill.ecse321.projectgroup15.controller;
 
 
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,10 +13,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,7 +82,7 @@ public class RepairShopRestController {
 		
 	//login as a customer
 	
-	@PostMapping(value = { "/loginuser" })
+	@PostMapping(value = { "/logincustomer" })
 	@ResponseBody
 	public String CustomerLogin(@RequestParam("username") String username, @RequestParam("password") String password) {  
 		try {
@@ -109,6 +113,21 @@ public class RepairShopRestController {
 		return technicianDto;
 	}
 	
+	//login as a Technician
+	
+		@PostMapping(value = { "/logintechnician" })
+		@ResponseBody
+		public String TechnicianLogin(@RequestParam("username") String username, @RequestParam("password") String password) {  
+			try {
+				service.loginAsTechnician(username, password);
+				return "Login Successful!";
+			} catch (IllegalArgumentException e) {
+				return e.getMessage();
+			}
+
+		}
+	
+	
 	// create a Payment
 	@PostMapping(value = {"/payment", "/payment/"})
 	public PaymentDto createPayment(@RequestBody Payment p) throws IllegalArgumentException {
@@ -122,7 +141,43 @@ public class RepairShopRestController {
 		PaymentDto paymentDto = new PaymentDto(p.getDate(), p.getTotalCost(), p.getId());
 		return paymentDto;
 	}
+	
+	// get all the Payments in the database
+		@GetMapping(value = {"/payments", "/payments/" })
+	 	public List<PaymentDto> getAllPayments(){
+		 	List<PaymentDto> payDtos = new ArrayList<>();
+		 	for(Payment pay : service.getAllPayments()) {
+			 	payDtos.add(convertpToDto(pay));
+		 	}
+		 	return payDtos;
+		 
+	 }
+		
+		//get the payment corresponding to the id
+		@GetMapping(value = {"/payments/{id}", "/payments/{id}/" })
+		 public PaymentDto getPaymentById(@PathVariable("id")String id) throws IllegalArgumentException{
+		 	return convertpToDto(service.getPayment(id));
+	 }
+		
+		//Delete TimeSlot
+				@DeleteMapping(value = { "/payment/delete/{id}", "/payments/delete/{id}/" })
+				public boolean deletePayment(@PathVariable(name = "id") String id) {
+					
+						return service.deletePayment(id);
+					
+				}
 	 
+		
+				
+			// create a Appointment
+			@PostMapping(value = {"/appointment", "/appointment/"})
+			public AppointmentDto createAppointment(@RequestBody Appointment a) throws IllegalArgumentException {
+				
+				Appointment appointment = service.createAppointment(a.getCustomer(), a.getTechnician(), a.getService(), a.getTimeslot(), a.getPayment());
+			
+				return convertToDto(appointment);
+			}
+							
 	
 	// get all the appointments in the database
 	@GetMapping(value = {"/appointments", "/appointments/" })
@@ -135,19 +190,24 @@ public class RepairShopRestController {
 	 
  }
 	
-	//get the appointment correspondig
+	//get the appointment corresponding to the id
 	@GetMapping(value = {"/appointments/{id}", "/appointments/{id}/" })
 	 public AppointmentDto getAppointmentById(@PathVariable("id")int id) throws IllegalArgumentException{
 	 	return convertToDto(service.getAppointment(id));
  }
 	
-		private TimeSlotDto convertToDto(TimeSlot ts) {
-		if(ts == null) {
-			throw new IllegalArgumentException("There is no such Time Slot");
-		}
-		TimeSlotDto tsDto = new TimeSlotDto(ts.getId(), ts.getDate(), ts.getStartTime(), ts.getEndTime());
-		return tsDto;
+	
+	//Delete Appointment
+	@DeleteMapping(value = { "/appointment/delete/{id}", "/payments/delete/{id}/" })
+	public boolean deleteAppointment(@PathVariable(name = "id") int id) {
+		
+			return service.deleteAppointment(id);
+		
 	}
+	
+	
+	
+		
 	
 	private AppointmentDto convertToDto(Appointment a){
 		if(a == null) {
@@ -157,6 +217,44 @@ public class RepairShopRestController {
 		return aDto;
 		}
 	
+	// Create Service 
+	@PostMapping(value = { "/createservice", "/createservice/" })
+	public ServiceDto createServiceDto(@RequestBody Services s) throws IllegalArgumentException {
+		
+		Services ss = service.createService(s.getName(), s.getCost(), s.getDuration(), s.getId(), s.getServiceType());
+		return convertToDto(ss);
+	}
+	
+	
+	// get all the services in the database
+			@GetMapping(value = {"/services", "/services/" })
+		 	public List<ServiceDto> getAllService(){
+			 	List<ServiceDto> ssDtos = new ArrayList<>();
+			 	for(Services ts : service.getAllServices()) {
+				 	ssDtos.add(convertToDto(ts));
+			 	}
+			 	return ssDtos;
+			 
+		 }
+			
+			//get the timeSlot corresponding to the id
+			@GetMapping(value = {"/services/{id}", "/services/{id}/" })
+			 public ServiceDto getServicesById(@PathVariable("id")String id) throws IllegalArgumentException{
+			 	return convertToDto(service.getServices(id));
+
+	}
+			//Delete TimeSlot
+			@DeleteMapping(value = { "/services/delete/id}", "/services/delete/{id}/" })
+			public boolean deleteServices(@PathVariable(name = "id") String id) {
+				
+					return service.deleteService(id);
+				
+			}
+	
+	
+	
+	
+	
 	private ServiceDto convertToDto(Services s) {
 		if(s == null) {
 			throw new IllegalArgumentException("There is no such service !");
@@ -164,4 +262,99 @@ public class RepairShopRestController {
 		ServiceDto sDto = new ServiceDto(s.getId(), null, 0, 0, null);
 		return sDto;
 	}
+	
+	
+	
+	
+	
+	//Create TimeSlot
+	
+	@PostMapping(value = { "/createtimeslot", "/createtimeslot/" })
+	
+	public TimeSlotDto createTimeSlotDto(@RequestBody TimeSlot ts) throws IllegalArgumentException {
+		
+		
+		
+		TimeSlot ts1 = service.createTimeSlot(ts.getId(),ts.getDate(), ts.getStartTime(), ts.getEndTime(), ts.getTechnician());
+		return converttsToDto(ts1);
+	}
+
+	private TimeSlotDto converttsToDto(TimeSlot tso) {
+		if (tso == null) {
+			throw new IllegalArgumentException("There is no such TimeSlot!");
+		}
+		TimeSlotDto timeSlotDto = new TimeSlotDto(tso.getId(),tso.getDate(), tso.getStartTime(), tso.getEndTime());
+		return timeSlotDto;
+	}
+	
+	
+	// get all the timeSlots in the database
+		@GetMapping(value = {"/timeslots", "/timeslots/" })
+	 	public List<TimeSlotDto> getAllTimeSlots(){
+		 	List<TimeSlotDto> tsDtos = new ArrayList<>();
+		 	for(TimeSlot ts : service.getAllTimeSlots()) {
+			 	tsDtos.add(converttsToDto(ts));
+		 	}
+		 	return tsDtos;
+		 
+	 }
+		
+		//get the timeSlot corresponding to the id
+		@GetMapping(value = {"/timeslot/{id}", "/timeslot/{id}/" })
+		 public TimeSlotDto getTimeSlotById(@PathVariable("id")int id) throws IllegalArgumentException{
+		 	return converttsToDto(service.getTimeSlot(id));
+
+}
+		//Delete TimeSlot
+		@DeleteMapping(value = { "/timeslot/delete/id}", "/timeslot/delete/{id}/" })
+		public boolean deleteTimeSlot(@PathVariable(name = "id") Integer id) {
+			
+				return service.deleteTimeSlot(id);
+			
+		}
+		
+		// change timeslot details
+				@PutMapping(value = { "/timeslot/change/{id}", "/timeslot/change/{id}/" })
+				public void changeCustomerPassword(@PathVariable("id") int id, @RequestParam Time endTime, @RequestParam Time startTime, @RequestParam Date date) {
+					
+						service.updateTimeSlot(startTime, endTime, date, id);
+					
+				}
+		
+		
+		
+		
+		// change Customer password
+		@PutMapping(value = { "/Customerregister/password/{username}", "/Customerregister/password/{username}/" })
+		public void changeCustomerPassword(@PathVariable("username") String username, @RequestParam String password) {
+			if (username == null) {
+				throw new IllegalArgumentException("Username cannot be empty!");
+			}
+			if (password == null) {
+				throw new IllegalArgumentException("New password cannot be empty!");
+			} else {
+				service.changeCustomerPassword(username, password);
+			}
+		}
+		
+		// change Technician password
+				@PutMapping(value = { "/technicianregister/password/{username}", "/technicianregister/password/{username}/" })
+				public void changeTechnicianPassword(@PathVariable("username") String username, @RequestParam String password) {
+					if (username == null) {
+						throw new IllegalArgumentException("Username cannot be empty!");
+					}
+					if (password == null) {
+						throw new IllegalArgumentException("New password cannot be empty!");
+					} else {
+						service.changeTechnicianPassword(username, password);
+					}
+				}
+		
+		
+		
+		
+				
+				
+		
+
 }
