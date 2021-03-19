@@ -15,7 +15,7 @@ public class Appointment
 
   
   @ManyToOne()
-  @JoinColumn(name = "id", referencedColumnName = "id", insertable=false, updatable=false) 
+  @JoinColumn(name = "technician_id", referencedColumnName = "id", insertable=false, updatable=false) 
   public Technician getTechnician() {
 	return technician;
 }
@@ -25,7 +25,7 @@ public void setTechnician(Technician technician) {
 }
 
 @ManyToOne()
-@JoinColumn(name = "id", referencedColumnName = "id", insertable=false, updatable=false) 
+@JoinColumn(name = "services_id", referencedColumnName = "id", insertable=false, updatable=false) 
   public Services getService() {
     return service;
   }
@@ -35,7 +35,7 @@ public void setTechnician(Technician technician) {
   }
 
   @ManyToOne()
-  @JoinColumn(name = "id", referencedColumnName = "id", insertable=false, updatable=false) 
+  @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable=false, updatable=false) 
   public Customer getCustomer() {
     return customer;
   }
@@ -45,7 +45,7 @@ public void setTechnician(Technician technician) {
   }
 
   @ManyToOne()
-  @JoinColumn(name = "id", referencedColumnName = "id", insertable=false, updatable=false) 
+  @JoinColumn(name = "timeslot_id", referencedColumnName = "id", insertable=false, updatable=false) 
   public TimeSlot getTimeslot() {
     return timeslot;
   }
@@ -55,7 +55,7 @@ public void setTechnician(Technician technician) {
   }
 
   @ManyToOne()
-  @JoinColumn(name = "id", referencedColumnName = "id", insertable=false, updatable=false) 
+  @JoinColumn(name = "payment_id", referencedColumnName = "id", insertable=false, updatable=false) 
   public Payment getPayment() {
     return payment;
   }

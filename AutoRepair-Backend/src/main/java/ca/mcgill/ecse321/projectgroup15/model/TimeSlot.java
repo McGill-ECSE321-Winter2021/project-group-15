@@ -21,7 +21,8 @@ public class TimeSlot
   
   
   
-  @ManyToOne
+  @ManyToOne()
+  @JoinColumn(name = "services_id", referencedColumnName = "id", insertable=false, updatable=false) 
 public Services getService() {
 	return service;
 }
