@@ -315,7 +315,7 @@ public class RepairShopRestController {
 		
 		// change timeslot details
 				@PutMapping(value = { "/timeslot/change/{id}", "/timeslot/change/{id}/" })
-				public void changeCustomerPassword(@PathVariable("id") int id, @RequestParam Time endTime, @RequestParam Time startTime, @RequestParam Date date) {
+				public void changeTimeSlotDetails(@PathVariable("id") int id, @RequestParam Time endTime, @RequestParam Time startTime, @RequestParam Date date) {
 					
 						service.updateTimeSlot(startTime, endTime, date, id);
 					
