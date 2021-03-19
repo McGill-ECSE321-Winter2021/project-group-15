@@ -25,54 +25,10 @@ public class Customer extends Person
     return cardNumber;
   }
 
-  public Payment getPayment(int index)
-  {
-    Payment aPayment = payments.get(index);
-    return aPayment;
-  }
+  
 
 
-  public int numberOfPayments()
-  {
-    int number = payments.size();
-    return number;
-  }
-
-  public boolean hasPayments()
-  {
-    boolean has = payments.size() > 0;
-    return has;
-  }
-
-  public int indexOfPayment(Payment aPayment)
-  {
-    int index = payments.indexOf(aPayment);
-    return index;
-  }
-
-  public Appointment getAppointment(int index)
-  {
-    Appointment aAppointment = appointments.get(index);
-    return aAppointment;
-  }
-
-  public int numberOfAppointments()
-  {
-    int number = appointments.size();
-    return number;
-  }
-
-  public boolean hasAppointments()
-  {
-    boolean has = appointments.size() > 0;
-    return has;
-  }
-
-  public int indexOfAppointment(Appointment aAppointment)
-  {
-    int index = appointments.indexOf(aAppointment);
-    return index;
-  }
+  
 
   public void setCardNumber(String cardNumber) {
     this.cardNumber = cardNumber;

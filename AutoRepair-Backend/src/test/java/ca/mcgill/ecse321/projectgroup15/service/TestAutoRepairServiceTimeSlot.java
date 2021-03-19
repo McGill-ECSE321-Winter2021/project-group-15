@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
@@ -43,16 +44,16 @@ public class TestAutoRepairServiceTimeSlot {
 	@InjectMocks
 	private AutoRepairService service;
 	
-	private static final String TIMESLOT_KEY = "TestTimeSlot";
+	private static final int TIMESLOT_KEY = 4;
 	
 	@BeforeEach
 	public void setMockOutput() {
 		
-		lenient().when(timeSlotDao.findTimeSlotByService(anyString())).thenAnswer(
+		lenient().when(timeSlotDao.findTimeSlotById(anyInt())).thenAnswer(
 				(InvocationOnMock invocation) -> {
 					                            if (invocation.getArgument(0).equals(TIMESLOT_KEY)) {
 					                            	TimeSlot ts = new TimeSlot();
-					                            	timeSlot.setId(TIMESLOT_KEY);
+					                            	ts.setId(TIMESLOT_KEY);
 					                            	return ts;
 					                            } else {
 					                            	return null;
@@ -74,9 +75,9 @@ public class TestAutoRepairServiceTimeSlot {
 		
 		int id = 26;
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
-		Time startTime = java.sql.Time.valueOf(LocalTime.of(14, 67));
+		Time startTime = java.sql.Time.valueOf(LocalTime.of(14, 56));
 		Time endTime = java.sql.Time.valueOf(LocalTime.of(17, 57));
-		Technician technician = "sdfsdgfd";
+		Technician technician = new Technician();
 		TimeSlot ts = null;
 		
 		try {
@@ -112,13 +113,13 @@ public class TestAutoRepairServiceTimeSlot {
 		String error = null;
 		
 		try {
-			ts = service.getTimeSlot("dewtd");
+			ts = service.getTimeSlot(0);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
 		
 		assertNull(ts);
-		assertEquals("No timeslot found with this id!",error);
+		assertEquals("No timeSlot found with this Id!",error);
 	}
 	
 
