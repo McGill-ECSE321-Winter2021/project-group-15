@@ -345,7 +345,7 @@ public class TestAutoRepairServiceTechnician {
 		Technician technician = null;
 		String error = null;
 		try {
-			technician = service.changeTechnicianPassword(null, password);
+			technician = service.changeTechnicianPassword(TECHNICIAN_KEY, password);
 		} catch (IllegalArgumentException e) {
 			
 			error = e.getMessage();
