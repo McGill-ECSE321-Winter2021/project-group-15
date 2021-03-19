@@ -102,7 +102,7 @@ public class TestAutoRepairServiceServices {
 		Services services = null;
 		String error = null;
 		try {
-			services = service.getServices(SERVICE_KEY);
+			services = service.getServices("xhsbdj");
 		} 
 		 catch(IllegalArgumentException e) {
 		  error = e.getMessage();
