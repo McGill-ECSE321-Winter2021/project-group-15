@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
@@ -29,6 +30,7 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.projectgroup15.dao.AppointmentRepository;
@@ -43,20 +45,26 @@ public class TestAutoRepairServiceAppointment {
 	@InjectMocks
 	private AutoRepairService service;
 	
-	private static final String APPOINTMENT_KEY = "TestAppointment";
+	private static final int APPOINTMENT_KEY = 8;
 	
 	@BeforeEach
 	public void setMockOutput() {
 		
-		lenient().when(appointmentDao.findPersonByName(anyString())).thenAnswer( (InvocationOnMock invocation) -> {
+		lenient().when(appointmentDao.findApointmentById(anyInt())).thenAnswer( (InvocationOnMock invocation) -> {
 	        if(invocation.getArgument(0).equals(APPOINTMENT_KEY)) {
 	            Appointment appointment = new Appointment();
-	            appointment.setName(APPOINTMENT_KEY);
+	            appointment.setId(APPOINTMENT_KEY);
 	            return appointment;
 	        } else {
 	            return null;
 	        }
 	    });
+		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
+			return invocation.getArgument(0);
+		};
+		
+		lenient().when(appointmentDao.save(any(Appointment.class))).thenAnswer(returnParameterAsAnswer);
+	}
 		
 		@Test
 		public void testGetAppointment() {
@@ -69,7 +77,7 @@ public class TestAutoRepairServiceAppointment {
 			}
 			
 			assertNotNull(appointment);
-			assertEquals(APPOINTMENT_KEY,appointment.getService());
+			assertEquals(APPOINTMENT_KEY,appointment.getId());
 		}
 		
 		@Test
@@ -77,35 +85,37 @@ public class TestAutoRepairServiceAppointment {
 			Appointment appointment = null;
 			String error = null;
 			try {
-				appointment = service.getAppointment(APPOINTMENT_KEY);
+				appointment = service.getAppointment(0);
 			} catch (IllegalArgumentException e) {
-				fail();
+				error = e.getMessage();
 			}
 			
-			assertNotNull(appointment);
-			assertEquals("No oppointment foud with this Id", error);
+			assertNull(appointment);
+			assertEquals("No Appointment found with this Id!", error);
 		}
 		@Test
 		public void testCreateAppointment() {
-			assertEquals(0, service.getAllAppointment().size());
+			assertEquals(0, service.getAllAppointments().size());
 			
-			String service = "sdfses";
-			String customer = "ffsrfv";
-			String technician = "fsdggd";
-			String ts = "srdgsg";
-			String payment = "dsfscv";
+			Services services = new Services();
+			Customer customer = new Customer();
+			Technician technician = new Technician();
+			TimeSlot timeSlot = new TimeSlot();
+			Payment payment = new Payment();
 			String Id = "sdfsd";
 			Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
 			
+			
 			Appointment appointment = null;
 			try {
-				customer = service.createAppointment(customer, technician, ts, payment, Id);
+				//createAppointment(Customer customer, Technician technician, Service service, TimeSlot ts, Payment payment)
+				appointment = service.createAppointment(customer, technician, services, timeSlot, payment);
 			} catch (IllegalArgumentException e) {
 				fail();
 				assertNotNull(appointment);
 				assertEquals(customer,appointment.getCustomer());
 				assertEquals(technician,appointment.getTechnician());
-				assertEquals(ts,appointment.getTimeslot());
+				assertEquals(timeSlot,appointment.getTimeslot());
 				assertEquals(payment,appointment.getPayment());
 				assertEquals(Id,appointment.getId());
 		}	
