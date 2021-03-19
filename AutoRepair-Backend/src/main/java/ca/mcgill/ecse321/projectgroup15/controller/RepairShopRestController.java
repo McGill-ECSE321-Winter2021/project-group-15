@@ -244,7 +244,7 @@ public class RepairShopRestController {
 
 	}
 			//Delete TimeSlot
-			@DeleteMapping(value = { "/services/delete/id}", "/services/delete/{id}/" })
+			@DeleteMapping(value = { "/services/delete/{id}", "/services/delete/{id}/" })
 			public boolean deleteServices(@PathVariable(name = "id") String id) {
 				
 					return service.deleteService(id);
