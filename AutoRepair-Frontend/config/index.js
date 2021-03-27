@@ -3,7 +3,13 @@ var path = require('path')
 
 module.exports = {
   build: {
+      
     env: require('./prod.env'),
+     host: 'projectgroup15-frontend-pg15.herokuapp.com',
+     port: 5432,
+     backendHost: 'projectgroup15-backend-pg15.herokuapp.com',
+     backendPort: 5432,
+     //...
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
@@ -21,9 +27,12 @@ module.exports = {
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report
   },
-  dev: {
+  dev: {      
     env: require('./dev.env'),
-    port: 8080,
+    host: '127.0.0.1',
+    port: 8087,
+    backendHost: '127.0.0.1',
+    backendPort: 8080,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
