@@ -7,28 +7,34 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.sql.Date;
+import java.time.Month;
+import java.time.Year;
 import java.util.*;
 
 @Entity
 public class Customer extends Person
 {
   //Customer Attributes
+  private String cardholderName;
   private String cardNumber;
   private String cvv;
-  private Date expiry;
-
+  private Month expiryMonth;
+  private Year expiryYear;
+  
   //Customer Associations
   private List<Payment> payments;
   private List<Appointment> appointments;
 
+  public String getCardholderName() {
+	  return cardholderName;
+  }
+  
+  public void setCardholderName(String cardholderName) {
+	  this.cardholderName = cardholderName;
+  }
   public String getCardNumber() {
     return cardNumber;
   }
-
-  
-
-
-  
 
   public void setCardNumber(String cardNumber) {
     this.cardNumber = cardNumber;
@@ -42,12 +48,19 @@ public class Customer extends Person
     this.cvv = cvv;
   }
 
-  public Date getExpiry() {
-    return expiry;
+  public Month getExpiryMonth() {
+    return expiryMonth;
   }
 
-  public void setExpiry(Date expiry) {
-    this.expiry = expiry;
+  public void setExpiryMonth(Month expiryMonth) {
+    this.expiryMonth = expiryMonth;
+  }
+  public Year getExpiryYear() {
+	    return expiryYear;
+	  }
+
+  public void setExpiryYear(Year expiryYear) {
+	  this.expiryYear = expiryYear;
   }
 
   @OneToMany(mappedBy = "customer",cascade = {CascadeType.ALL})

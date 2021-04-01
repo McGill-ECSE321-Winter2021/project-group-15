@@ -23,10 +23,6 @@ public class TechnicianDto {
 	public TechnicianDto() {
 	}
 
-	
-	
-
-
 	public String getUsername() {
 		return username;
 	}
