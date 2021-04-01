@@ -14,6 +14,7 @@
       <td>{{ timeSlot.date }}</td>
       <td>{{ timeSlot.startTime }}</td>
       <td>{{ timeSlot.endTime }}</td>
+      
    
       <<td>
         <button>Edit</button>
@@ -34,7 +35,7 @@
       </td>
       <td>
         <button
-          <button>Create</button>
+          <button v-bind:disabled="!newTimeSlot.id" v-on:click="createTimeSlot(newTimeSlot.id,newTimeSlot.date,newTimeSlot.startTime,newTimeSlot.endTime)">Create</button>
       </td>
     
     </tr>

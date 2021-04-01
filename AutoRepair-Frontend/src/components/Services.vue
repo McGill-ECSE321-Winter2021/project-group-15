@@ -36,6 +36,9 @@
       <td>
         <input type="text" v-model="newService.serviceType" placeholder="Service Type">
       </td>
+      <button
+          <button v-bind:disabled="!newService.name" v-on:click="createService(newService.name, newService.id, newService.cost, newService.duration, newService.serviceType)">Create</button>
+      </td>
     </tr>
   </table>
       <span v-if="errorService" style="color:red">Error: {{errorService}} </span>
