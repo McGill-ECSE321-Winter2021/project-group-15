@@ -9,8 +9,8 @@ public class AppointmentDto {
 	private int id;
 //	private TimeSlotDto ts;
 	private static TimeSlotDto ts;
-	private List<ServiceDto> services;
-	private List<TechnicianDto> technicians;
+	private ServiceDto services;
+	private TechnicianDto technicians;
 
 	
 	//First Controller
@@ -19,7 +19,7 @@ public class AppointmentDto {
 	@SuppressWarnings("unchecked") // because the Collection the Services list needs to be empty at the start.
 	
 	//Third Controller
-	public AppointmentDto(int id, TimeSlotDto ts, List<ServiceDto> arrayList, List<TechnicianDto> arrayList2){
+	public AppointmentDto(int id, TimeSlotDto ts, ServiceDto arrayList, TechnicianDto arrayList2){
 		this.id = id;
 		this.ts = ts;
 		this.services = arrayList;
@@ -33,7 +33,7 @@ public class AppointmentDto {
 		return ts;
 	}
 	//Get all the services required for an appointment
-	public List<ServiceDto> getServices(){
+	public ServiceDto getServices(){
 		return services;
 	}
 	
@@ -41,7 +41,7 @@ public class AppointmentDto {
 	//	this.services = services;
 	//}
 	
-	public List<TechnicianDto> getTechnicians() {
+	public TechnicianDto getTechnicians() {
 		return technicians;
 	}
 	

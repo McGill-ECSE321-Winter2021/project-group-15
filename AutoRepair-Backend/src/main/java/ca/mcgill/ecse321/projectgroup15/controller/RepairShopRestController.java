@@ -49,51 +49,31 @@ public class RepairShopRestController {
 	}
 	
 	
-	// Customer //
-
+	// Customer
 	
-	//get all the customers in the database
-		@GetMapping(value = { "/customer", "/customer/" })
-		public List<CustomerDto> getAllCustomer() {
-			return service.getAllCustomers().stream().map(a -> convertToDto(a)).collect(Collectors.toList());
-		}
-		
-		
-		//register as a customer
-		@PostMapping(value = { "/Customerregister", "/Customerregister/" })
-		
-		public CustomerDto createCustomerDto(@RequestBody Customer c) throws IllegalArgumentException {
-			//service.saveCustomer(c);
-			
-			
-			Customer cus = service.createCustomer(c.getEmail(), c.getUsername(), c.getPassword(), c.getLastName(), c.getFirstName(), c.getCardNumber(), c.getCvv(), c.getExpiry());
-			return convertToDto(cus);
-		}
-
-		private CustomerDto convertToDto(Customer a) {
-			if (a == null) {
-				throw new IllegalArgumentException("There is no such app user!");
-			}
-			CustomerDto CustomerDto = new CustomerDto(a.getEmail(), a.getUsername(), a.getPassword(), a.getLastName(), a.getFirstName(), a.getCardNumber(), a.getCvv(), a.getExpiry());
-			return CustomerDto;
-		}
-
+	//Register Page
 	
-		
-	//login as a customer
 	
-	@PostMapping(value = { "/logincustomer" })
-	@ResponseBody
-	public String CustomerLogin(@RequestParam("username") String username, @RequestParam("password") String password) {  
-		try {
-			service.loginAsCustomer(username, password);
-			return "Login Successful!";
-		} catch (IllegalArgumentException e) {
-			return e.getMessage();
-		}
+	//register as a customer
+	@PostMapping(value = { "/Customerregister", "/Customerregister/" })
+	
+	public CustomerDto createCustomerDto(@RequestBody Customer c) throws IllegalArgumentException {
+		//service.saveCustomer(c);
+		
+		
+		Customer cus = service.createCustomer(c.getEmail(), c.getUsername(), c.getPassword(), c.getLastName(), c.getFirstName(), c.getCardNumber(), c.getCvv(), c.getExpiryMonth(), c.getExpiryYear());
+		return convertToDto(cus);
+	}
 
+	private CustomerDto convertToDto(Customer a) {
+		if (a == null) {
+			throw new IllegalArgumentException("There is no such app user!");
+		}
+		CustomerDto CustomerDto = new CustomerDto(a.getEmail(), a.getUsername(), a.getPassword(), a.getLastName(), a.getFirstName(), a.getCardNumber(), a.getCvv(), a.getExpiryMonth(), a.getExpiryYear());
+		return CustomerDto;
 	}
 	
+
 	//Register as a technician
 	@PostMapping(value = { "/technicianregister", "/technicianregister/" })
 	
@@ -112,12 +92,77 @@ public class RepairShopRestController {
 		TechnicianDto technicianDto = new TechnicianDto(t.getTechnicianRole(), t.getEmail(), t.getUsername(), t.getPassword(), t.getLastName(), t.getFirstName());
 		return technicianDto;
 	}
+
+/*	
+
+	//Register as a administrator
+	@PostMapping(value = { "/adminregister", "/adminregister/" })
+	
+	public AdministratorDto createAdministratorDto(@RequestBody Administrator a) throws IllegalArgumentException {
+		//service.saveCustomer(c);
+		
+		
+		Administrator admin = service.createAdministrator(a.getEmail(), a.getUsername(), a.getPassword(), a.getLastName(), a.getFirstName());
+		return convertTechDto(tech);
+	}
+
+	private TechnicianDto convertTechDto(Technician t) {
+		if (t == null) {
+			throw new IllegalArgumentException("There is no such app user!");
+		}
+		TechnicianDto technicianDto = new TechnicianDto(t.getTechnicianRole(), t.getEmail(), t.getUsername(), t.getPassword(), t.getLastName(), t.getFirstName());
+		return technicianDto;
+	}
+	
+	
+	
+	
+	
+	
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// Customer //
+
+	
+	//get all the customers in the database
+		@GetMapping(value = { "/customer", "/customer/" })
+		public List<CustomerDto> getAllCustomer() {
+			return service.getAllCustomers().stream().map(a -> convertToDto(a)).collect(Collectors.toList());
+		}
+		
+	
+	
+		
+	//login as a customer
+	
+	@PostMapping(value = { "/logincustomer/{username}/{password}" })
+	@ResponseBody
+	public String CustomerLogin(@PathVariable("username") String username, @PathVariable("password") String password) {  
+		try {
+			service.loginAsCustomer(username, password);
+			return "Login Successful!";
+		} catch (IllegalArgumentException e) {
+			return e.getMessage();
+		}
+
+	}
+	
+	
 	
 	//login as a Technician
 	
-		@PostMapping(value = { "/logintechnician" })
+		@PostMapping(value = { "/logintechnician/{username}/{password}" })
 		@ResponseBody
-		public String TechnicianLogin(@RequestParam("username") String username, @RequestParam("password") String password) {  
+		public String TechnicianLogin(@PathVariable("username") String username, @PathVariable("password") String password) {  
 			try {
 				service.loginAsTechnician(username, password);
 				return "Login Successful!";
@@ -213,7 +258,7 @@ public class RepairShopRestController {
 		if(a == null) {
 			throw new IllegalArgumentException("There is no such Appointment ");
 		}
-		AppointmentDto aDto = new AppointmentDto(a.getId());
+		AppointmentDto aDto = new AppointmentDto(a.getId(), converttsToDto(a.getTimeslot()), convertToDto(a.getService()), convertTechDto(a.getTechnician()));
 		return aDto;
 		}
 	

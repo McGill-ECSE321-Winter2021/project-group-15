@@ -2,6 +2,8 @@ package ca.mcgill.ecse321.projectgroup15.service;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,18 +41,39 @@ public class AutoRepairService {
 	@Autowired
 	AppointmentRepository appointmentRepository;
 	
+	/**
+	 * @return the loggedInUser
+	 */
+	public static Person getLoggedInUser() {
+		return loggedInUser;
+	}
+
+
+	/**
+	 * @param loggedInUser the loggedInUser to set
+	 */
+	public static void setLoggedInUser(Person loggedInUser) {
+		AutoRepairService.loggedInUser = loggedInUser;
+	}
+
 	@Autowired
 	TimeSlotRepository timeSlotRepository;
 	
 	private static Person loggedInUser = null;
 	
 	
+	/*
+	 * if (this.getAllCustomers().size() == 1) {
+			throw new IllegalArgumentException("Can only have one Admin!");
+		}
+	 */
+	
 	//Register as Customer
 	
 	@Transactional
-	public Customer createCustomer(String email, String username, String password, String lastName, String firstname, String cardNumber, String cvv, Date Expiry) {
-		if (this.getAllCustomers().size() == 1) {
-			throw new IllegalArgumentException("Can only have one Admin!");
+	public Customer createCustomer(String email, String username, String password, String lastName, String firstname, String cardNumber, String cvv, Month expiryMonth, Year expiryYear) {
+		if(getCustomer(username) != null) {
+			throw new IllegalArgumentException("this username was already taken");
 		}
 		if ((username == null || username.trim().length() == 0)
 				&& (password == null || password.trim().length() == 0)) {
@@ -70,7 +93,8 @@ public class AutoRepairService {
 		customer.setFirstName(firstname);
 		customer.setCardNumber(cardNumber);
 		customer.setCvv(cvv);
-		customer.setExpiry(Expiry);
+		customer.setExpiryMonth(expiryMonth);
+		customer.setExpiryYear(expiryYear);
 		customerRepository.save(customer);
 		return customer;
 	}
