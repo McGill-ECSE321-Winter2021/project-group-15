@@ -100,7 +100,7 @@ label.radio:after {
 	width: 0.75em;
 	height: 0.5em;
 	background: transparent;
-	top: 7.5px;
+	top: 5px;
 	left: 4.5px;
 	border: 3px solid #ffffff;
 	border-top: none;
