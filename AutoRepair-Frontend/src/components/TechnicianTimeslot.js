@@ -1,7 +1,7 @@
 import axios from 'axios'
-import AutoRepairService from '@/AutoRepair-Backend/src/main/java/ca/mcgill/ecse321/projectgroup15/service/AutoRepairService'
-import Technician from '@/AutoRepair-Backend/src/main/java/ca/mcgill/ecse321/projectgroup15/model/Technician'
-import TechnicianDto from '@/AutoRepair-Backend/src/main/java/ca/mcgill/ecse321/projectgroup15/dto/TechnicianDto'
+//import AutoRepairService from '@/AutoRepair-Backend/src/main/java/ca/mcgill/ecse321/projectgroup15/service/AutoRepairService'
+//import Technician from '@/AutoRepair-Backend/src/main/java/ca/mcgill/ecse321/projectgroup15/model/Technician'
+//import TechnicianDto from '@/AutoRepair-Backend/src/main/java/ca/mcgill/ecse321/projectgroup15/dto/TechnicianDto'
 var config = require('../../config')
 
 var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port

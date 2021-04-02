@@ -5,7 +5,7 @@ import Hello from '@/components/Hello'
 import FirstComponent from '@/components/FirstComponent'
 import About from '@/components/About'
 import Technicians from '@/components/Technicians'
-import EventRegistration from'@/components/EventRegistration'
+import CreateAccount from'@/components/CreateAccount'
 import Payment from '@/components/Payment'
 //import OrderSummary from '@/components/OrderSummary'
 import Services from '@/components/Services'
@@ -30,9 +30,9 @@ export default new Router({
         component: About
     },
            {
-               path: '/EventRegistration',
-               name: 'EventRegistration',
-               component: EventRegistration
+               path: '/CreateAccount',
+               name: 'CreateAccount',
+               component: CreateAccount
            },
            {
            path: '/Payment',
@@ -78,9 +78,6 @@ export default new Router({
            component: CustomerPaymentInfo
        },
           
-         
-           
-   
 //    {
 //       path: '/',
 //       name: 'Payment',
