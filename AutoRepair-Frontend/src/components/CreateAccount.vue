@@ -7,7 +7,7 @@
     <div class="accounttype">
       <input type="radio" value="Customer" id="radioOne" name="account" checked/>
       <label for="radioOne" class="radio" chec>Customer</label>
-      <input type="radio" value="None" id="radioTwo" name="account" />
+      <input type="radio" value="Technician" id="radioTwo" name="account" />
       <label for="radioTwo" class="radio">Technician</label>
     </div>
   <hr>
@@ -28,17 +28,15 @@
   </form>
   </div>
 </template>
-<script> 
+<script src="./registrationPerson.js"> 
 </script>
 <style>
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, 
-pre, form, fieldset, input, textarea, p, blockquote, th, td { 
+body, div, dl, dt, h1,
+form, fieldset, input, textarea, p, blockquote, th, td { 
   padding:0;
   margin:0;}
 
-fieldset, img {border:0}
-
-ol, ul, li {list-style:none}
+  
 
 :focus {outline:none}
 
@@ -99,8 +97,8 @@ label.radio:after {
 	opacity: 0;
 	content: '';
 	position: absolute;
-	width: 0.5em;
-	height: 0.25em;
+	width: 0.75em;
+	height: 0.5em;
 	background: transparent;
 	top: 7.5px;
 	left: 4.5px;
@@ -144,9 +142,6 @@ input[type=password]{
   margin-bottom: 25px;
 }
 
-
-
-
 .accounttype{
   margin-left: 8px;
   margin-top: 20px;
@@ -167,7 +162,7 @@ a.button {
   border-radius: 4px; 
   background-color: #3a57af; 
   transition: all 0.1s linear 0s; 
-  top: 40px;
+  top: 10px;
   position: relative;
 }
 
