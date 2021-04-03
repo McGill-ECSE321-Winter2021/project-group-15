@@ -497,6 +497,101 @@ public class AutoRepairService {
 			return deleted;
 		}
 	
+		//Administrator
+		
+		@Transactional
+		public Administrator changeAdministratorPassword(String username, String password) {
+			if (username == null) {
+				throw new IllegalArgumentException("Username cannot be empty!");
+			}
+			if (password == null) {
+				throw new IllegalArgumentException("New password cannot be empty!");
+			}
+			List<Administrator> admins = getAdministrators();
+			Administrator foundAdmin = null;
+			for(Administrator admin : admins) {
+				if (admin.getUsername().equals(username)) {
+					foundAdmin = admin;
+					break;
+				
+			
+				}
+				if(foundAdmin == null) {
+					throw new IllegalArgumentException("No Administrator found with username!");
+				}
+			}
+			foundAdmin.setPassword(password);
+			administratorRepository.save(foundAdmin);
+
+			return foundAdmin;
+		}
+		
+		@Transactional
+		public List<Administrator> getAdministrators() {
+			return toList(administratorRepository.findAll());
+		}
+		
+		@Transactional
+		public Administrator loginAsAdministrator(String username, String password) {
+			if (username == null || username.trim().length() == 0) {
+				throw new IllegalArgumentException("Username cannot be empty.");
+			}
+			if (password == null || password.trim().length() == 0) {
+				throw new IllegalArgumentException("Password cannot be empty.");
+			}
+			List<Administrator> admins = getAdministrators();
+			Administrator foundAdmin = null;
+			for(Administrator admin : admins) {
+				if (admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
+					loggedInUser = admin;
+					foundAdmin = admin;
+					break;
+				
+			
+				}
+			}
+			if (foundAdmin == null) {
+				throw new IllegalArgumentException("This adminsitrator account could not be found.");
+			}
+
+			return foundAdmin;
+
+			
+		}
+		
+		@Transactional
+		public Administrator createAdministrator(String email, String username, String password, String firstName, String lastName) {
+			if ((username == null || username.trim().length() == 0)
+					&& (password == null || password.trim().length() == 0)) {
+				throw new IllegalArgumentException("Username and password cannot be empty!");
+			}
+			if (username == null || username.trim().length() == 0) {
+				throw new IllegalArgumentException("Username cannot be empty!");
+			}
+			if (password == null || password.trim().length() == 0) {
+				throw new IllegalArgumentException("Password cannot be empty!");
+			}
+			if (email == null || email.trim().length() == 0) {
+				throw new IllegalArgumentException("Email is required!");
+			}
+			Administrator admin = new Administrator();
+			admin.setEmail(email);
+			admin.setUsername(username);
+			admin.setPassword(password);
+			admin.setFirstName(firstName);
+			admin.setLastName(lastName);
+			administratorRepository.save(admin);
+			
+			return admin;
+			
+		}
+		
+
+
+
+
+
+
 		
 		
 		

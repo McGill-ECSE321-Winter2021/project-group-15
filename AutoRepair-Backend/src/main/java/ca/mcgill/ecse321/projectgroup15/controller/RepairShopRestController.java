@@ -395,7 +395,56 @@ public class RepairShopRestController {
 					}
 				}
 		
-		
+		//login as Administrator
+				
+				@PostMapping(value = { "/loginadministrator/{username}/{password}" })
+				@ResponseBody
+				public String AdministratorLogin(@RequestParam("username") String username, @RequestParam("password") String password) {  
+					try {
+						service.loginAsAdministrator(username, password);
+						return "Login Successful!";
+					} catch (IllegalArgumentException e) {
+						return e.getMessage();
+					}
+
+				}
+				
+				
+		// change Administrator password
+			@PutMapping(value = { "/administratorregister/password/{username}", "/administratorregister/password/{username}/" })
+			public void changeAdministratorPassword(@PathVariable("username") String username, @RequestParam String password) {
+				if (username == null) {
+					throw new IllegalArgumentException("Username cannot be empty!");
+				}
+				if (password == null) {
+					throw new IllegalArgumentException("New password cannot be empty!");
+				} else {
+					service.changeAdministratorPassword(username, password);
+				}
+			}
+			
+			private AdministratorDto convertToDto(Administrator a) {
+				if (a == null) {
+					throw new IllegalArgumentException("There is no such administrator!");
+				}
+				
+				AdministratorDto adminDto = new AdministratorDto(a.getEmail(), a.getUsername(), a.getPassword(), a.getLastName(), a.getFirstName());
+				return adminDto;
+				
+				
+			}
+			
+			//Register as a administrator
+			@PostMapping(value = { "/administratorregister", "/administratorregister/" })
+			
+			public AdministratorDto createAdministratorDto(@RequestBody Administrator a) throws IllegalArgumentException {
+				
+				
+				Administrator admin = service.createAdministrator(a.getEmail(), a.getUsername(), a.getPassword(), a.getLastName(), a.getFirstName());
+				return convertToDto(admin);
+			}
+			
+
 		
 		
 				
