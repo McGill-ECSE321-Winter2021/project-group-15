@@ -14,7 +14,7 @@ public class Services
 
   //Service Associations
   private RepairShop repairShop;
-  private List<Appointment> appointments;
+  private Appointment appointments;
   private List<TimeSlot> timeSlots;
  
   
@@ -78,12 +78,12 @@ public String getName() {
     this.repairShop = repairShop;
   }
 
-  @OneToMany(mappedBy = "service",cascade = {CascadeType.ALL})
-  public List<Appointment> getAppointments() {
+  @OneToOne
+  public Appointment getAppointments() {
     return appointments;
   }
 
-  public void setAppointments(List<Appointment> appointments) {
+  public void setAppointments(Appointment appointments) {
     this.appointments = appointments;
   }
  

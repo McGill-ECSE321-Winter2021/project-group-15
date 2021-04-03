@@ -13,7 +13,7 @@ public class Payment
   //Payment Associations
   private RepairShop repairShop;
   private Customer customer;
-  private List<Appointment> appointments;
+  private Appointment appointments;
   private String id;
 
   public Date getDate() {
@@ -50,12 +50,12 @@ public class Payment
     this.customer = customer;
   }
 
-  @OneToMany(mappedBy = "payment",cascade = {CascadeType.ALL})
-  public List<Appointment> getAppointments() {
+  @OneToOne
+  public Appointment getAppointments() {
     return appointments;
   }
 
-  public void setAppointments(List<Appointment> appointments) {
+  public void setAppointments(Appointment appointments) {
     this.appointments = appointments;
   }
 

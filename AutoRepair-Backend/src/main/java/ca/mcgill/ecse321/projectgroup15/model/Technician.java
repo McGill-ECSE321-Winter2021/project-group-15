@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import java.util.*;
 
@@ -22,7 +23,7 @@ public class Technician extends Person
 
 //Technician Associations
   private List<TimeSlot> timeSlots;
-  private List<Appointment> appointments;
+  private Appointment appointments;
  private List<Services> services;
  
  
@@ -35,12 +36,12 @@ public void setServices(List<Services> services) {
 	this.services = services;
 }
 
-@OneToMany(mappedBy = "technician",cascade = {CascadeType.ALL})
-  public List<Appointment> getAppointments() {
+@OneToOne
+  public Appointment getAppointments() {
 	return appointments;
 }
 
-public void setAppointments(List<Appointment> appointments) {
+public void setAppointments(Appointment appointments) {
 	this.appointments = appointments;
 }
 

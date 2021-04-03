@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import java.sql.Date;
 import java.time.Month;
 import java.time.Year;
@@ -23,7 +25,7 @@ public class Customer extends Person
   
   //Customer Associations
   private List<Payment> payments;
-  private List<Appointment> appointments;
+  private Appointment appointments;
 
   public String getCardholderName() {
 	  return cardholderName;
@@ -72,12 +74,12 @@ public class Customer extends Person
     this.payments = Payments;
   }
 
-  @OneToMany(mappedBy = "customer",cascade = {CascadeType.ALL})
-  public List<Appointment> getAppointments() {
+  @OneToOne
+  public Appointment getAppointments() {
     return appointments;
   }
 
-  public void setAppointments(List<Appointment> appointments) {
+  public void setAppointments(Appointment appointments) {
     this.appointments = appointments;
   }
 }

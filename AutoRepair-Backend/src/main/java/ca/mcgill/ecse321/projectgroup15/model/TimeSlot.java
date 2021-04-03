@@ -19,7 +19,17 @@ public class TimeSlot
   private Technician technician;
   private Services service;
   
+  private Appointment appointments;
   
+  
+  @OneToOne
+  public Appointment getAppointments() {
+	return appointments;
+}
+
+public void setAppointments(Appointment appointments) {
+	this.appointments = appointments;
+}
   
   @ManyToOne()
   @JoinColumn(name = "services_id", referencedColumnName = "id", insertable=false, updatable=false) 
