@@ -23,10 +23,10 @@
       </td>
     </tr>
     </table>
-      <span v-if="errorAppointment" style="color:red">Error: {{errorAppointment}} </span>
+      
 </div>
 </template>
-<script src="./CreateAppointments.js">
+<script src="./BookAppointments.js">
 </script>
 <style>
 #bookappointment {
