@@ -1,7 +1,5 @@
 import axios from 'axios'
-//import AutoRepairService from '@/AutoRepair-Backend/src/main/java/ca/mcgill/ecse321/projectgroup15/service/AutoRepairService'
-//import Technician from '@/AutoRepair-Backend/src/main/java/ca/mcgill/ecse321/projectgroup15/model/Technician'
-//import TechnicianDto from '@/AutoRepair-Backend/src/main/java/ca/mcgill/ecse321/projectgroup15/dto/TechnicianDto'
+
 var config = require('../../config')
 
 var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
@@ -13,7 +11,7 @@ var AXIOS = axios.create({
 })
 
 
-function TimeSlot(id, date, start, end)
+function TimeSlotDto(id, date, start, end)
 {
     this.id = id;
     this.date = date;
@@ -32,11 +30,7 @@ function Services(serviceType,id,name,cost,duration)
     this.duration = duration;
 }
 
-function Appointment(id,service,timeSlot){
-  this.id = id;
-  this.service = service;
-  this.timeSlot = timeSlot;
-}
+
 
 
 
@@ -63,6 +57,8 @@ export default {
           
         },
         
+        
+        
         errorTimeSlot: '',
         services: [],
         newService: {
@@ -80,11 +76,44 @@ export default {
         selectedService: ''
       }
     },
+
+    
+
+      createTimeSlot: async function (id,date,startTime,endTime) {
+      /** 
+        var p = new TimeSlotDto(id, date, startTime, endTime)
+        this.timeSlots.push(p);
+        this.newTimeSlot.id = ''
+        this.newTimeSlot.date = ''
+        this.newTimeSlot.startTime = ''
+        this.newTimeSlot.endTime = ''
+        **/
+        const axiosOptions = {
+          method: "post",
+          baseURL: "http://localhost:8080/",
+          url: '/createtimeslot/',
+          data : {
+            id: id,
+            date: date,
+            startTime: startTime,
+            endTime: endTime
+    
+          }
+        }
+       
+        const response = await axios(axiosOptions);
+        this.timeSlots.push(response.data);
+        
+      },
+
+    
      
-    createTimeSlot: function (id,date,startTime,endTime) {
-      AXIOS.post('/createtimeslot/', new TimeSlot(id,date,startTime,endTime))
+    
+      /** 
+      AXIOS.post('/createtimeslot/', timeSlot)
         .then(response => {
         // JSON responses are automatically parsed.
+          console.log('success');
           this.timeSlots.push(response.data)
           this.errorTimeSlot = ''
           this.newTimeSlot = ''
@@ -95,6 +124,8 @@ export default {
           this.errorTimeSlot = errorMsg
         })
     },
+     **/
+    
     createAppointment: function (id,serviceName,timeSlotId){
       var indexServ = this.services.map(x => x.name).indexOf(serviceName)
       var indexTime = this.timeSlots.map(x => x.id).indexOf(timeSlotId)
@@ -103,7 +134,12 @@ export default {
       this.newAppointment.service = indexServ
       this.newAppointment.timeSlot = indexTime
       this.appointmentsToBook.push(this.newAppointment)
-      AXIOS.post('/appointment/', new Appointment(id,indexServ,indexTime)).then(
+      appointment = {
+        id: id,
+        timeslot: indexTime,
+        service: indexServ ,
+      },
+      AXIOS.post('http://localhost:8080/appointment/', appointment).then(
         response => {
           this.appointments.push(response.data)
           this.errorAppointment = ''
@@ -118,7 +154,7 @@ export default {
         this.errorAppointment = errorMsg
       })
     },
-    created: function () {
+    created: async function () {
       // Test data
      // const id = new PersonDto('John')
      // const p2 = new PersonDto('Jill')
@@ -129,8 +165,9 @@ export default {
    //  const p2 = new ServiceDto('Test2','1233','Hey','200$', '30 minutes', 'Test')
   
       //Sample initial content
-      this.services = [p1, p2]
+      //this.services = [p1, p2]
       // Initializing persons from backend
+    /** 
     AXIOS.get('/services')
     .then(response => {
       // JSON responses are automatically parsed.
@@ -139,12 +176,23 @@ export default {
     .catch(e => {
       this.errorService = e
     }),
+    **/
+   const axiosOptions = {
+    method: "get",
+    baseURL: "http://localhost:8087",
+    url: '/timeSlots/',
+    
+  };
+ 
+  const response = await axios(axiosOptions);
+  this.timeSlots = response.data
+    /**  
     AXIOS.get('/timeslots').then(response => {
       this.timeSlots = response.data
     }).catch(e => {
       this.errorTimeSlot = e
     })
-
+    **/
   },
 
   

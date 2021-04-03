@@ -22,7 +22,7 @@
     </tr>
     <tr>
       <td>
-        <input type="text" v-model="newTimeSlot.id" placeholder="Event Name">
+        <input type="text" v-model="newTimeSlot.id" placeholder="TimeSlot id">
       </td>
       <td>
         <input type="date" v-model="newTimeSlot.date" placeholder="YYYY-MM-DD">

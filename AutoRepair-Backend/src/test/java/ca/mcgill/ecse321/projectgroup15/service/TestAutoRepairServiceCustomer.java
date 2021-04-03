@@ -20,6 +20,7 @@ import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
+import java.time.Year;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -83,9 +84,12 @@ public class TestAutoRepairServiceCustomer {
 		String cardNumber = "nxbdqw";
 		String cvv = "xhvcxh";
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
+		Month month = null;
+		Year year = null;
+		
 		Customer customer = null;
 		try {
-			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,date);
+			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,month,year);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
@@ -109,10 +113,12 @@ public class TestAutoRepairServiceCustomer {
 		String cvv = "xhvcxh";
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
 		String error = null;
+		Month month = null;
+		Year year = null;
 		Customer customer = null;
 		
 		try {
-			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,date);
+			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,month,year);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -134,10 +140,12 @@ public class TestAutoRepairServiceCustomer {
 		String cvv = "xhvcxh";
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
 		String error = null;
+		Month month = null;
+		Year year = null;
 		Customer customer = null;
 		
 		try {
-			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,date);
+			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,month,year);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -158,11 +166,13 @@ public class TestAutoRepairServiceCustomer {
 		String cardNumber = "nxbdqw";
 		String cvv = "xhvcxh";
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
+		Month month = null;
+		Year year = null;
 		String error = null;
 		Customer customer = null;
 		
 		try {
-			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,date);
+			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,month,year);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -182,12 +192,14 @@ public class TestAutoRepairServiceCustomer {
 		String firstName = "zsdqw";
 		String cardNumber = "nxbdqw";
 		String cvv = "xhvcxh";
+		Month month = null;
+		Year year = null;
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
 		String error = null;
 		Customer customer = null;
 		
 		try {
-			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,date);
+			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,month,year);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -206,12 +218,14 @@ public class TestAutoRepairServiceCustomer {
 		String firstName = "zsdqw";
 		String cardNumber = "nxbdqw";
 		String cvv = "xhvcxh";
+		Month month = null;
+		Year year = null;
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
 		String error = null;
 		Customer customer = null;
 		
 		try {
-			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,date);
+			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,month,year);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -231,11 +245,13 @@ public class TestAutoRepairServiceCustomer {
 		String cardNumber = "nxbdqw";
 		String cvv = "xhvcxh";
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
+		Month month = null;
+		Year year = null;
 		String error = null;
 		Customer customer = null;
 		
 		try {
-			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,date);
+			customer = service.createCustomer(email, username, password, lastName, firstName,cardNumber,cvv,month,year);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}

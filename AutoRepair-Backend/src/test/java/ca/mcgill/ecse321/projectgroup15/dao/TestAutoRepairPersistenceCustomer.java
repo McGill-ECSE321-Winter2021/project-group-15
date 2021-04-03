@@ -75,7 +75,7 @@ public class TestAutoRepairPersistenceCustomer {
 		customer.setPassword(password);
 		customer.setCvv(cvv);
 		customer.setEmail(email);
-		customer.setExpiry(date);
+		
 		customer.setRepairShop(auto2);
 		List<Payment> payments = new ArrayList<Payment>();
 		List<Appointment> appointments = new ArrayList<Appointment>();
@@ -96,7 +96,7 @@ public class TestAutoRepairPersistenceCustomer {
 		assertEquals(userId,customer.getId());
 		assertEquals(cvv,customer.getCvv());
 		assertEquals(email,customer.getEmail());
-		assertEquals(date,customer.getExpiry());
+		
 		assertEquals(auto2,customer.getRepairShop());
 		assertEquals(auto2.getId(),customer.getRepairShop().getId());
 		
