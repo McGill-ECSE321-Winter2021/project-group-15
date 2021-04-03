@@ -8,10 +8,13 @@ import Technicians from '@/components/Technicians'
 import CreateAccount from'@/components/CreateAccount'
 import Payment from '@/components/Payment'
 //import OrderSummary from '@/components/OrderSummary'
-import Services from '@/components/Services'
+import Services from '@/components/Services.vue'
 import CustomerDashboard from '@/components/CustomerDashboard'
 import CustomerAppointments from '@/components/CustomerAppointments'
 import CustomerPaymentInfo from '@/components/CustomerPaymentInfo'
+import TechnicianAvailability from '@/components/TechnicianAvailability'
+import BookAppointment from '@/components/BookAppointment'
+import CreateAppointment from '@/components/CreateAppointment'
 
 
 
@@ -77,6 +80,21 @@ export default new Router({
            name: 'CustomerPaymentInfo',
            component: CustomerPaymentInfo
        },
+       {
+         path: '/TechnicianAvailability',
+         name: 'TechnicianAvailability',
+         component: TechnicianAvailability
+       },
+       {
+         path: '/BookAppointment',
+         name: 'BookAppointment',
+         component: BookAppointment
+       },
+       {
+         path: '/CreateAppointment',
+         name: 'CreateAppointment',
+         component: CreateAppointment
+       }
           
 //    {
 //       path: '/',
