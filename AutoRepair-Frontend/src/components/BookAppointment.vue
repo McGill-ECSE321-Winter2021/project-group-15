@@ -1,28 +1,32 @@
 <template>
 <div id="bookappointment">
   <h2>Book an appointment</h2>
-      <table>
-        <tr>
-           <th>Appointment Id</th>
-        </tr>
-        <tr v-for="appointment in appointments" >
-            <td>{{ appointment.id }}</td>
-            <td> 
-              <ul>
-                <li v-for="service in appointment.getServices()">
-                  {{service.name}}
-                </li>
-              </ul>
-            </td>
-            <td>
-               <button>Book Appointment</button>
-            </td>
-        </tr>
-       </table>
+      <h2>My appointments</h2>
+  <table>
+    <tr>
+      <th>Appointment id</th>
+      <th>Technician name</th>
+      <th>Service type</th>
+      <th>Start time</th>
+      <th>End time</th>
+      
+      <!--<th>Edit</th>-->
+    </tr>
+    <tr v-for="appointment in appointmentsToBook">
+      <td>{{ appointment.id }}</td>
+      <td>{{ appointment.technician.lastName }}</td>
+      <td>{{ appointment.service.serviceType }}</td>
+      <td>{{ appointment.timeSlot.startTime }}</td>
+      <td>{{ appointment.timeSlot.endTime }}</td>
+      <td>
+        <button>Book Appointment</button>
+      </td>
+    </tr>
+    </table>
       <span v-if="errorAppointment" style="color:red">Error: {{errorAppointment}} </span>
 </div>
 </template>
-<script src="./BookAppointment.js">
+<script src="./CreateAppointments.js">
 </script>
 <style>
 #bookappointment {

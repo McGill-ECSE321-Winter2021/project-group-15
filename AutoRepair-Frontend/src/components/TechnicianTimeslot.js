@@ -11,27 +11,23 @@ var AXIOS = axios.create({
 })
 
 
-function TimeSlotDto(id, date, start, end)
+
+function TimeSlot(id, date, start, end)
 {
     this.id = id;
     this.date = date;
     this.startTime = start;
     this.endTime = end;
     
+    
 
 }
 
-function Services(serviceType,id,name,cost,duration)
-{
-    this.serviceType = serviceType;
-    this.id = id;
-    this.name = name;
-    this.cost = cost;
-    this.duration = duration;
-}
 
 
 
+ export var timeSlotsToAdd;
+ 
 
 
 
@@ -40,14 +36,8 @@ export default {
     name: 'technicianavailability',
     data () {
       return {
-        appointments: [],
-        newAppointment: {
-          id: '',
-          service: '',
-          timeSlot: ''
-        },
-        appointmentsToBook: [],
-        errorAppointment: '',
+        
+        
         timeSlots: [],
         newTimeSlot: {
           id: '',
@@ -59,36 +49,26 @@ export default {
         
         
         
-        errorTimeSlot: '',
-        services: [],
-        newService: {
-          serviceType: '',
-          id: '',
-          name: '',
-          cost: '',
-          duration: '',
-
-        },
-        errorService: '',
+        errorTimeSlot: ''
         
-        response: [],
-        selectedTimeSlot: '',
-        selectedService: ''
+        
       }
     },
 
     
 
-      createTimeSlot: async function (id,date,startTime,endTime) {
-      /** 
-        var p = new TimeSlotDto(id, date, startTime, endTime)
+      createTimeSlot: function (id,date,startTime,endTime) {
+      
+        var p = new TimeSlot(id, date, startTime, endTime)
         this.timeSlots.push(p);
         this.newTimeSlot.id = ''
         this.newTimeSlot.date = ''
         this.newTimeSlot.startTime = ''
         this.newTimeSlot.endTime = ''
-        **/
-        const axiosOptions = {
+        timeSlotsToAdd = this.timeSlots;
+        
+       /** 
+        const axiosData = {
           method: "post",
           baseURL: "http://localhost:8080/",
           url: '/createtimeslot/',
@@ -96,7 +76,10 @@ export default {
             id: id,
             date: date,
             startTime: startTime,
-            endTime: endTime
+            endTime: endTime,
+            repairShop: '',
+            technician: '',
+            service: ''
     
           }
         }
@@ -105,12 +88,21 @@ export default {
         this.timeSlots.push(response.data);
         
       },
+      **/
+    
+     timeSlot = {
+      id: id,
+      date: date,
+      startTime: startTime,
+      endTime: endTime,
+      repairShop: '',
+      technician: '',
+      service: ''
 
+    },
     
-     
-    
-      /** 
-      AXIOS.post('/createtimeslot/', timeSlot)
+      
+      AXIOS.post('http://localhost:8080/createtimeslot/', timeSlot)
         .then(response => {
         // JSON responses are automatically parsed.
           console.log('success');
@@ -124,8 +116,8 @@ export default {
           this.errorTimeSlot = errorMsg
         })
     },
-     **/
-    
+     
+    /** 
     createAppointment: function (id,serviceName,timeSlotId){
       var indexServ = this.services.map(x => x.name).indexOf(serviceName)
       var indexTime = this.timeSlots.map(x => x.id).indexOf(timeSlotId)
@@ -154,6 +146,7 @@ export default {
         this.errorAppointment = errorMsg
       })
     },
+    **/
     created: async function () {
       // Test data
      // const id = new PersonDto('John')
@@ -166,7 +159,7 @@ export default {
   
       //Sample initial content
       //this.services = [p1, p2]
-      // Initializing persons from backend
+      
     /** 
     AXIOS.get('/services')
     .then(response => {
@@ -196,20 +189,7 @@ export default {
   },
 
   
-  createService: function (name,id,cost,duration,serviceType) {
-    AXIOS.post('/createservice', new Services(name,id,cost,duration,serviceType))
-      .then(response => {
-      // JSON responses are automatically parsed.
-        this.services.push(response.data)
-        this.errorService = ''
-        this.newService = ''
-      })
-      .catch(e => {
-        var errorMsg = e.response.data.message
-        console.log(errorMsg)
-        this.errorTimeSlot = errorMsg
-      })
-  }
+  
 
  
 }

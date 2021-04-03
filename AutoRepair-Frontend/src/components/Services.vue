@@ -1,5 +1,5 @@
 <template>
-<div id="technicianavailability">
+<div id="service">
   <h2>Services</h2>
   <table>
     <tr>
@@ -44,10 +44,10 @@
       <span v-if="errorService" style="color:red">Error: {{errorService}} </span>
 </div>
 </template>
-<script src="./TechnicianTimeslot.js">
+<script src="./CreateServices.js">
 </script>
 <style>
-#technicianavailability {
+#service {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     color: #2c3e50;
     background: #f2ece8;
