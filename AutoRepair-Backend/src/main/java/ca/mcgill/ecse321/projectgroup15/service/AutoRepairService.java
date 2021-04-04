@@ -72,9 +72,7 @@ public class AutoRepairService {
 	
 	@Transactional
 	public Customer createCustomer(String email, String username, String password, String lastName, String firstname, String cardNumber, String cvv, Month expiryMonth, Year expiryYear) {
-		if(getCustomer(username) != null) {
-			throw new IllegalArgumentException("this username was already taken");
-		}
+
 		if ((username == null || username.trim().length() == 0)
 				&& (password == null || password.trim().length() == 0)) {
 			throw new IllegalArgumentException("Customer name and password cannot be empty!");
