@@ -442,13 +442,6 @@ public class RepairShopRestController {
 				
 				Administrator admin = service.createAdministrator(a.getEmail(), a.getUsername(), a.getPassword(), a.getLastName(), a.getFirstName());
 				return convertToDto(admin);
-			}
-			
-
-		
-		
-				
-				
-		
+			}		
 
 }

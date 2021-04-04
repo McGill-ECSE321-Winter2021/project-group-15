@@ -12,9 +12,7 @@
   <a href="#/Technicians">Our Technicians</a>
   <a href="#/Contact">Contact</a>
   <a href="#/About">About</a>
-  <a href="#/Payment">PaymentVue</a>
-  <a href="#/CreateAccount">Create an account</a>
-  <a href="#/CustomerDashboard"><img src="./assets/Login.png" width="60" height="50">Login</a>
+    <a href="#/Login"><img src="./assets/Login.png" width="60" height="50">Login</a>
 
 </div>
     <router-view></router-view>

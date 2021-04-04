@@ -1,10 +1,8 @@
 <template>
   <div id="CustomerAppointments">
 <ul>
-  <li><a href="#home">Request appointment</a></li>
+  <li><a href="#/BookAppointment">Request appointment</a></li>
   <li><a class="active" href="#/CustomerDashboard/ViewAppointments">My Appointments</a></li>
-  <li><a href="#/CustomerDashboard/ViewAppointments">My Bills</a></li>
-  <li><a href="#/CustomerDashboard/ViewPaymentInfos">My Account</a></li>
   <li><a href="#/CustomerDashboard/ViewPaymentInfos">Payment Informations</a></li>
 
 </ul>

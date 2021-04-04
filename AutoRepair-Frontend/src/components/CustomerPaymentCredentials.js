@@ -9,60 +9,87 @@ var AXIOS = axios.create({
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-function CustomerDto(cardholderName, cardNumber,  expiryMonth, expiryYear, CVV)
+//// 1. Create the button
+//var button = document.createElement("button");
+//button.innerHTML = "Add";
+//
+//// 2. Append somewhere
+//var body = document.getElementsByTagName("body")[0];
+//if (url === 'http://localhost:8087/#/Home'){
+//body.appendChild(button);
+//}
+//// 3. Add event handler
+//button.addEventListener ("click", function() {
+//  alert("did something");
+//});
+
+/* Read
+
+https://css-tricks.com/use-button-element/
+*/
+
+function CustomerDto(id, cardholderName, cardNumber,  expiryMonth, expiryYear, CVV)
 {
+        this.id = id;
 		this.cardholderName = cardholderName;
 		this.cardNumber = cardNumber;
 		this.expiryMonth = expiryMonth;
 		this.expiryYear = expiryYear;
 		this.CVV = CVV;
 }
-
-
 export default {
     name: 'CustomerPaymentCredentials',
     data () {
       return {
-        customers: [],
-        newCustomer: {
-         cardholderName: '',
-	cardNumber: '',
-	expiryMonth:'',
-	expiryYear: '',
-	CVV: ''
+        customerCCs: [],
+        newCustomerCC: {
+            id: '',
+            cardholderName: '',
+            cardNumber: '',
+            expiryMonth:'',
+            expiryYear: '',
+            CVV: ''
         },
-	response: []
-
+      errorCustomerCC: '',
+      response: []
     }
 },
-created: function () {
-	//Test Data
-	const c1 = new CustomerDto('Emily Mills','1234-4567-8909-8765','03','2023', '000')
-	const c2 = new CustomerDto('Roger Mills','0000-0000-0000-0000','02','2022', '111')
+    createCustomerCC: function (id, cardholderName, cardNumber,  expiryMonth, expiryYear, CVV) {
+        this.newCustomerCC = new customerCC(id, cardholderName, cardNumber,  expiryMonth, expiryYear, CVV),
+        this.newCustomerCC.id = id,
+        this.newCustomerCC.cardholderName = cardholderName,
+        this.newCustomerCC.cardNumber = cardNumber,
+        this.newCustomerCC.expiryMonth= expiryMonth,
+        this.newCustomerCC.expiryYear = expiryYear,
+        this.newCustomerCC.CVV= CVV,
+        this.customerCCs.push(this.newCustomerCC)
+        customerCC = {
+            id: id,
+            cardholderName: cardholderName,
+            cardNumber: cardNumber,
+            expiryMonth: expiryMonth,
+            expiryYear: expiryYear,
+            CVV: CVV,
+        },
+        AXIOS.post('http://localhost:8087/customerCC/', customerCC).then(
+             response => {
+                  this.customerCCs.push(response.data)
+                  this.errorCustomerCC = ''
+                  this.newCustomerCC = ''
+        }).catch(e => {
+         var errorMsg = e.response.data.message;
+           console.log(errorMsg);
+           this.errorCustomerCC = errorMsg;
+        })
+    },
 
-	//Sample initial content
-	this.customers = [c1,c2]
-},
-methods: {
-    createCustomerCC: function (cardholderName, cardNumber,  expiryMonth, expiryYear, CVV) {
-      // Create a new person and add it to the list of people
-      var p = new CustomerDto(cardholderName, cardNumber,  expiryMonth, expiryYear, CVV)
-      this.customers.push(p)
-      // Reset the name field for new creditcards
-      this.newCustomer.cardholderName = ''
-      this.newCustomer.cardNumber = ''
-      this.newCustomer.expiryMonth= ''
-      this.newCustomer.expiryYear = ''
-      this.newCustomer.CVV= ''
-
-    }, 
-    modifyCustomerCC: function (cardholderName, cardNumber,  expiryMonth, expiryYear, CVV){
- this.newCustomer.cardholderName = ''
-      this.customer.cardNumber = 'ASLK'
-      this.customer.expiryMonth= ''
-      this.customer.expiryYear = ''
-      this.customer.CVV= ''
-
-}
-}
-}
+         created: async function () {
+         const axiosOptions = {
+        method: "get",
+        baseURL: "http://localhost:8087",
+        url: '/customerCCs/',
+        };
+        const response = await axios(axiosOptions);
+       this.customerCCs.push(response.data);
+          }
+ }

@@ -1,14 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import Hello from '@/components/Hello'
-import FirstComponent from '@/components/FirstComponent'
 import About from '@/components/About'
 import Technicians from '@/components/Technicians'
-import CreateAccount from'@/components/CreateAccount'
-import Payment from '@/components/Payment'
-//import OrderSummary from '@/components/OrderSummary'
-import Services from '@/components/Services.vue'
+import Login from '@/components/Login'
+import TechnicianRegister from '@/components/TechnicianRegister'
+import CustomerRegister from '@/components/CustomerRegister'
+import Services from '@/components/Services'
 import CustomerDashboard from '@/components/CustomerDashboard'
 import CustomerAppointments from '@/components/CustomerAppointments'
 import CustomerPaymentInfo from '@/components/CustomerPaymentInfo'
@@ -32,16 +30,7 @@ export default new Router({
         name: 'About',
         component: About
     },
-           {
-               path: '/CreateAccount',
-               name: 'CreateAccount',
-               component: CreateAccount
-           },
-           {
-           path: '/Payment',
-           name: 'Payment',
-           component: Payment
-       },
+   
           
            {
            path: '/Services',
@@ -66,9 +55,39 @@ export default new Router({
 //           },
            
            {
+           path: '/Login',
+           name: 'Login',
+           component: Login
+       },
+           
+           {
+           path: '/TechnicianRegister',
+           name: 'TechnicianRegister',
+           component: TechnicianRegister
+       },
+           
+           {
+           path: '/CustomerRegister',
+           name: 'CustomerRegister',
+           component: CustomerRegister
+       },
+           
+           {
+           path: '/TechnicianAvailability',
+           name: 'TechnicianAvailability',
+           component: TechnicianAvailability
+       },
+           
+           {
            path: '/CustomerDashboard',
            name: 'CustomerDashboard',
            component: CustomerDashboard
+       },
+           
+           {
+           path: '/BookAppointment',
+           name: 'BookAppointment',
+           component: BookAppointment
        },
            {
            path: '/CustomerDashboard/ViewAppointments',
