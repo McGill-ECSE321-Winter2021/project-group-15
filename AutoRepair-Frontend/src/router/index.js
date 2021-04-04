@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import About from '@/components/About'
 import Technicians from '@/components/Technicians'
+import OpeningHours from  '@/components/OpeningHours'
 import Login from '@/components/Login'
 import TechnicianRegister from '@/components/TechnicianRegister'
 import TechnicianLogin from '@/components/TechnicianLogin'
@@ -47,6 +48,11 @@ export default new Router({
            path: '/Technicians',
            name: 'Technicians',
            component: Technicians
+       },
+           {
+           path: '/OpeningHours',
+           name: 'OpeningHours',
+           component: OpeningHours
        },
 //           {
 //           path: '/Payment',
