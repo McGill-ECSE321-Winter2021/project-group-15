@@ -14,11 +14,11 @@ This table contains the team members of this project, their roles and the hours 
 
 | Name | Role | Sprint 1 | Sprint 2 | Sprint 3 | Sprint 4 |
 | ----- | ----- | :-----: | :-----: | :-----: | :-----: |
-| Venkata Satyanarayana | Software developer     |  26   |   25  |     |     |
-| Ege Karadibak | Documentation manager and Software developer |  25   |  25    |      |    |
-| Elie Ruban | Testing and Software developer| 22 |25 | | |
-| Rania Ouassif | Project Manager and Software developer | 25|25 | | |
-| Anandamoyi Saha | Testing lead and Software developer |24 |27 | | |
+| Venkata Satyanarayana | Software developer     |  26   |     |     |     |
+| Ege Karadibak | Documentation manager and Software developer |  25   |      |      |    |
+| Elie Ruban | Testing and Software developer| 22 | | | |
+| Rania Ouassif | Project Manager and Software developer | 25| | | |
+| Anandamoyi Saha | Testing lead and Software developer |24 | | | |
 
 ## Project Report and Meeting Minutes
 
