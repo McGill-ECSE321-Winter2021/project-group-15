@@ -1,3 +1,9 @@
 .gradle/
 
+/.DS_Store
+/.gitignore
+/.project
+/.settings/
+/.travis.yml
 /AutoRepair-Backend/
+/AutoRepair-Frontend/
