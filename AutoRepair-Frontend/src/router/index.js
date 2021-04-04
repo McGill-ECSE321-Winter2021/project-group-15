@@ -5,7 +5,10 @@ import About from '@/components/About'
 import Technicians from '@/components/Technicians'
 import Login from '@/components/Login'
 import TechnicianRegister from '@/components/TechnicianRegister'
+import TechnicianLogin from '@/components/TechnicianLogin'
 import CustomerRegister from '@/components/CustomerRegister'
+import CustomerLogin from '@/components/CustomerLogin'
+
 import Services from '@/components/Services'
 import CustomerDashboard from '@/components/CustomerDashboard'
 import CustomerAppointments from '@/components/CustomerAppointments'
@@ -65,11 +68,22 @@ export default new Router({
            name: 'TechnicianRegister',
            component: TechnicianRegister
        },
+           {
+           path: '/TechnicianLogin',
+           name: 'TechnicianLogin',
+           component: TechnicianLogin
+       },
            
            {
            path: '/CustomerRegister',
            name: 'CustomerRegister',
            component: CustomerRegister
+       },
+           
+           {
+           path: '/CustomerLogin',
+           name: 'CustomerLogin',
+           component: CustomerLogin
        },
            
            {

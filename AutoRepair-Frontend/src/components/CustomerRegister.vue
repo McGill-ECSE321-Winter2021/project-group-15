@@ -1,7 +1,8 @@
 <template>
     <div id="createAccount" class="card">
         <span id="header" class="header">Customer Registration Form</span>
-       <button href="">Already have an account? Click here.</button>
+         <button onclick="window.location.href='http://localhost:8087/#/CustomerLogin';"> Already have an account? Click here.</button>
+
         <span id="title">Create Account:</span>
         <div v-if="showError">
             <div id="alert" class="alert alert-warning" role="alert">{{ errorMsg }}</div>

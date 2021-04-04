@@ -1,28 +1,14 @@
 <template>
     <div id="createAccount" class="card">
-        <span id="header" class="header">Technician Registration Form</span>
-                                <button onclick="window.location.href='http://localhost:8087/#/TechnicianLogin';"> Already have an account? Click here.</button>
+        <span id="header" class="header">Technician Login</span>
+              <button onclick="window.location.href='http://localhost:8087/#/TechnicianRegister';"> Not registred yet? Click here.</button>
 
-        <span id="title">Create Account:</span>
+        <span id="title">Login:</span>
         <div v-if="showError">
             <div id="alert" class="alert alert-warning" role="alert">{{ errorMsg }}</div>
         </div>
         
-                <b-container fluid>
-            <b-form-input
-                class="loginField"
-                type="text"
-                id="email"
-                v-model="email"
-                placeholder="Enter email"
-                :state="emailState"
-                v-on:keyup.enter="createTechnician(email, username, password, lastName, firstName)"
-            ></b-form-input>
-            <b-form-invalid-feedback id="email-live-feedback">
-                Can't be empty
-                            </b-form-invalid-feedback>
-        </b-container>
-        
+          
                 <b-container fluid>
             <b-form-input
                 class="loginField"
@@ -30,9 +16,8 @@
                 id="username"
                 v-model="username"
                 placeholder="username"
-                :state="usernameState"
                 aria-describedby="username-live-feedback"
-                v-on:keyup.enter="createTechnician(email, username, password, lastName, firstName)"
+                v-on:keyup.enter="TechnicianLogin(username, password)"
             ></b-form-input>
             <b-form-invalid-feedback id="username-live-feedback">
                 Can't be empty
@@ -46,56 +31,23 @@
                 type="password"
                 id="password"
                 v-model="password"
-                placeholder="Enter password"
-                :state="passwordState"
+                placeholder="password"
                 aria-describedby="password-live-feedback"
-                v-on:keyup.enter="createTechnician(email, username, password, lastName, firstName)"
+                v-on:keyup.enter="TechnicianLogin(username, password)"
             ></b-form-input>
             <b-form-invalid-feedback id="password-live-feedback">
-                Password must be at least 8 characters
+            
             </b-form-invalid-feedback>
         </b-container>
 
     
-        <b-container fluid>
-            <b-form-input
-                class="loginField"
-                type="lastName"
-                id="lastName"
-                v-model="lastName"
-                placeholder="Last Name"
-                :state="lastNameState"
-                aria-describedby="lastName-live-feedback"
-                v-on:keyup.enter="createTechnician(email, username, password, lastName, firstName)"
-            ></b-form-input>
-            <b-form-invalid-feedback id="lastname-live-feedback">
-                Can't be empty
-            </b-form-invalid-feedback>
-        </b-container>
-        
-        
-                <b-container fluid>
-            <b-form-input
-                class="loginField"
-                type="firstName"
-                id="firstName"
-                v-model="firstName"
-                placeholder="First Name"
-                :state="firstNameState"
-                aria-describedby="firstname-live-feedback"
-                v-on:keyup.enter="createTechnician(email, username, password, lastName, firstName)"
-
-            ></b-form-input>
-            <b-form-invalid-feedback id="firstName-live-feedback">
-                Can't be empty
-            </b-form-invalid-feedback>
-        </b-container>
+       
         
             <button
                 type="button"
-                v-on:click="createTechnician(email, username, password, lastName, firstName)"
+                v-on:click="TechnicianLogin(username, password)"
                 class="btn btn-primary btn-lg loginField button"
-            >Create an Account</button>
+            >Login</button>
         </b-container>
     </div>
 </template>
@@ -123,16 +75,7 @@ var AXIOS = axios.create({
             return this.username.length > 0 ? true : false
             },
             
-            passwordState() {
-            return this.password.length > 7 ? true : false
-            },
-            lastNameState() {
-            return this.lastName.length > 0 ? true : false
-            },
-            
-            firstNameState() {
-                return this.firstName.length > 0 ? true : false
-            },
+           
            
             },
         data(){
@@ -143,9 +86,6 @@ var AXIOS = axios.create({
                 errorMsg: "",
                 showError: false,
                 password: "",
-                firstName: "",
-                lastName: "",
-                email: "",
                 username: ""
             };
         },
@@ -170,10 +110,9 @@ var AXIOS = axios.create({
             },
 
             
-                createTechnician: function(email, username, password, firstName, lastName) {
+                TechnicianLogin: function( username, password) {
                 this.errorMsg = "";
                 this.showError = false;
-                if(this.password !== ""){
                     AXIOS.post(`/logintechnician/` + username + `/` + password + `/`)
                     .then(response =>{
                     AXIOS.post(`/logintechnician/` + username + `/` + password + `/`)
@@ -190,7 +129,7 @@ var AXIOS = axios.create({
                         this.errorMsg = "username is already in use";
                         this.showError = true;
                     });
-                }
+                
             }
         }
     }
