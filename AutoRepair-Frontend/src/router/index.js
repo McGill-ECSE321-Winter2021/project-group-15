@@ -8,6 +8,8 @@ import TechnicianRegister from '@/components/TechnicianRegister'
 import TechnicianLogin from '@/components/TechnicianLogin'
 import CustomerRegister from '@/components/CustomerRegister'
 import CustomerLogin from '@/components/CustomerLogin'
+import AdministratorRegister from '@/components/AdministratorRegister'
+import AdministratorLogin from '@/components/AdministratorLogin'
 
 import Services from '@/components/Services'
 import CustomerDashboard from '@/components/CustomerDashboard'
@@ -84,6 +86,17 @@ export default new Router({
            path: '/CustomerLogin',
            name: 'CustomerLogin',
            component: CustomerLogin
+       },
+           
+           {
+           path: '/AdministratorRegister',
+           name: 'AdministratorRegister',
+           component: AdministratorRegister
+       },
+           {
+           path: '/AdministratorLogin',
+           name: 'AdministratorLogin',
+           component: AdministratorLogin
        },
            
            {

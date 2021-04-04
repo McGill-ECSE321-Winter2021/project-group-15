@@ -15,6 +15,10 @@ Customer
         <button class="button" onclick="window.location.href='http://localhost:8087/#/TechnicianRegister';">
 Technician
     </button>
+
+ <button class="button" onclick="window.location.href='http://localhost:8087/#/AdministratorRegister';">
+Administrator
+    </button>
     
     
 </div>

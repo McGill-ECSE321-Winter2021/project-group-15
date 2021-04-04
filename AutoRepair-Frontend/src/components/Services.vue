@@ -1,5 +1,10 @@
 <template>
 <div id="service">
+<ul>
+  <li><a class="active" href="#/Services">Create services</a></li>
+  <li><a href="#/CreateAppointment">Create appointments</a></li>
+
+</ul>
   <h2>Services</h2>
   <table>
     <tr>
@@ -55,9 +60,46 @@
   table {
   border: 1px solid #ccc;
   border-collapse: collapse;
-  margin: 0;
   padding: 0;
   width: 100%;
   table-layout: fixed;
+ margin-left: 15%;
+  width: 85%;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 15%;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  font-family: "Arial";
+}
+
+li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+li a.active {
+  background-color: #262626;
+  color: white;
+  text-decoration: bold;
+}
+
+li a:hover:not(.active) {
+  background-color:#c34230;
+  color: white;
+}
+
+
+th, td {
+  text-align: center;
+  padding: 16px;
 }
 </style>
