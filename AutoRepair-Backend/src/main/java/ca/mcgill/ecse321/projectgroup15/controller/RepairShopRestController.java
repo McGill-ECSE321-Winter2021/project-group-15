@@ -314,15 +314,13 @@ public class RepairShopRestController {
 	
 	//Create TimeSlot
 	
-	@PostMapping(value = { "/createtimeslot/{id}/{date}/{startTime}/{endTime}/{username}", "/createtimeslot/{id}/{date}/{startTime}/{endTime}/{username}/" })
+	@PostMapping(value = { "/createtimeslot", "/createtimeslot/" })
 	
-	public TimeSlotDto createTimeSlotDto(@PathVariable("id") int id, @PathVariable("date")  String date, @PathVariable("startTime") String startTime, @PathVariable("endTime") String endTime, @PathVariable("username") String username) throws IllegalArgumentException {
+	public TimeSlotDto createTimeSlotDto(@RequestBody TimeSlot ts) throws IllegalArgumentException {
 		
-		Technician t = service.getTechnician(username);
-		Time startTimeA = Time.valueOf(startTime);
-		Time endTimeA = Time.valueOf(endTime);
-		Date dateA = Date.valueOf(date);
-		TimeSlot ts1 = service.createTimeSlot(id,dateA, startTimeA, endTimeA, t);
+		
+		
+		TimeSlot ts1 = service.createTimeSlot(ts.getId(),ts.getDate(), ts.getStartTime(), ts.getEndTime(), ts.getTechnician());
 		return converttsToDto(ts1);
 	}
 

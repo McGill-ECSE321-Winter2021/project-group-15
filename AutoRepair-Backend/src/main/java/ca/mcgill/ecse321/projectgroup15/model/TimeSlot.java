@@ -5,17 +5,12 @@ import java.sql.Time;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 @Entity
 public class TimeSlot
 {
   //TimeSlot Attributes
-	@JsonFormat(pattern="yyyy-MM-dd")	
   private Date date;
-	@JsonFormat(pattern="HH:mm")
   private Time startTime;
-	@JsonFormat(pattern="HH:mm")
   private Time endTime;
   private int id;
 

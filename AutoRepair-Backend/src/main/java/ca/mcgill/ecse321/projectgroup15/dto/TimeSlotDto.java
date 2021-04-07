@@ -3,15 +3,10 @@ package ca.mcgill.ecse321.projectgroup15.dto;
 import java.sql.Date;
 import java.sql.Time;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class TimeSlotDto {
 	private int id;
-	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date date;
-	@JsonFormat(pattern="HH:mm")
 	private Time startTime;
-	@JsonFormat(pattern="HH:mm")
 	private Time endTime;
 
 	public TimeSlotDto() {	
