@@ -201,18 +201,18 @@ var AXIOS = axios.create({
             },
             
            cardNumberState() {
-                return this.cardNumber.length > 0 ? true : false
+                return this.cardNumber.length == 16 ? true : false
             },
             
                        cvvState() {
-                return this.CVV.length > 0 ? true : false
+                return  this.CVV.length == 3 ? true : false
             },
             
                 expiryMonthState() {
-                return this.expiryMonth.length > 0 ? true : false
+                return this.expiryMonth.length == 2 ? true : false
             },
                expiryYearState() {
-                return this.expiryYear.length > 0 ? true : false
+                return (this.expiryYear.length == 4)  ?  true : false
             },
             
            
