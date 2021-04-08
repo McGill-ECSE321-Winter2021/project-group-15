@@ -13,7 +13,7 @@ import CustomerLogin from '@/components/CustomerLogin'
 import AdministratorRegister from '@/components/AdministratorRegister'
 import AdministratorLogin from '@/components/AdministratorLogin'
 
-import Services from '@/components/Services'
+import Services from '@/components/Services.vue'
 import CustomerDashboard from '@/components/CustomerDashboard'
 import CustomerAppointments from '@/components/CustomerAppointments'
 import CustomerPaymentInfo from '@/components/CustomerPaymentInfo'
