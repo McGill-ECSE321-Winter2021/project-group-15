@@ -19,34 +19,35 @@ var AXIOS = axios.create({
 })
 
 
-function AppointmentDto(id, ts, technician, service){
-	this.id = id;
-	this.ts = ts;
-	this.technician = technician;
-	this.service = service;
-}
+function ServiceDto(name, cost, duration){
 
+		this.name = name;
+		this.cost  = cost;
+		this.duration = duration;
+}
 export default {
-name: 'viewAppointments',
+	name: 'Services',
 created: function () {
    //Test Data
+   const t1 = new ServiceDto('Wheel Replacement','150$','3')
+   const t2 = new ServiceDto('Diagnostic','100$','2')
+   const t3 = new ServiceDto('Standard Oil Change','29.99$','1')
 
-   const a1 = new AppointmentDto('1', '12/04/2021 9:00-10:00' , 'John' , 'Repair')
-   const a2 = new AppointmentDto('2', '14/04/2021 13:00-16:00' , 'Brandon', 'Diagnostic')
+
 
    //Sample initial content
-	this.appointments = [a1,a2]
+   this.services = [t1,t2,t3]
 },
  data () {
       return {
-	appointments: [],
-	 newAppointment: {
-		id:'',
-        		ts: '',
-		technician: '',
-		service: ''
+        Services: [],
+	 newService: {
+		name:'',
+        		cost: '',
+		duration: ''
+	
+   
       	}
 }
 }
 }
-

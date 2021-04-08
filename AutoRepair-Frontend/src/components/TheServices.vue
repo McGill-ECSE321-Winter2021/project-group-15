@@ -1,32 +1,30 @@
 <template>
-  <div id="Technicians">
+  <div id="OurServices">
 <div class="title">
 
-<h2>Technicians</h2>
-    <img src="../assets/TechnicianLogoGrey.png" width="15%" height="5%">
+<h2>Our Services</h2>
+    <img src="../assets/Services.png" width="50%" height="5%">
 </div>
  <table>
     <tr>
-      <th>Role</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
+      <th>Service</th>
+      <th>Cost</th>
+      <th>Duration - hours</th>
     </tr>
-    <tr v-for="technician in technicians">
-      <td>{{ technician.technicianRole }}</td>
-      <td>{{ technician.firstName }}</td>
-      <td>{{ technician.lastName }}</td>
-      <td>{{ technician.email }}</td>
+    <tr v-for="service in services">
+      <td>{{ service.name }}</td>
+      <td>{{ service.cost }}</td>
+      <td>{{ service.duration }}</td>
     </tr>
  
   </table>
 </div>
 </div>
 </template>
-<script src="./ourtechnicians">
+<script src="./ourservices.js">
 </script>
 <style>
-#Technicians {
+#OurServices {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     color: #2c3e50;
     background: white;

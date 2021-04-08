@@ -257,25 +257,10 @@ var AXIOS = axios.create({
                 createCustomer: function(email, username, password, firstName, lastName, cardNumber, CVV, expiryMonth, expiryYear) {
                 this.errorMsg = "";
                 this.showError = false;
-                if(this.password !== ""){
-                    AXIOS.post(`/logincustomer/` + username + `/` + password + `/`)
-                    .then(response =>{
-                    AXIOS.post(`/logincustomer/` + username + `/` + password + `/`)
-                            .then (response => {
-                                this.goToCustomerDashboard();
-                            })
-                            .catch(e => {
-                                console.log(e.message);
-                                this.errorMsg = "Account does not exist";
-                                this.showError = true;
-                            });
-                    })
-                    .catch( e => {
-                        this.errorMsg = "username is already in use";
-                        this.showError = true;
-                    });
-                }
-            }
+               this.goToCustomerDashboard();
+                           
+                
+          }  
         }
     }
 </script>
