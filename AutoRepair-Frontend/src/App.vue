@@ -2,16 +2,13 @@
   <div id="app">
 <div class="topInfos">
     <img src="./assets/logo.png" width="15%" height="5%">
-
-<h2> <i> Auto Repair Shop </i></h2>
   <p> Customer Support 514-123-4567 </p>
-
 <hr class="rounded">
 <hr class="rounded">
 </div>
 <div class="topnav">
   <a href="#/Home"><i class="fa fa-fw fa-search"></i>Home</a>
-  <a href="#/TheServices">Services</a>
+  <a href="#/Services">Services</a>
   <a href="#/Technicians">Our Technicians</a>
   <a href="#/About">About</a>
   <a href="#/OpeningHours">Opening Hours</a>
@@ -77,7 +74,7 @@ padding: 2px 2px;
   background-color: black;
   overflow: hidden;
   color: white;
-  text-align: center;
+  text-align: left;
   padding: 2px 2px;
   font-size: 12px;
   float: center;
@@ -92,11 +89,6 @@ hr.rounded {
   margin-top: 0px;
   margin-bottom: 2px;
 
-}
-
-div.centered{
-margin-top: 0px;
-text-align: center;
 }
 
 

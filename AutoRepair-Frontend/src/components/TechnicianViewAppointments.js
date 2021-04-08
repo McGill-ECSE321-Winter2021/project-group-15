@@ -24,8 +24,8 @@ name: 'TechnicianAppointments',
 created: function () {
    //Test Data
 
-   const a1 = new AppointmentDto('1', '12/04/2021 9:00-10:00' , 'Mark' , 'Repair')
-   const a2 = new AppointmentDto('2', '14/04/2021 13:00-16:00' , 'James', 'Diagnostic')
+   const a1 = new AppointmentDto('1', 'ts1' , 'Mark' , 'Repair')
+   const a2 = new AppointmentDto('2', 'ts2' , 'James', 'Diagnostic')
 
    //Sample initial content
 	this.appointments = [a1,a2]
