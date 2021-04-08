@@ -31,11 +31,7 @@ name: 'viewAppointments',
 created: function () {
    //Test Data
 
-   const a1 = new AppointmentDto('1', '12/04/2021 9:00-10:00' , 'John' , 'Repair')
-   const a2 = new AppointmentDto('2', '14/04/2021 13:00-16:00' , 'Brandon', 'Diagnostic')
-
-   //Sample initial content
-	this.appointments = [a1,a2]
+   
 },
  data () {
       return {
