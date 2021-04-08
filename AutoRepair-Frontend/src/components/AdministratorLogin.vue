@@ -104,18 +104,31 @@ var AXIOS = axios.create({
             },
             goToAdministratorDashboard: function(){
                 Router.push({
-                    path: "/AdministratorRegister",
+                    path: "/Services",
                     name: "Services"
                 });
             },
 
             
-                AdministratorLogin: function(username, password) {
+                AdministratorLogin: function( username, password) {
                 this.errorMsg = "";
-                             this.showError = false;
-
+                this.showError = false;
+                    AXIOS.post(`/loginadministrator/` + username + `/` + password + `/`)
+                    .then(response =>{
+                    AXIOS.post(`/loginadministrator/` + username + `/` + password + `/`)
+                            .then (response => {
                                 this.goToAdministratorDashboard();
-                    
+                            })
+                            .catch(e => {
+                                console.log(e.message);
+                                this.errorMsg = "Account does not exist";
+                                this.showError = true;
+                            });
+                    })
+                    .catch( e => {
+                        this.errorMsg = "username is already in use";
+                        this.showError = true;
+                    });
                 
             }
         }

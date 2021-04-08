@@ -6,7 +6,6 @@ import Technicians from '@/components/Technicians'
 import OpeningHours from  '@/components/OpeningHours'
 import Login from '@/components/Login'
 import TechnicianRegister from '@/components/TechnicianRegister'
-import TheServices from '@/components/TheServices'
 import TechnicianLogin from '@/components/TechnicianLogin'
 import CustomerRegister from '@/components/CustomerRegister'
 import CustomerLogin from '@/components/CustomerLogin'
@@ -18,7 +17,6 @@ import CustomerDashboard from '@/components/CustomerDashboard'
 import CustomerAppointments from '@/components/CustomerAppointments'
 import CustomerPaymentInfo from '@/components/CustomerPaymentInfo'
 import TechnicianAvailability from '@/components/TechnicianAvailability'
-import TechnicianAppointments from'@/components/TechnicianAppointments'
 import BookAppointment from '@/components/BookAppointment'
 import CreateAppointment from '@/components/CreateAppointment'
 
@@ -55,12 +53,6 @@ export default new Router({
            path: '/OpeningHours',
            name: 'OpeningHours',
            component: OpeningHours
-       },
-           
-           {
-           path: '/TheServices',
-           name: 'TheServices',
-           component: TheServices
        },
 //           {
 //           path: '/Payment',
@@ -145,12 +137,6 @@ export default new Router({
          name: 'TechnicianAvailability',
          component: TechnicianAvailability
        },
-           
-           {
-             path: '/TechnicianAppointments',
-             name: 'TechniciansAppointments',
-             component: TechnicianAppointments
-           },
        {
          path: '/BookAppointment',
          name: 'BookAppointment',
