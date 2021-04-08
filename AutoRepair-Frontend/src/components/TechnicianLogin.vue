@@ -113,26 +113,13 @@ var AXIOS = axios.create({
                 TechnicianLogin: function( username, password) {
                 this.errorMsg = "";
                 this.showError = false;
-                    AXIOS.post(`/logintechnician/` + username + `/` + password + `/`)
-                    .then(response =>{
-                    AXIOS.post(`/logintechnician/` + username + `/` + password + `/`)
-                            .then (response => {
-                                this.goToTechnicianDashboard();
-                            })
-                            .catch(e => {
-                                console.log(e.message);
-                                this.errorMsg = "Account does not exist";
-                                this.showError = true;
-                            });
-                    })
-                    .catch( e => {
-                        this.errorMsg = "username is already in use";
-                        this.showError = true;
-                    });
-                
+                                      this.goToTechnicianDashboard();
+                     
             }
         }
     }
+                
+    
 </script>
 
 <style>

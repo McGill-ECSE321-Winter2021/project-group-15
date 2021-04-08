@@ -162,35 +162,21 @@ var AXIOS = axios.create({
                     name: "Home"
                 });
             },
-            goToAdministratorDashboard: function(){
+               goToAdministratorDashboard: function(){
                 Router.push({
-                    path: "/Services",
-                    name: "Sercices"
-                    
-});
+                    path: "/AdministratorRegister",
+                    name: "Services"
+                });
             },
 
                 createAdministrator: function(email, username, password, firstName, lastName) {
                 this.errorMsg = "";
                 this.showError = false;
-                if(this.password !== ""){
-                    AXIOS.post(`/loginadministrator/` + username + `/` + password + `/`)
-                    .then(response =>{
-                    AXIOS.post(`/loginadministrator/` + username + `/` + password + `/`)
-                            .then (response => {
+        
+             
                                 this.goToAdministratorDashboard();
-                            })
-                            .catch(e => {
-                                console.log(e.message);
-                                this.errorMsg = "Account does not exist";
-                                this.showError = true;
-                            });
-                    })
-                    .catch( e => {
-                        this.errorMsg = "username is already in use";
-                        this.showError = true;
-                    });
-                }
+                    
+                
             }
         }
     }
