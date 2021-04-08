@@ -4,7 +4,6 @@
   <li><a href="#/BookAppointment">Request appointment</a></li>
   <li><a class="active" href="#/CustomerDashboard/ViewAppointments">My Appointments</a></li>
   <li><a href="#/CustomerDashboard/ViewPaymentInfos">Payment Informations</a></li>
-  <li><a href="#/Home">Logout</a></li>
 
 </ul>
 <h2>Your Appointments</h2>

@@ -3,10 +3,8 @@
 
 <ul>
   <li><a class="active" href="#/TechnicianAvailability">Add Availability</a></li>
-  <li><a href="#/TechnicianAppointments">My Appointments</a></li>
+  <li><a href="#">My Appointments</a></li>
   <li><a href="#">My Account</a></li>
-  <li><a href="#/Home">Logout</a></li>
-
 
 </ul>
   <h2>Availabilities</h2>

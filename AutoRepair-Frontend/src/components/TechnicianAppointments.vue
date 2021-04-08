@@ -1,13 +1,6 @@
 <template>
   <div id="TechnicianAppointments">
-<ul>
-  <li><a  href="#/TechnicianAvailability">Add Availability</a></li>
-  <li><a class="active" href="#/TechnicianAppointments">My Appointments</a></li>
-  <li><a href="#">My Account</a></li>
-  <li><a href="#/Home">Logout</a></li>
 
-
-</ul>
 <h2>Your Appointments</h2>
 <table>
   <tr>
