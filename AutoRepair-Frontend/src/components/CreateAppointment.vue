@@ -3,7 +3,6 @@
 <ul>
   <li><a href="#/Services">Create services</a></li>
   <li><a class="active" href="#/CreateAppointment">Create appointments</a></li>
-  <li><a href="#/Home">Logout</a></li>
 
 </ul>
   <h2>Create Appointments</h2>
