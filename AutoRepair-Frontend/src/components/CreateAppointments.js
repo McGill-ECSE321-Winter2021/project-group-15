@@ -1,5 +1,7 @@
 import axios from 'axios'
-
+import timeSlotsToAdd from './TechnicianTimeslot.js'
+import servicesToAdd from './Services.js'
+import Technicians from './ourtechnicians.js'
 
 var config = require('../../config')
 
@@ -10,8 +12,6 @@ var AXIOS = axios.create({
   baseURL: backendUrl,
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
-
-
 
 export default {
     name: 'createappointment',
@@ -26,11 +26,10 @@ export default {
         },
         appointmentsToBook: [],
         errorAppointment: '',
-        timeSlots: '',
+        timeSlots: timeSlotsToAdd,
         
         
-        services: '',
-        technicians: '',
+        services: servicesToAdd,
         
 
        // technicians: Technicians.technicians,
@@ -38,43 +37,21 @@ export default {
         
         response: [],
         selectedTimeSlot: '',
-        selectedService: '',
-        selectedTechnician: '',
+        selectedService: ''
         }
     },
-
-    
-    
-    createAppointment: function (id,serviceName,timeSlotId,technicianLastName){
-
-      AXIOS.get('/services')
-      .then(response => {
-        // JSON responses are automatically parsed.
-        this.services = response.data
-      })
-      .catch(e => {
-        this.errorService = e
-      })
-
-      AXIOS.get('/timeslots').then(response => {
-        this.timeSlots = response.data
-      }).catch(e => {
-        this.errorTimeSlot = e
-      })
+    createAppointment: function (id,serviceName,timeSlotId){
         var indexServ = this.services.map(x => x.name).indexOf(serviceName)
         var indexTime = this.timeSlots.map(x => x.id).indexOf(timeSlotId)
-        /** 
         this.newAppointment = new Appointment(id,indexServ,indexTime)
         this.newAppointment.id = id;
         this.newAppointment.service = indexServ
         this.newAppointment.timeSlot = indexTime
         this.appointmentsToBook.push(this.newAppointment)
-        **/
         appointment = {
           id: id,
           timeslot: indexTime,
           service: indexServ ,
-          technician: ''
         },
         AXIOS.post('http://localhost:8080/appointment/', appointment).then(
           response => {
