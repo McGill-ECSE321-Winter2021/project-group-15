@@ -11,6 +11,7 @@
       <th>First Name</th>
       <th>Last Name</th>
       <th>Email</th>
+      <!--<th>Edit</th>-->
     </tr>
     <tr v-for="technician in technicians">
       <td>{{ technician.technicianRole }}</td>
