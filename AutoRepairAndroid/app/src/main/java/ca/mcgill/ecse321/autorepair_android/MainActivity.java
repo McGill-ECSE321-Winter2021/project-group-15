@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button bookAppointment;
     Button viewAppointment;
-    Button login;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +71,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bookAppointment.setOnClickListener(this);
         viewAppointment = (Button)findViewById(R.id.button4);
         viewAppointment.setOnClickListener(this);
-        login = (Button)findViewById(R.id.button6);
+        //login = (Button)findViewById(R.id.button6);
         //login.setOnClickListener(this);
+       // back = (Button)findViewById(R.id.button2);
+        //back.setOnClickListener(this);
 
-       // setContentView(R.layout.activity_register);
+
+          //  setContentView(R.layout.activity_login);
+
+        setContentView(R.layout.activity_register);
+        //setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_bookappointment);
+        //setContentView(R.layout.activity_selectservice);
+        //setContentView(R.layout.activity_selecttimeslot);
+        //setContentView(R.layout.activity_payment);
+        //login.setOnClickListener(this);
+       // setContentView(R.layout.activity_viewappointment);
     }
 
 
@@ -90,15 +102,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Toast.makeText(this, "Button 2 clicked", Toast.LENGTH_SHORT).show();
                 setContentView(R.layout.activity_login);
                 break;
-            /*case R.id.button6:
-                //Toast.makeText(this, "login", Toast.LENGTH_SHORT).show();
-                setContentView(R.layout.activity_login);
-                break;
-            default:
-                setContentView(R.layout.activity_login);
-                break;*/
+
         }
-        //setContentView(R.layout.activity_selectservice);
+
+
     }
 
 
