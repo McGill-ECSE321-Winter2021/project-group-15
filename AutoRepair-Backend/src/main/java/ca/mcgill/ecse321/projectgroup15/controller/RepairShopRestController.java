@@ -55,6 +55,12 @@ public class RepairShopRestController {
 	
 	
 	//register as a customer
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	@PostMapping(value = { "/Customerregister", "/Customerregister/" })
 	
 	public CustomerDto createCustomerDto(@RequestBody Customer c) throws IllegalArgumentException {
@@ -64,7 +70,11 @@ public class RepairShopRestController {
 		Customer cus = service.createCustomer(c.getEmail(), c.getUsername(), c.getPassword(), c.getLastName(), c.getFirstName(), c.getCardNumber(), c.getCvv(), c.getExpiryMonth(), c.getExpiryYear());
 		return convertToDto(cus);
 	}
-
+	/**
+	 * 
+	 * @param a
+	 * @return
+	 */
 	private CustomerDto convertToDto(Customer a) {
 		if (a == null) {
 			throw new IllegalArgumentException("There is no such app user!");
@@ -75,6 +85,12 @@ public class RepairShopRestController {
 	
 
 	//Register as a technician
+	/**
+	 * 
+	 * @param t
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	@PostMapping(value = { "/technicianregister", "/technicianregister/" })
 	
 	public TechnicianDto createTechnicianDto(@RequestBody Technician t) throws IllegalArgumentException {
@@ -84,7 +100,11 @@ public class RepairShopRestController {
 		Technician tech = service.createTechnician(t.getEmail(), t.getUsername(), t.getPassword(), t.getLastName(), t.getFirstName(), t.getTechnicianRole());
 		return convertTechDto(tech);
 	}
-
+	/**
+	 * 
+	 * @param t
+	 * @return
+	 */
 	private TechnicianDto convertTechDto(Technician t) {
 		if (t == null) {
 			throw new IllegalArgumentException("There is no such app user!");
@@ -134,6 +154,10 @@ public class RepairShopRestController {
 
 	
 	//get all the customers in the database
+	/**
+	 * 
+	 * @return
+	 */
 		@GetMapping(value = { "/customer", "/customer/" })
 		public List<CustomerDto> getAllCustomer() {
 			return service.getAllCustomers().stream().map(a -> convertToDto(a)).collect(Collectors.toList());
@@ -143,7 +167,12 @@ public class RepairShopRestController {
 	
 		
 	//login as a customer
-	
+		/**
+		 * 
+		 * @param username
+		 * @param password
+		 * @return
+		 */
 	@PostMapping(value = { "/logincustomer/{username}/{password}" })
 	@ResponseBody
 	public String CustomerLogin(@PathVariable("username") String username, @PathVariable("password") String password) {  
@@ -159,7 +188,12 @@ public class RepairShopRestController {
 	
 	
 	//login as a Technician
-	
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 		@PostMapping(value = { "/logintechnician/{username}/{password}" })
 		@ResponseBody
 		public String TechnicianLogin(@PathVariable("username") String username, @PathVariable("password") String password) {  
@@ -174,6 +208,12 @@ public class RepairShopRestController {
 	
 	
 	// create a Payment
+		/**
+		 * 
+		 * @param p
+		 * @return
+		 * @throws IllegalArgumentException
+		 */
 	@PostMapping(value = {"/payment", "/payment/"})
 	public PaymentDto createPayment(@RequestBody Payment p) throws IllegalArgumentException {
 		
@@ -181,13 +221,21 @@ public class RepairShopRestController {
 		
 		return convertpToDto(payment);
 	}
-	
+	/**
+	 * 
+	 * @param p
+	 * @return
+	 */
 	private PaymentDto convertpToDto(Payment p) {
 		PaymentDto paymentDto = new PaymentDto(p.getDate(), p.getTotalCost(), p.getId());
 		return paymentDto;
 	}
 	
 	// get all the Payments in the database
+	/**
+	 * 
+	 * @return
+	 */
 		@GetMapping(value = {"/payments", "/payments/" })
 	 	public List<PaymentDto> getAllPayments(){
 		 	List<PaymentDto> payDtos = new ArrayList<>();
@@ -199,12 +247,23 @@ public class RepairShopRestController {
 	 }
 		
 		//get the payment corresponding to the id
+		/**
+		 * 
+		 * @param id
+		 * @return
+		 * @throws IllegalArgumentException
+		 */
 		@GetMapping(value = {"/payments/{id}", "/payments/{id}/" })
 		 public PaymentDto getPaymentById(@PathVariable("id")String id) throws IllegalArgumentException{
 		 	return convertpToDto(service.getPayment(id));
 	 }
 		
 		//Delete TimeSlot
+		/**
+		 * 
+		 * @param id
+		 * @return
+		 */
 				@DeleteMapping(value = { "/payment/delete/{id}", "/payments/delete/{id}/" })
 				public boolean deletePayment(@PathVariable(name = "id") String id) {
 					
@@ -215,6 +274,12 @@ public class RepairShopRestController {
 		
 				
 			// create a Appointment
+				/**
+				 * 
+				 * @param a
+				 * @return
+				 * @throws IllegalArgumentException
+				 */
 			@PostMapping(value = {"/appointment", "/appointment/"})
 			public AppointmentDto createAppointment(@RequestBody Appointment a) throws IllegalArgumentException {
 				
@@ -225,6 +290,10 @@ public class RepairShopRestController {
 							
 	
 	// get all the appointments in the database
+			/**
+			 * 
+			 * @return
+			 */
 	@GetMapping(value = {"/appointments", "/appointments/" })
  	public List<AppointmentDto> getAllAppointments(){
 	 	List<AppointmentDto> aDtos = new ArrayList<>();
@@ -236,6 +305,12 @@ public class RepairShopRestController {
  }
 	
 	//get the appointment corresponding to the id
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	@GetMapping(value = {"/appointments/{id}", "/appointments/{id}/" })
 	 public AppointmentDto getAppointmentById(@PathVariable("id")int id) throws IllegalArgumentException{
 	 	return convertToDto(service.getAppointment(id));
@@ -243,6 +318,11 @@ public class RepairShopRestController {
 	
 	
 	//Delete Appointment
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping(value = { "/appointment/delete/{id}", "/payments/delete/{id}/" })
 	public boolean deleteAppointment(@PathVariable(name = "id") int id) {
 		
@@ -253,7 +333,11 @@ public class RepairShopRestController {
 	
 	
 		
-	
+	/**
+	 * 
+	 * @param a
+	 * @return
+	 */
 	private AppointmentDto convertToDto(Appointment a){
 		if(a == null) {
 			throw new IllegalArgumentException("There is no such Appointment ");
@@ -263,6 +347,12 @@ public class RepairShopRestController {
 		}
 	
 	// Create Service 
+	/**
+	 * 
+	 * @param s
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	@PostMapping(value = { "/createservice", "/createservice/" })
 	public ServiceDto createServiceDto(@RequestBody Services s) throws IllegalArgumentException {
 		
@@ -272,6 +362,10 @@ public class RepairShopRestController {
 	
 	
 	// get all the services in the database
+	/**
+	 * 
+	 * @return
+	 */
 			@GetMapping(value = {"/services", "/services/" })
 		 	public List<ServiceDto> getAllService(){
 			 	List<ServiceDto> ssDtos = new ArrayList<>();
@@ -283,12 +377,23 @@ public class RepairShopRestController {
 		 }
 			
 			//get the timeSlot corresponding to the id
+			/**
+			 * 
+			 * @param id
+			 * @return
+			 * @throws IllegalArgumentException
+			 */
 			@GetMapping(value = {"/services/{id}", "/services/{id}/" })
 			 public ServiceDto getServicesById(@PathVariable("id")String id) throws IllegalArgumentException{
 			 	return convertToDto(service.getServices(id));
 
 	}
 			//Delete TimeSlot
+			/**
+			 * 
+			 * @param id
+			 * @return
+			 */
 			@DeleteMapping(value = { "/services/delete/{id}", "/services/delete/{id}/" })
 			public boolean deleteServices(@PathVariable(name = "id") String id) {
 				
@@ -299,7 +404,11 @@ public class RepairShopRestController {
 	
 	
 	
-	
+			/**
+			 * 
+			 * @param s
+			 * @return
+			 */
 	private ServiceDto convertToDto(Services s) {
 		if(s == null) {
 			throw new IllegalArgumentException("There is no such service !");
@@ -313,7 +422,16 @@ public class RepairShopRestController {
 	
 	
 	//Create TimeSlot
-	
+	/**
+	 * 
+	 * @param id
+	 * @param date
+	 * @param startTime
+	 * @param endTime
+	 * @param username
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	@PostMapping(value = { "/createtimeslot/{id}/{date}/{startTime}/{endTime}/{username}", "/createtimeslot/{id}/{date}/{startTime}/{endTime}/{username}/" })
 	
 	public TimeSlotDto createTimeSlotDto(@PathVariable("id") int id, @PathVariable("date")  String date, @PathVariable("startTime") String startTime, @PathVariable("endTime") String endTime, @PathVariable("username") String username) throws IllegalArgumentException {
@@ -325,7 +443,11 @@ public class RepairShopRestController {
 		TimeSlot ts1 = service.createTimeSlot(id,dateA, startTimeA, endTimeA, t);
 		return converttsToDto(ts1);
 	}
-
+	/**
+	 * 
+	 * @param tso
+	 * @return
+	 */
 	private TimeSlotDto converttsToDto(TimeSlot tso) {
 		if (tso == null) {
 			throw new IllegalArgumentException("There is no such TimeSlot!");
@@ -336,6 +458,10 @@ public class RepairShopRestController {
 	
 	
 	// get all the timeSlots in the database
+	/**
+	 * 
+	 * @return
+	 */
 		@GetMapping(value = {"/timeslots", "/timeslots/" })
 	 	public List<TimeSlotDto> getAllTimeSlots(){
 		 	List<TimeSlotDto> tsDtos = new ArrayList<>();
@@ -347,12 +473,23 @@ public class RepairShopRestController {
 	 }
 		
 		//get the timeSlot corresponding to the id
+		/**
+		 * 
+		 * @param id
+		 * @return
+		 * @throws IllegalArgumentException
+		 */
 		@GetMapping(value = {"/timeslot/{id}", "/timeslot/{id}/" })
 		 public TimeSlotDto getTimeSlotById(@PathVariable("id")int id) throws IllegalArgumentException{
 		 	return converttsToDto(service.getTimeSlot(id));
 
 }
 		//Delete TimeSlot
+		/**
+		 * 
+		 * @param id
+		 * @return
+		 */
 		@DeleteMapping(value = { "/timeslot/delete/{id}", "/timeslot/delete/{id}/" })
 		public boolean deleteTimeSlot(@PathVariable(name = "id") Integer id) {
 			
@@ -361,6 +498,13 @@ public class RepairShopRestController {
 		}
 		
 		// change timeslot details
+		/**
+		 * 
+		 * @param id
+		 * @param endTime
+		 * @param startTime
+		 * @param date
+		 */
 				@PutMapping(value = { "/timeslot/change/{id}", "/timeslot/change/{id}/" })
 				public void changeTimeSlotDetails(@PathVariable("id") int id, @RequestParam Time endTime, @RequestParam Time startTime, @RequestParam Date date) {
 					
@@ -372,6 +516,11 @@ public class RepairShopRestController {
 		
 		
 		// change Customer password
+				/**
+				 * 
+				 * @param username
+				 * @param password
+				 */
 		@PutMapping(value = { "/Customerregister/password/{username}", "/Customerregister/password/{username}/" })
 		public void changeCustomerPassword(@PathVariable("username") String username, @RequestParam String password) {
 			if (username == null) {
@@ -385,6 +534,11 @@ public class RepairShopRestController {
 		}
 		
 		// change Technician password
+		/**
+		 * 
+		 * @param username
+		 * @param password
+		 */
 				@PutMapping(value = { "/technicianregister/password/{username}", "/technicianregister/password/{username}/" })
 				public void changeTechnicianPassword(@PathVariable("username") String username, @RequestParam String password) {
 					if (username == null) {
@@ -398,7 +552,12 @@ public class RepairShopRestController {
 				}
 		
 		//login as Administrator
-				
+				/**
+				 * 
+				 * @param username
+				 * @param password
+				 * @return
+				 */
 				@PostMapping(value = { "/loginadministrator/{username}/{password}" })
 				@ResponseBody
 				public String AdministratorLogin(@RequestParam("username") String username, @RequestParam("password") String password) {  
@@ -413,6 +572,11 @@ public class RepairShopRestController {
 				
 				
 		// change Administrator password
+				/**
+				 * 
+				 * @param username
+				 * @param password
+				 */
 			@PutMapping(value = { "/administratorregister/password/{username}", "/administratorregister/password/{username}/" })
 			public void changeAdministratorPassword(@PathVariable("username") String username, @RequestParam String password) {
 				if (username == null) {
@@ -424,7 +588,11 @@ public class RepairShopRestController {
 					service.changeAdministratorPassword(username, password);
 				}
 			}
-			
+			/**
+			 * 
+			 * @param a
+			 * @return
+			 */
 			private AdministratorDto convertToDto(Administrator a) {
 				if (a == null) {
 					throw new IllegalArgumentException("There is no such administrator!");
@@ -437,6 +605,12 @@ public class RepairShopRestController {
 			}
 			
 			//Register as a administrator
+			/**
+			 * 
+			 * @param a
+			 * @return
+			 * @throws IllegalArgumentException
+			 */
 			@PostMapping(value = { "/administratorregister", "/administratorregister/" })
 			
 			public AdministratorDto createAdministratorDto(@RequestBody Administrator a) throws IllegalArgumentException {

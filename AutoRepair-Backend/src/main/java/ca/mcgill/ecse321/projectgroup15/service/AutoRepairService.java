@@ -69,7 +69,19 @@ public class AutoRepairService {
 	 */
 	
 	//Register as Customer
-	
+	/**
+	 * 
+	 * @param email
+	 * @param username
+	 * @param password
+	 * @param lastName
+	 * @param firstname
+	 * @param cardNumber
+	 * @param cvv
+	 * @param expiryMonth
+	 * @param expiryYear
+	 * @return
+	 */
 	@Transactional
 	public Customer createCustomer(String email, String username, String password, String lastName, String firstname, String cardNumber, String cvv, Month expiryMonth, Year expiryYear) {
 
@@ -97,12 +109,19 @@ public class AutoRepairService {
 		return customer;
 	}
 	
-	
+	/**
+	 * 
+	 * @param c
+	 */
 	@Transactional
 	public void saveCustomer(Customer c) {
 		customerRepository.save(c);	
 	}
-
+	/**
+	 * 
+	 * @param username
+	 * @return
+	 */
 	@Transactional
 	public Customer getCustomer(String username) {
 		Customer Customer = customerRepository.findCustomerByUsername(username);
@@ -111,12 +130,19 @@ public class AutoRepairService {
 		}
 		return Customer;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	@Transactional
 	public List<Customer> getAllCustomers() {
 		return toList(customerRepository.findAll());
 	}
-
+	/**
+	 * 
+	 * @param username
+	 * @return
+	 */
 	@Transactional
 	public boolean deleteCustomer(String username) {
 		if (username == null || username.trim().length() == 0) {
@@ -133,7 +159,12 @@ public class AutoRepairService {
 		}
 		return deleted;
 	}
-
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	@Transactional
 	public Customer changeCustomerPassword(String username, String password) {
 		if (username == null) {
@@ -151,6 +182,16 @@ public class AutoRepairService {
 
 	
 	//Register as Technician
+	/**
+	 * 
+	 * @param email
+	 * @param username
+	 * @param password
+	 * @param lastName
+	 * @param firstName
+	 * @param technicianRole
+	 * @return
+	 */
 	@Transactional
 	public Technician createTechnician (String email, String username, String password, String lastName, String firstName, TechnicianRole technicianRole) {
 		if ((username == null || username.trim().length() == 0)
@@ -176,12 +217,19 @@ public class AutoRepairService {
 		technicianRepository.save(technician);
 		return technician;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	@Transactional
 	public List<Technician> getAllTechnicians() {
 		return toList(technicianRepository.findAll());
 	}
-	
+	/**
+	 * 
+	 * @param username
+	 * @return
+	 */
 	@Transactional
 	public Technician getTechnician(String username) {
 		Technician technician = technicianRepository.findTechnicianByUsername(username);
@@ -190,7 +238,11 @@ public class AutoRepairService {
 		}
 		return technician;
 	}
-
+/**
+ * 
+ * @param username
+ * @return
+ */
 	@Transactional
 	public boolean deleteTechnician(String username) {
 		if (username == null || username.trim().length() == 0) {
@@ -207,7 +259,12 @@ public class AutoRepairService {
 		}
 		return deleted;
 	}
-	
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	@Transactional
 	public Technician changeTechnicianPassword(String username, String password) {
 		if (username == null) {
@@ -225,7 +282,15 @@ public class AutoRepairService {
 
 	
 	//TimeSlot
-	
+	/**
+	 * 
+	 * @param id
+	 * @param date
+	 * @param startTime
+	 * @param endTime
+	 * @param technician
+	 * @return
+	 */
 	@Transactional
 	public TimeSlot createTimeSlot(int id,Date date, Time startTime, Time endTime, Technician technician ) {
 		TimeSlot ts = new TimeSlot();
@@ -238,12 +303,19 @@ public class AutoRepairService {
 		timeSlotRepository.save(ts);
 		return ts;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	@Transactional
 	public List<TimeSlot> getAllTimeSlots(){
 		return toList(timeSlotRepository.findAll());
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Transactional
 	public TimeSlot getTimeSlot(int id) {
 		TimeSlot timeSlot = timeSlotRepository.findTimeSlotById(id);
@@ -252,7 +324,11 @@ public class AutoRepairService {
 		}
 		return timeSlot;
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Transactional
 	public boolean deleteTimeSlot(int id) {
 	
@@ -266,7 +342,14 @@ public class AutoRepairService {
 		}
 		return deleted;
 	}
-	
+	/**
+	 * 
+	 * @param startTime
+	 * @param EndTime
+	 * @param date
+	 * @param id
+	 * @return
+	 */
 	@Transactional
 	public TimeSlot updateTimeSlot(Time startTime, Time EndTime, Date date, int id) {
 		
@@ -279,7 +362,15 @@ public class AutoRepairService {
 		return timeSlot;
 	}
 	//services
-	
+	/**
+	 * 
+	 * @param name
+	 * @param cost
+	 * @param duration
+	 * @param id
+	 * @param serviceType
+	 * @return
+	 */
 	@Transactional
 	public Services createService(String name, float cost, int duration, String id, ServiceType serviceType) {
 		Services serv = new Services();
@@ -291,12 +382,19 @@ public class AutoRepairService {
 		serviceRepository.save(serv);
 		return serv;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	@Transactional
 	public List<Services> getAllServices(){
 		return toList(serviceRepository.findAll());
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Transactional
 	public Services getServices(String id) {
 		Services service = serviceRepository.findServiceById(id);
@@ -305,7 +403,11 @@ public class AutoRepairService {
 		}
 		return service;
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Transactional
 	public boolean deleteService(String id) {
 	
@@ -324,7 +426,15 @@ public class AutoRepairService {
 	
 	
 	//appointment
-	
+	/**
+	 * 
+	 * @param customer
+	 * @param technician
+	 * @param service
+	 * @param ts
+	 * @param payment
+	 * @return
+	 */
 	@Transactional
 	public Appointment createAppointment(Customer customer, Technician technician, Services service, TimeSlot ts, Payment payment) {
 		Appointment apt = new Appointment();
@@ -337,12 +447,19 @@ public class AutoRepairService {
 		return apt;
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 */
 	@Transactional
 	public List<Appointment> getAllAppointments(){
 		return toList(appointmentRepository.findAll());
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Transactional
 	public Appointment getAppointment(int id) {
 		Appointment a = appointmentRepository.findApointmentById(id);
@@ -352,7 +469,11 @@ public class AutoRepairService {
 		return a;
 	}
 	
-	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Transactional
 	public boolean deleteAppointment(int id) {
 	
@@ -379,7 +500,12 @@ public class AutoRepairService {
 	}
 	
 	//login 
-	
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 		@Transactional
 		public Customer loginAsCustomer(String username, String password) {
 
@@ -409,7 +535,12 @@ public class AutoRepairService {
 
 		}
 		
-		
+		/**
+		 * 
+		 * @param username
+		 * @param password
+		 * @return
+		 */
 		@Transactional
 		public Technician loginAsTechnician(String username, String password) {
 
@@ -445,7 +576,13 @@ public class AutoRepairService {
 		
 		
 	//Payment
-		
+		/**
+		 * 
+		 * @param id
+		 * @param totalCost
+		 * @param date
+		 * @return
+		 */
 		public Payment createPayment(String id, float totalCost, Date date) {
 			if (id == null) {
 				throw new IllegalArgumentException("There is no payment with this id");
@@ -463,7 +600,11 @@ public class AutoRepairService {
 		}
 		
 		
-
+		/**
+		 * 
+		 * @param id
+		 * @return
+		 */
 		@Transactional
 		public Payment getPayment(String id) {
 			Payment payment = paymentRepository.findPaymentById(id);
@@ -472,12 +613,19 @@ public class AutoRepairService {
 			}
 			return payment;
 		}
-
+		/**
+		 * 
+		 * @return
+		 */
 		@Transactional
 		public List<Payment> getAllPayments() {
 			return toList(paymentRepository.findAll());
 		}
-
+		/**
+		 * 
+		 * @param paymentId
+		 * @return
+		 */
 		@Transactional
 		public boolean deletePayment(String paymentId) {
 			if (paymentId == null) {
@@ -496,7 +644,12 @@ public class AutoRepairService {
 		}
 	
 		//Administrator
-		
+		/**
+		 * 
+		 * @param username
+		 * @param password
+		 * @return
+		 */
 		@Transactional
 		public Administrator changeAdministratorPassword(String username, String password) {
 			if (username == null) {
@@ -523,12 +676,20 @@ public class AutoRepairService {
 
 			return foundAdmin;
 		}
-		
+		/**
+		 * 
+		 * @return
+		 */
 		@Transactional
 		public List<Administrator> getAdministrators() {
 			return toList(administratorRepository.findAll());
 		}
-		
+		/**
+		 * 
+		 * @param username
+		 * @param password
+		 * @return
+		 */
 		@Transactional
 		public Administrator loginAsAdministrator(String username, String password) {
 			if (username == null || username.trim().length() == 0) {
@@ -556,7 +717,15 @@ public class AutoRepairService {
 
 			
 		}
-		
+		/**
+		 * 
+		 * @param email
+		 * @param username
+		 * @param password
+		 * @param firstName
+		 * @param lastName
+		 * @return
+		 */
 		@Transactional
 		public Administrator createAdministrator(String email, String username, String password, String firstName, String lastName) {
 			if ((username == null || username.trim().length() == 0)
