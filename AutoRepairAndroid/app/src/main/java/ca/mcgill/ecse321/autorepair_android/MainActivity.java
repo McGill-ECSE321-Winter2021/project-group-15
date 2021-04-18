@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
           //  setContentView(R.layout.activity_login);
 
-        setContentView(R.layout.activity_register);
+        //setContentView(R.layout.activity_register);
         //setContentView(R.layout.activity_main);
         //setContentView(R.layout.activity_bookappointment);
         //setContentView(R.layout.activity_selectservice);
@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //setContentView(R.layout.activity_payment);
         //login.setOnClickListener(this);
        // setContentView(R.layout.activity_viewappointment);
+
     }
 
 
